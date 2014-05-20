@@ -1,0 +1,54 @@
+{{# def.header }}
+{{~ Object.keys(ctx.functions) :fn }}
+<div id="{{= fn }}" class="item">
+
+  <h3>
+    <span class="radius label">Function</span>
+    {{= fn }}({{~ ctx.functions[fn].params :param:i }}{{= param.name }}{{?
+      i < ctx.functions[fn].params.length - 1
+    }}, {{?}}{{~}})
+    <a href="#{{= fn }}" title="Link here"><span class="fa fa-link"></span></a>
+  </h3>
+
+  <p>
+    <span class="fa fa-reply fa-flip-vertical" title="Returns"></span>
+    <kbd title="Types">{{= renderTypes(ctx.functions[fn].returns.types) }}</kbd>
+    {{= ctx.functions[fn].returns.description }}
+  </p>
+
+  <hr>
+
+  {{? ctx.functions[fn].params.length }}
+  <table class="args">
+    <thead>
+      <tr>
+        <th>Arg Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{~ ctx.functions[fn].params :param }}
+      <tr>
+        <td class="name">{{= param.name }}</td>
+        <td>{{= renderTypes(param.types) }}</td>
+        <td>{{= param.description }}</td>
+      </tr>
+      {{~}}
+    </tbody>
+  </table>
+  {{?}}
+
+  {{= ctx.functions[fn].description.full }}
+
+  <div>
+    <a href="#" class="toggle-code right" title="Toggle the Source Code">
+      Source
+      <span class="fa fa-code"></span>
+    </a>
+    <hr class="toggle-sep">
+    <pre class="toggle-code hide language-javascript"><code class="language-javascript">{{= ctx.functions[fn].code }}</code></pre>
+  </div>
+</div>
+{{~}}
+{{# def.footer }}

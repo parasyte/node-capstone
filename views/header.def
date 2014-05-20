@@ -1,0 +1,42 @@
+{{# def.utils }}
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{= ctx.options.project || ctx.pkg.name }}</title>
+    <link href="css/normalize.css" rel="stylesheet" />
+    <link href="css/foundation.min.css" rel="stylesheet" />
+    <link href="css/prism.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link
+      href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
+      rel="stylesheet">
+    <script src="js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1>
+            <a href="index.html">{{= ctx.options.project || ctx.pkg.name }}</a>
+          </h1>
+        </li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li class="active">
+            <a href="{{= ctx.pkg.repository.url }}">
+              <span class="fa fa-fw fa-2x fa-github-square"></span>Fork Me
+            </a>
+          </li>
+        </ul>
+      </section>
+    </nav>
+
+    <div class="row">
+      <section class="sidebar small-3 column">
+        {{# def.sidebar }}
+      </section>
+      <section class="content small-9 column">

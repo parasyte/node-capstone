@@ -1,0 +1,3 @@
+{{# def.header }}
+{{= ctx.readme }}
+{{# def.footer }}

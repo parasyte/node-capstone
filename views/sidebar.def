@@ -1,0 +1,53 @@
+<dl>
+  <dt><a href="index.html">Main</a></dt>
+  {{? Object.keys(ctx.modules).length }}
+  <dt>Modules</dt>
+  <dd>
+    <ul class="side-nav">
+      {{~ Object.keys(ctx.modules) :value }}
+      <li><a href="{{= value }}.html">{{= value }}</a></li>
+      {{~}}
+    </ul>
+  </dd>
+  {{?}}
+  {{? Object.keys(ctx.classes).length }}
+  <dt>Classes</dt>
+  <dd>
+    <ul class="side-nav">
+      {{~ Object.keys(ctx.classes) :value }}
+      <li><a href="{{= value }}.html">{{= value }}</a></li>
+      {{~}}
+    </ul>
+  </dd>
+  {{?}}
+  {{? Object.keys(ctx.functions).length }}
+  <dt><a href="functions.html">Functions</a></dt>
+  <dd>
+    <ul class="side-nav">
+      {{~ Object.keys(ctx.functions) :value }}
+      <li><a href="functions.html#{{= value }}">{{= value }}</a></li>
+      {{~}}
+    </ul>
+  </dd>
+  {{?}}
+  {{? Object.keys(ctx.constants).length }}
+  <dt><a href="constants.html">Constants</a></dt>
+  <dd>
+    <ul class="side-nav">
+      {{~ Object.keys(ctx.constants) :value }}
+      <li><a href="constants.html#{{= value }}">{{= value }}</a></li>
+      {{~}}
+    </ul>
+  </dd>
+  {{?}}
+  {{? ctx.misc.length }}
+  <dt><a href="misc.html">Miscellaneous</a></dt>
+  <dd>
+    <ul class="side-nav">
+      {{~ ctx.misc :value }}
+      <li><a href="misc.html#{{= value }}">{{= value }}</a></li>
+      {{~}}
+    </ul>
+  </dd>
+  {{?}}
+</dl>

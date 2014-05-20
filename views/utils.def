@@ -1,0 +1,28 @@
+{{
+/**
+ * Render a list of data types with links.
+ * @param {String[]} types Array of data types
+ * @return {String} Rendered types
+ */
+function renderTypes(types) {
+    var natives = [ "number", "string", "bool", "array", "object", "function" ];
+    return types.map(function (value) {
+        var type = value.replace(/[\[\]]/g, "");
+        if (natives.indexOf(type.toLowerCase()) >= 0) {
+            return value;
+        }
+
+        type = type.replace(".", ".html#");
+        if (type.indexOf(".") < 0) {
+            if (type in ctx.classes) {
+                type += ".html#" + type;
+            }
+            else {
+                type = "constants.html#" + type;
+            }
+        }
+
+        return "<a href=\"" + type + "\">" + value + "</a>"
+    }).join(", ");
+}
+}}

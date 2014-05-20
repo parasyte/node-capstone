@@ -1,0 +1,149 @@
+/* App styles */
+
+section.content div.item {
+    margin-bottom: 3em;
+}
+
+section.content div.item h1,
+section.content div.item h2,
+section.content div.item h3,
+section.content div.item h4,
+section.content div.item h5 {
+    font-weight: bold;
+}
+
+section.content div.item h1 a span.fa-link,
+section.content div.item h2 a span.fa-link,
+section.content div.item h3 a span.fa-link,
+section.content div.item h4 a span.fa-link,
+section.content div.item h5 a span.fa-link {
+    color: #aaa;
+    font-size: 80%;
+}
+
+section.content div.item h1 a span.fa-link:hover,
+section.content div.item h2 a span.fa-link:hover,
+section.content div.item h3 a span.fa-link:hover,
+section.content div.item h4 a span.fa-link:hover,
+section.content div.item h5 a span.fa-link:hover {
+    color: #ccc;
+}
+
+section.content div.item:target {
+    outline: 1px solid #6bc6ff;
+    background-color: #f2f8ff;
+}
+
+section.content div.item table {
+    width: 100%;
+}
+
+table thead tr th {
+    border-bottom: 1px solid #ddd;
+}
+
+table thead tr th,
+table tbody tr td {
+    border-right: 1px solid #ddd;
+}
+
+table thead tr th:last-child,
+table tbody tr td:last-child {
+    border-right: none;
+}
+
+table.args td.name {
+    font-weight: bold;
+}
+
+.sidebar {
+    padding: 1em;
+}
+
+.sidebar dl {
+    border-radius: 3px;
+    border: 1px solid #ddd;
+}
+
+.sidebar dl dt {
+    color: #666;
+    background-color: #f5f5f5;
+}
+
+.sidebar dl dt,
+.sidebar dl dd {
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+    padding: 0.5em;
+    margin: 0;
+}
+
+.sidebar dl dt:last-child,
+.sidebar dl dd:last-child {
+    border: none;
+}
+
+.sidebar dl dt a {
+    display: block;
+    color: #000;
+}
+
+.sidebar dl dt a:hover {
+    color: #258faf;
+}
+
+.side-nav {
+    padding: 0;
+}
+
+.top-bar-section .fa {
+    position: relative;
+    top: 3px;
+}
+
+.label {
+    top: -3px;
+    margin-bottom: 0;
+}
+
+a.toggle-code {
+    font-size: 90%;
+}
+
+hr.toggle-sep {
+    margin-bottom: 0;
+}
+
+.footer {
+    background-color: #f1f1f1;
+    color: #666;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    margin-top: 2em;
+    padding: 1.5em;
+    line-height: 2;
+    font-size: 90%;
+}
+
+.footer a span.label {
+    top: 0;
+    font-size: 100%;
+    padding: 3px;
+    border: 1px solid #289abd;
+}
+
+.footer a span.label:hover {
+    background-color: #258faf;
+}
+
+
+/* Foundation overrides */
+
+body {
+    font-size: 14px;
+}
+
+code {
+    font-weight: normal;
+    line-height: normal;
+}
