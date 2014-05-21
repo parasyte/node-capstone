@@ -6,13 +6,291 @@ describe("ARM64", function () {
         0x00, 0x40, 0x21, 0x4b, 0xe1, 0x0b, 0x40, 0xb9,
         0x20, 0x04, 0x81, 0xda, 0x20, 0x08, 0x02, 0x8b
     ]);
-    var EXPECT_ARM64 = "0x2c:\tmul\tx1, x1, x2\n" +
-        "0x30:\tlsr\tw1, w1, #0\n" +
-        "0x34:\tsub\tw0, w0, w1, uxtw\n" +
-        "0x38:\tldr\tw1, [sp, #8]\n" +
-        "0x3c:\tcsneg\tx0, x1, x1, eq\n" +
-        "0x40:\tadd\tx0, x1, x2, lsl #2\n";
 
+    var EXPECT_ARM64 = [
+        {
+            "arch" : 1,
+            "id" : 212,
+            "address" : 44,
+            "bytes" : [ 33, 124, 2, 155 ],
+            "mnemonic" : "mul",
+            "op_str" : "x1, x1, x2"
+        },
+        {
+            "arch" : 1,
+            "id" : 201,
+            "address" : 48,
+            "bytes" : [ 33, 124, 0, 83 ],
+            "mnemonic" : "lsr",
+            "op_str" : "w1, w1, #0"
+        },
+        {
+            "arch" : 1,
+            "id" : 349,
+            "address" : 52,
+            "bytes" : [ 0, 64, 33, 75 ],
+            "mnemonic" : "sub",
+            "op_str" : "w0, w0, w1, uxtw"
+        },
+        {
+            "arch" : 1,
+            "id" : 170,
+            "address" : 56,
+            "bytes" : [ 225, 11, 64, 185 ],
+            "mnemonic" : "ldr",
+            "op_str" : "w1, [sp, #8]"
+        },
+        {
+            "arch" : 1,
+            "id" : 58,
+            "address" : 60,
+            "bytes" : [ 32, 4, 129, 218 ],
+            "mnemonic" : "csneg",
+            "op_str" : "x0, x1, x1, eq"
+        },
+        {
+            "arch" : 1,
+            "id" : 7,
+            "address" : 64,
+            "bytes" : [ 32, 8, 2, 139 ],
+            "mnemonic" : "add",
+            "op_str" : "x0, x1, x2, lsl #2"
+        },
+    ];
+
+    var EXPECT_ARM64_LITE = [
+        [ 44, 4, "mul", "x1, x1, x2" ],
+        [ 48, 4, "lsr", "w1, w1, #0" ],
+        [ 52, 4, "sub", "w0, w0, w1, uxtw" ],
+        [ 56, 4, "ldr", "w1, [sp, #8]" ],
+        [ 60, 4, "csneg", "x0, x1, x1, eq" ],
+        [ 64, 4, "add", "x0, x1, x2, lsl #2" ]
+    ];
+
+    var EXPECT_ARM64_DETAIL = [
+        {
+            "arch" : 1,
+            "id" : 212,
+            "address" : 44,
+            "bytes" : [ 33, 124, 2, 155 ],
+            "mnemonic" : "mul",
+            "op_str" : "x1, x1, x2",
+            "detail" : {
+                "regs_read" : [],
+                "regs_write" : [],
+                "groups" : [],
+                "arm64" : {
+                    "cc" : 0,
+                    "update_flags" : false,
+                    "writeback" : false,
+                    "operands" : [
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 0,
+                            "type" : 1,
+                            "reg" : 198
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 0,
+                            "type" : 1,
+                            "reg" : 198
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 0,
+                            "type" : 1,
+                            "reg" : 199
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "arch" : 1,
+            "id" : 201,
+            "address" : 48,
+            "bytes" : [ 33, 124, 0, 83 ],
+            "mnemonic" : "lsr",
+            "op_str" : "w1, w1, #0",
+            "detail" : {
+                "regs_read" : [],
+                "regs_write" : [],
+                "groups" : [],
+                "arm64" : {
+                    "cc" : 0,
+                    "update_flags" : false,
+                    "writeback" : false,
+                    "operands" : [
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 0,
+                            "type" : 1,
+                            "reg" : 167
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 0,
+                            "type" : 1,
+                            "reg" : 167
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 0,
+                            "type" : 3,
+                            "imm" : 0
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "arch" : 1,
+            "id" : 349,
+            "address" : 52,
+            "bytes" : [ 0, 64, 33, 75 ],
+            "mnemonic" : "sub",
+            "op_str" : "w0, w0, w1, uxtw",
+            "detail" : {
+                "regs_read" : [],
+                "regs_write" : [],
+                "groups" : [],
+                "arm64" : {
+                    "cc" : 0,
+                    "update_flags" : false,
+                    "writeback" : false,
+                    "operands" : [
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 0,
+                            "type" : 1,
+                            "reg" : 166
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 0,
+                            "type" : 1,
+                            "reg" : 166
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 3,
+                            "type" : 1,
+                            "reg" : 167
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "arch" : 1,
+            "id" : 170,
+            "address" : 56,
+            "bytes" : [ 225, 11, 64, 185 ],
+            "mnemonic" : "ldr",
+            "op_str" : "w1, [sp, #8]",
+            "detail" : {
+                "regs_read" : [],
+                "regs_write" : [],
+                "groups" : [],
+                "arm64" : {
+                    "cc" : 0,
+                    "update_flags" : false,
+                    "writeback" : false,
+                    "operands" : [
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 0,
+                            "type" : 1,
+                            "reg" : 167
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 0,
+                            "type" : 5,
+                            "mem" : { "base" : 4, "index" : 0, "disp" : 8 }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "arch" : 1,
+            "id" : 58,
+            "address" : 60,
+            "bytes" : [ 32, 4, 129, 218 ],
+            "mnemonic" : "csneg",
+            "op_str" : "x0, x1, x1, eq",
+            "detail" : {
+                "regs_read" : [ 1 ],
+                "regs_write" : [],
+                "groups" : [],
+                "arm64" : {
+                    "cc" : 1,
+                    "update_flags" : false,
+                    "writeback" : false,
+                    "operands" : [
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 0,
+                            "type" : 1,
+                            "reg" : 197
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 0,
+                            "type" : 1,
+                            "reg" : 198
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 0,
+                            "type" : 1,
+                            "reg" : 198
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "arch" : 1,
+            "id" : 7,
+            "address" : 64,
+            "bytes" : [ 32, 8, 2, 139 ],
+            "mnemonic" : "add",
+            "op_str" : "x0, x1, x2, lsl #2",
+            "detail" : {
+                "regs_read" : [],
+                "regs_write" : [],
+                "groups" : [],
+                "arm64" : {
+                    "cc" : 0,
+                    "update_flags" : false,
+                    "writeback" : false,
+                    "operands" : [
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 0,
+                            "type" : 1,
+                            "reg" : 197
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 0,
+                            "type" : 1,
+                            "reg" : 198
+                        },
+                        {
+                            "shift" : { "type" : 1, "value" : 2 },
+                            "ext" : 0,
+                            "type" : 1,
+                            "reg" : 199
+                        }
+                    ]
+                }
+            }
+        }
+    ];
 
     it("can print the correct register", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM64, capstone.MODE_ARM);
@@ -34,92 +312,24 @@ describe("ARM64", function () {
     });
 
     it("can be disassembled", function () {
-        var output = "";
         var cs = new capstone.Cs(capstone.ARCH_ARM64, capstone.MODE_ARM);
-
-        cs.disasm(CODE_ARM64, 0x2c).forEach(function (insn) {
-            output += "0x" + insn.address.toString(16) + ":\t" +
-                insn.mnemonic + "\t" + insn.op_str + "\n";
-        });
-
+        var output = cs.disasm(CODE_ARM64, 0x2c);
         cs.close();
-
         expect(output).toEqual(EXPECT_ARM64);
     });
 
     it("can be disassembled quickly", function () {
-        var output = "";
         var cs = new capstone.Cs(capstone.ARCH_ARM64, capstone.MODE_ARM);
-
-        cs.disasm_lite(CODE_ARM64, 0x2c).forEach(function (insn) {
-            (function (address, size, mnemonic, op_str) {
-                output += "0x" + address.toString(16) + ":\t" +
-                    mnemonic + "\t" + op_str + "\n";
-            }).apply(this, insn);
-        });
-
+        var output = cs.disasm_lite(CODE_ARM64, 0x2c);
         cs.close();
-
-        expect(output).toEqual(EXPECT_ARM64);
+        expect(output).toEqual(EXPECT_ARM64_LITE);
     });
 
     it("can be disassembled with detail", function () {
-        var output = "";
-        var expected = "0x2c:\tmul\tx1, x1, x2\t" +
-            "{\"regs_read\":[],\"regs_write\":[],\"groups\":[],\"arm64\":" +
-            "{\"cc\":0,\"update_flags\":false,\"writeback\":false," +
-            "\"operands\":[{\"shift\":{\"type\":0,\"value\":0},\"ext\":0," +
-            "\"type\":1,\"reg\":198},{\"shift\":{\"type\":0,\"value\":0}," +
-            "\"ext\":0,\"type\":1,\"reg\":198},{\"shift\":{\"type\":0," +
-            "\"value\":0},\"ext\":0,\"type\":1,\"reg\":199}]}}\n" +
-            "0x30:\tlsr\tw1, w1, #0\t" +
-            "{\"regs_read\":[],\"regs_write\":[],\"groups\":[],\"arm64\":" +
-            "{\"cc\":0,\"update_flags\":false,\"writeback\":false," +
-            "\"operands\":[{\"shift\":{\"type\":0,\"value\":0},\"ext\":0," +
-            "\"type\":1,\"reg\":167},{\"shift\":{\"type\":0,\"value\":0}," +
-            "\"ext\":0,\"type\":1,\"reg\":167},{\"shift\":{\"type\":0," +
-            "\"value\":0},\"ext\":0,\"type\":3,\"imm\":0}]}}\n" +
-            "0x34:\tsub\tw0, w0, w1, uxtw\t" +
-            "{\"regs_read\":[],\"regs_write\":[],\"groups\":[],\"arm64\":" +
-            "{\"cc\":0,\"update_flags\":false,\"writeback\":false," +
-            "\"operands\":[{\"shift\":{\"type\":0,\"value\":0},\"ext\":0," +
-            "\"type\":1,\"reg\":166},{\"shift\":{\"type\":0,\"value\":0}," +
-            "\"ext\":0,\"type\":1,\"reg\":166},{\"shift\":{\"type\":0," +
-            "\"value\":0},\"ext\":3,\"type\":1,\"reg\":167}]}}\n" +
-            "0x38:\tldr\tw1, [sp, #8]\t" +
-            "{\"regs_read\":[],\"regs_write\":[],\"groups\":[],\"arm64\":" +
-            "{\"cc\":0,\"update_flags\":false,\"writeback\":false," +
-            "\"operands\":[{\"shift\":{\"type\":0,\"value\":0},\"ext\":0," +
-            "\"type\":1,\"reg\":167},{\"shift\":{\"type\":0,\"value\":0}," +
-            "\"ext\":0,\"type\":5,\"mem\":{\"base\":4,\"index\":0," +
-            "\"disp\":8}}]}}\n" +
-            "0x3c:\tcsneg\tx0, x1, x1, eq\t" +
-            "{\"regs_read\":[1],\"regs_write\":[],\"groups\":[],\"arm64\"" +
-            ":{\"cc\":1,\"update_flags\":false,\"writeback\":false," +
-            "\"operands\":[{\"shift\":{\"type\":0,\"value\":0},\"ext\":0," +
-            "\"type\":1,\"reg\":197},{\"shift\":{\"type\":0,\"value\":0}," +
-            "\"ext\":0,\"type\":1,\"reg\":198},{\"shift\":{\"type\":0," +
-            "\"value\":0},\"ext\":0,\"type\":1,\"reg\":198}]}}\n" +
-            "0x40:\tadd\tx0, x1, x2, lsl #2\t" +
-            "{\"regs_read\":[],\"regs_write\":[],\"groups\":[],\"arm64\":" +
-            "{\"cc\":0,\"update_flags\":false,\"writeback\":false," +
-            "\"operands\":[{\"shift\":{\"type\":0,\"value\":0},\"ext\":0," +
-            "\"type\":1,\"reg\":197},{\"shift\":{\"type\":0,\"value\":0}," +
-            "\"ext\":0,\"type\":1,\"reg\":198},{\"shift\":{\"type\":1," +
-            "\"value\":2},\"ext\":0,\"type\":1,\"reg\":199}]}}\n";
-
         var cs = new capstone.Cs(capstone.ARCH_ARM64, capstone.MODE_ARM);
-
         cs.detail = true;
-
-        cs.disasm(CODE_ARM64, 0x2c).forEach(function (insn) {
-            output += "0x" + insn.address.toString(16) + ":\t" +
-                insn.mnemonic + "\t" + insn.op_str + "\t" +
-                JSON.stringify(insn.detail) + "\n";
-        });
-
+        var output = cs.disasm(CODE_ARM64, 0x2c);
         cs.close();
-
-        expect(output).toEqual(expected);
+        expect(output).toEqual(EXPECT_ARM64_DETAIL);
     });
 });

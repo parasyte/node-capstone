@@ -41,7 +41,7 @@ cs.disasm(code, 0x1000).forEach(function (insn) {
 cs.close();
 ```
 
-For other examples, see the tests in the `specs` directory.
+For other examples, see the tests in the `spec` directory.
 
 Full documentation is available at https://parasyte.github.io/node-capstone-docs
 

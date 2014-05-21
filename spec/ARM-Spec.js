@@ -7,14 +7,363 @@ describe("ARM", function () {
         0xf1, 0x02, 0x03, 0x0e, 0x00, 0x00, 0xa0, 0xe3,
         0x02, 0x30, 0xc1, 0xe7, 0x00, 0x00, 0x53, 0xe3
     ]);
-    var EXPECT_ARM = "0x1000:\tbl\t#-0x4c\n" +
-        "0x1004:\tstr\tlr, [sp, #-0x4]!\n" +
-        "0x1008:\tandeq\tr0, r0, r0\n" +
-        "0x100c:\tstr\tr8, [r2, #-0x3e0]!\n" +
-        "0x1010:\tmcreq\tp2, #0, r0, c3, c1, #7\n" +
-        "0x1014:\tmov\tr0, #0\n" +
-        "0x1018:\tstrb\tr3, [r1, r2]\n" +
-        "0x101c:\tcmp\tr3, #0\n";
+
+    var EXPECT_ARM = [
+        {
+            "arch" : 0,
+            "id" : 13,
+            "address" : 4096,
+            "bytes" : [ 237, 255, 255, 235 ],
+            "mnemonic" : "bl",
+            "op_str" : "#-0x4c"
+        },
+        {
+            "arch" : 0,
+            "id" : 212,
+            "address" : 4100,
+            "bytes" : [ 4, 224, 45, 229 ],
+            "mnemonic" : "str",
+            "op_str" : "lr, [sp, #-0x4]!"
+        },
+        {
+            "arch" : 0,
+            "id" : 8,
+            "address" : 4104,
+            "bytes" : [ 0, 0, 0, 0 ],
+            "mnemonic" : "andeq",
+            "op_str" : "r0, r0, r0"
+        },
+        {
+            "arch" : 0,
+            "id" : 212,
+            "address" : 4108,
+            "bytes" : [ 224, 131, 34, 229 ],
+            "mnemonic" : "str",
+            "op_str" : "r8, [r2, #-0x3e0]!"
+        },
+        {
+            "arch" : 0,
+            "id" : 74,
+            "address" : 4112,
+            "bytes" : [ 241, 2, 3, 14 ],
+            "mnemonic" : "mcreq",
+            "op_str" : "p2, #0, r0, c3, c1, #7"
+        },
+        {
+            "arch" : 0,
+            "id" : 80,
+            "address" : 4116,
+            "bytes" : [ 0, 0, 160, 227 ],
+            "mnemonic" : "mov",
+            "op_str" : "r0, #0"
+        },
+        {
+            "arch" : 0,
+            "id" : 203,
+            "address" : 4120,
+            "bytes" : [ 2, 48, 193, 231 ],
+            "mnemonic" : "strb",
+            "op_str" : "r3, [r1, r2]"
+        },
+        {
+            "arch" : 0,
+            "id" : 23,
+            "address" : 4124,
+            "bytes" : [ 0, 0, 83, 227 ],
+            "mnemonic" : "cmp",
+            "op_str" : "r3, #0"
+        }
+    ];
+
+    var EXPECT_ARM_LITE = [
+        [ 4096, 4, "bl", "#-0x4c" ],
+        [ 4100, 4, "str", "lr, [sp, #-0x4]!" ],
+        [ 4104, 4, "andeq", "r0, r0, r0" ],
+        [ 4108, 4, "str", "r8, [r2, #-0x3e0]!" ],
+        [ 4112, 4, "mcreq", "p2, #0, r0, c3, c1, #7" ],
+        [ 4116, 4, "mov", "r0, #0"],
+        [ 4120, 4, "strb", "r3, [r1, r2]" ],
+        [ 4124, 4, "cmp", "r3, #0" ]
+    ];
+
+    var EXPECT_ARM_DETAIL = [
+        {
+            "arch" : 0,
+            "id" : 13,
+            "address" : 4096,
+            "bytes" : [ 237, 255, 255, 235 ],
+            "mnemonic" : "bl",
+            "op_str" : "#-0x4c",
+            "detail" : {
+                "regs_read" : [ 12 ],
+                "regs_write" : [ 10 ],
+                "groups" : [ 20 ],
+                "arm" : {
+                    "cc" : 0,
+                    "update_flags" : false,
+                    "writeback" : false,
+                    "operands" : [
+                        {
+                            "shift" : { "type" : 0, "value" : 0        },
+                            "type" : 4,
+                            "imm" : 4294967220
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "arch" : 0,
+            "id" : 212,
+            "address" : 4100,
+            "bytes" : [ 4, 224, 45, 229 ],
+            "mnemonic" : "str",
+            "op_str" : "lr, [sp, #-0x4]!",
+            "detail" : {
+                "regs_read" : [],
+                "regs_write" : [],
+                "groups" : [ 20 ],
+                "arm" : {
+                    "cc" : 15,
+                    "update_flags" : false,
+                    "writeback" : true,
+                    "operands" : [
+                        {
+                            "shift" : { "type" : 0, "value" : 0    },
+                            "type" : 1,
+                            "reg" : 10
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 6,
+                            "mem" : {
+                                "base" : 12,
+                                "index" : 0,
+                                "scale" : 1,
+                                "disp" : -4
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "arch" : 0,
+            "id" : 8,
+            "address" : 4104,
+            "bytes" : [ 0, 0, 0, 0 ],
+            "mnemonic" : "andeq",
+            "op_str" : "r0, r0, r0",
+            "detail" : {
+                "regs_read" : [],
+                "regs_write" : [],
+                "groups" : [ 20 ],
+                "arm" : {
+                    "cc" : 1,
+                    "update_flags" : false,
+                    "writeback" : false,
+                    "operands" : [
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 1,
+                            "reg" : 66
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 1,
+                            "reg" : 66
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 1,
+                            "reg" : 66
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "arch" : 0,
+            "id" : 212,
+            "address" : 4108,
+            "bytes" : [ 224, 131, 34, 229 ],
+            "mnemonic" : "str",
+            "op_str" : "r8, [r2, #-0x3e0]!",
+            "detail" : {
+                "regs_read" : [],
+                "regs_write" : [],
+                "groups" : [ 20 ],
+                "arm" : {
+                    "cc" : 15,
+                    "update_flags" : false,
+                    "writeback" : true,
+                    "operands" : [
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 1,
+                            "reg" : 74
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 6,
+                            "mem" : {
+                                "base" : 68,
+                                "index" : 0,
+                                "scale" : 1,
+                                "disp" : -992
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "arch" : 0,
+            "id" : 74,
+            "address" : 4112,
+            "bytes" : [ 241, 2, 3, 14 ],
+            "mnemonic" : "mcreq",
+            "op_str" : "p2, #0, r0, c3, c1, #7",
+            "detail" : {
+                "regs_read" : [],
+                "regs_write" : [],
+                "groups" : [ 20 ],
+                "arm" : {
+                    "cc" : 1,
+                    "update_flags" : false,
+                    "writeback" : false,
+                    "operands" : [
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 3,
+                            "imm" : 2
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 4,
+                            "imm" : 0
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 1,
+                            "reg" : 66
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 2,
+                            "imm" : 3
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 2,
+                            "imm" : 1
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 4,
+                            "imm" : 7
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "arch" : 0,
+            "id" : 80,
+            "address" : 4116,
+            "bytes" : [ 0, 0, 160, 227 ],
+            "mnemonic" : "mov",
+            "op_str" : "r0, #0",
+            "detail" : {
+                "regs_read" : [],
+                "regs_write" : [],
+                "groups" : [ 20 ],
+                "arm" : {
+                    "cc" : 15,
+                    "update_flags" : false,
+                    "writeback" : false,
+                    "operands" : [
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 1,
+                            "reg" : 66
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 4,
+                            "imm" : 0
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "arch" : 0,
+            "id" : 203,
+            "address" : 4120,
+            "bytes" : [ 2, 48, 193, 231 ],
+            "mnemonic" : "strb",
+            "op_str" : "r3, [r1, r2]",
+            "detail" : {
+                "regs_read" : [],
+                "regs_write" : [],
+                "groups" : [ 20 ],
+                "arm" : {
+                    "cc" : 15,
+                    "update_flags" : false,
+                    "writeback" : false,
+                    "operands" : [
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 1,
+                            "reg" : 69
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 6,
+                            "mem" : {
+                                "base" : 67,
+                                "index" : 68,
+                                "scale" : 1,
+                                "disp" : 0
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "arch" : 0,
+            "id" : 23,
+            "address" : 4124,
+            "bytes" : [ 0, 0, 83, 227 ],
+            "mnemonic" : "cmp",
+            "op_str" : "r3, #0",
+            "detail" : {
+                "regs_read" : [],
+                "regs_write" : [ 3 ],
+                "groups" : [ 20 ],
+                "arm" : {
+                    "cc" : 15,
+                    "update_flags" : true,
+                    "writeback" : false,
+                    "operands" : [
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 1,
+                            "reg" : 69
+                        },
+                        {
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 4,
+                            "imm" : 0
+                        }
+                    ]
+                }
+            }
+        }
+    ];
+
     /*
     var CODE_ARMTHUMB = new Buffer([
         0xd1, 0xe8, 0x00, 0xf0, 0xf0, 0x24, 0x04, 0x07,
@@ -40,105 +389,24 @@ describe("ARM", function () {
     });
 
     it("can be disassembled", function () {
-        var output = "";
         var cs = new capstone.Cs(capstone.ARCH_ARM, capstone.MODE_ARM);
-
-        cs.disasm(CODE_ARM, 0x1000).forEach(function (insn) {
-            output += "0x" + insn.address.toString(16) + ":\t" +
-                insn.mnemonic + "\t" + insn.op_str + "\n";
-        });
-
+        var output = cs.disasm(CODE_ARM, 0x1000);
         cs.close();
-
         expect(output).toEqual(EXPECT_ARM);
     });
 
     it("can be disassembled quickly", function () {
-        var output = "";
         var cs = new capstone.Cs(capstone.ARCH_ARM, capstone.MODE_ARM);
-
-        cs.disasm_lite(CODE_ARM, 0x1000).forEach(function (insn) {
-            (function (address, size, mnemonic, op_str) {
-                output += "0x" + address.toString(16) + ":\t" +
-                    mnemonic + "\t" + op_str + "\n";
-            }).apply(this, insn);
-        });
-
+        var output = cs.disasm_lite(CODE_ARM, 0x1000);
         cs.close();
-
-        expect(output).toEqual(EXPECT_ARM);
+        expect(output).toEqual(EXPECT_ARM_LITE);
     });
 
     it("can be disassembled with detail", function () {
-        var output = "";
-        var expected = "0x1000:\tbl\t#-0x4c\t" +
-            "{\"regs_read\":[12],\"regs_write\":[10],\"groups\":[20]," +
-            "\"arm\":{\"cc\":0,\"update_flags\":false,\"writeback\":" +
-            "false,\"operands\":[{\"shift\":{\"type\":0,\"value\":0}," +
-            "\"type\":4,\"imm\":4294967220}]}}\n" +
-            "0x1004:\tstr\tlr, [sp, #-0x4]!\t" +
-            "{\"regs_read\":[],\"regs_write\":[],\"groups\":[20],\"arm\":" +
-            "{\"cc\":15,\"update_flags\":false,\"writeback\":true," +
-            "\"operands\":[{\"shift\":{\"type\":0,\"value\":0},\"type\":" +
-            "1,\"reg\":10},{\"shift\":{\"type\":0,\"value\":0},\"type\":" +
-            "6,\"mem\":{\"base\":12,\"index\":0,\"scale\":1,\"disp\":" +
-            "-4}}]}}\n" +
-            "0x1008:\tandeq\tr0, r0, r0\t" +
-            "{\"regs_read\":[],\"regs_write\":[],\"groups\":[20],\"arm\":" +
-            "{\"cc\":1,\"update_flags\":false,\"writeback\":false," +
-            "\"operands\":[{\"shift\":{\"type\":0,\"value\":0},\"type\":" +
-            "1,\"reg\":66},{\"shift\":{\"type\":0,\"value\":0},\"type\":" +
-            "1,\"reg\":66},{\"shift\":{\"type\":0,\"value\":0},\"type\":" +
-            "1,\"reg\":66}]}}\n" +
-            "0x100c:\tstr\tr8, [r2, #-0x3e0]!\t" +
-            "{\"regs_read\":[],\"regs_write\":[],\"groups\":[20],\"arm\":" +
-            "{\"cc\":15,\"update_flags\":false,\"writeback\":true," +
-            "\"operands\":[{\"shift\":{\"type\":0,\"value\":0},\"type\":" +
-            "1,\"reg\":74},{\"shift\":{\"type\":0,\"value\":0},\"type\":" +
-            "6,\"mem\":{\"base\":68,\"index\":0,\"scale\":1,\"disp\":" +
-            "-992}}]}}\n" +
-            "0x1010:\tmcreq\tp2, #0, r0, c3, c1, #7\t" +
-            "{\"regs_read\":[],\"regs_write\":[],\"groups\":[20],\"arm\":" +
-            "{\"cc\":1,\"update_flags\":false,\"writeback\":false," +
-            "\"operands\":[{\"shift\":{\"type\":0,\"value\":0},\"type\":3," +
-            "\"imm\":2},{\"shift\":{\"type\":0,\"value\":0},\"type\":4," +
-            "\"imm\":0},{\"shift\":{\"type\":0,\"value\":0},\"type\":1," +
-            "\"reg\":66},{\"shift\":{\"type\":0,\"value\":0},\"type\":2," +
-            "\"imm\":3},{\"shift\":{\"type\":0,\"value\":0},\"type\":2," +
-            "\"imm\":1},{\"shift\":{\"type\":0,\"value\":0},\"type\":4," +
-            "\"imm\":7}]}}\n" +
-            "0x1014:\tmov\tr0, #0\t" +
-            "{\"regs_read\":[],\"regs_write\":[],\"groups\":[20],\"arm\":" +
-            "{\"cc\":15,\"update_flags\":false,\"writeback\":false," +
-            "\"operands\":[{\"shift\":{\"type\":0,\"value\":0},\"type\":" +
-            "1,\"reg\":66},{\"shift\":{\"type\":0,\"value\":0},\"type\":" +
-            "4,\"imm\":0}]}}\n" +
-            "0x1018:\tstrb\tr3, [r1, r2]\t" +
-            "{\"regs_read\":[],\"regs_write\":[],\"groups\":[20],\"arm\":" +
-            "{\"cc\":15,\"update_flags\":false,\"writeback\":false," +
-            "\"operands\":[{\"shift\":{\"type\":0,\"value\":0},\"type\":" +
-            "1,\"reg\":69},{\"shift\":{\"type\":0,\"value\":0},\"type\":" +
-            "6,\"mem\":{\"base\":67,\"index\":68,\"scale\":1,\"disp\":" +
-            "0}}]}}\n" +
-            "0x101c:\tcmp\tr3, #0\t" +
-            "{\"regs_read\":[],\"regs_write\":[3],\"groups\":[20]," +
-            "\"arm\":{\"cc\":15,\"update_flags\":true,\"writeback\":" +
-            "false,\"operands\":[{\"shift\":{\"type\":0,\"value\":0}," +
-            "\"type\":1,\"reg\":69},{\"shift\":{\"type\":0,\"value\":0}," +
-            "\"type\":4,\"imm\":0}]}}\n";
-
         var cs = new capstone.Cs(capstone.ARCH_ARM, capstone.MODE_ARM);
-
         cs.detail = true;
-
-        cs.disasm(CODE_ARM, 0x1000).forEach(function (insn) {
-            output += "0x" + insn.address.toString(16) + ":\t" +
-                insn.mnemonic + "\t" + insn.op_str + "\t" +
-                JSON.stringify(insn.detail) + "\n";
-        });
-
+        var output = cs.disasm(CODE_ARM, 0x1000);
         cs.close();
-
-        expect(output).toEqual(expected);
+        expect(output).toEqual(EXPECT_ARM_DETAIL);
     });
 });
