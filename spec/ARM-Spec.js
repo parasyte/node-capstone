@@ -15,7 +15,7 @@ describe("ARM", function () {
             "address" : 4096,
             "bytes" : [ 237, 255, 255, 235 ],
             "mnemonic" : "bl",
-            "op_str" : "#-0x4c"
+            "op_str" : "#0xfbc"
         },
         {
             "arch" : 0,
@@ -23,7 +23,7 @@ describe("ARM", function () {
             "address" : 4100,
             "bytes" : [ 4, 224, 45, 229 ],
             "mnemonic" : "str",
-            "op_str" : "lr, [sp, #-0x4]!"
+            "op_str" : "lr, [sp, #-4]!"
         },
         {
             "arch" : 0,
@@ -76,8 +76,8 @@ describe("ARM", function () {
     ];
 
     var EXPECT_ARM_LITE = [
-        [ 4096, 4, "bl", "#-0x4c" ],
-        [ 4100, 4, "str", "lr, [sp, #-0x4]!" ],
+        [ 4096, 4, "bl", "#0xfbc" ],
+        [ 4100, 4, "str", "lr, [sp, #-4]!" ],
         [ 4104, 4, "andeq", "r0, r0, r0" ],
         [ 4108, 4, "str", "r8, [r2, #-0x3e0]!" ],
         [ 4112, 4, "mcreq", "p2, #0, r0, c3, c1, #7" ],
@@ -93,7 +93,7 @@ describe("ARM", function () {
             "address" : 4096,
             "bytes" : [ 237, 255, 255, 235 ],
             "mnemonic" : "bl",
-            "op_str" : "#-0x4c",
+            "op_str" : "#0xfbc",
             "detail" : {
                 "regs_read" : [ 12 ],
                 "regs_write" : [ 10 ],
@@ -104,9 +104,9 @@ describe("ARM", function () {
                     "writeback" : false,
                     "operands" : [
                         {
-                            "shift" : { "type" : 0, "value" : 0        },
+                            "shift" : { "type" : 0, "value" : 0 },
                             "type" : 4,
-                            "imm" : 4294967220
+                            "imm" : 4028
                         }
                     ]
                 }
@@ -118,7 +118,7 @@ describe("ARM", function () {
             "address" : 4100,
             "bytes" : [ 4, 224, 45, 229 ],
             "mnemonic" : "str",
-            "op_str" : "lr, [sp, #-0x4]!",
+            "op_str" : "lr, [sp, #-4]!",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
@@ -129,7 +129,7 @@ describe("ARM", function () {
                     "writeback" : true,
                     "operands" : [
                         {
-                            "shift" : { "type" : 0, "value" : 0    },
+                            "shift" : { "type" : 0, "value" : 0 },
                             "type" : 1,
                             "reg" : 10
                         },

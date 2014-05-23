@@ -1,6 +1,6 @@
 {
     "name" : "capstone",
-    "version" : "2.1.1",
+    "version" : "2.2.0",
     "description" : "Bindings for the capstone disassembler library",
     "keywords" : [
         "capstone",
@@ -8,7 +8,9 @@
         "ARM", "ARM64",
         "PowerPC", "PPC",
         "x86", "x86_64", "i386",
-        "MIPS"
+        "MIPS",
+        "Sparc",
+        "SystemZ"
     ],
     "license" : "MIT",
     "author" : {
