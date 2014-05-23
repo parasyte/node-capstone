@@ -9,23 +9,32 @@ supported architectures.
 
 * [node.js v0.10.x](https://nodejs.org/)
     * [npm](https://www.npmjs.org/)
-* [capstone](http://www.capstone-engine.org/download.html)
+* [Capstone](http://www.capstone-engine.org/)
 
-Additionally, the Capstone library version needs to match the binding's version
-or it will throw an exception.
 
 ### Install
 
 `npm install capstone`
 
+#### libcapstone
+
+The Capstone library is not included, and must be installed separately. The
+recommended method to install on OSX is using homebrew:
+
+`brew install capstone`
+
+On Windows and Linux, install a pre-compiled binary from the
+[Capstone download](http://www.capstone-engine.org/download.html) page, or
+build from source.
+
+Ensure `libcapstone` is available in your PATH. Additionally, the `libcapstone`
+version needs to match the binding's version.
+
 ### Basic usage
 
 ```javascript
 var capstone = require("capstone");
-
-var code = new Buffer([
-    0x55, 0x48, 0x8b, 0x05, 0xb8, 0x13, 0x00, 0x00
-]);
+var code = new Buffer([ 0x55, 0x48, 0x8b, 0x05, 0xb8, 0x13, 0x00, 0x00 ]);
 
 var cs = new capstone.Cs(capstone.ARCH_X86, capstone.MODE_64);
 
