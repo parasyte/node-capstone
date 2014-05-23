@@ -1,6 +1,6 @@
 {
     "name" : "capstone",
-    "version" : "2.1.1",
+    "version" : "2.1.2",
     "description" : "Bindings for the capstone disassembler library",
     "keywords" : [
         "capstone",
