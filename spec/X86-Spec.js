@@ -129,6 +129,13 @@ describe("X86", function () {
         expect(output).toEqual("r15w");
     });
 
+    it("can print the correct instruction", function () {
+        var cs = new capstone.Cs(capstone.ARCH_X86, capstone.MODE_64);
+        var output = cs.insn_name(capstone.x86.INS_XTEST);
+        cs.close();
+        expect(output).toEqual("xtest");
+    });
+
     it("can be disassembled", function () {
         var cs = new capstone.Cs(capstone.ARCH_X86, capstone.MODE_64);
         var output = cs.disasm(CODE_X86, 0x1000);

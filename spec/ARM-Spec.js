@@ -388,6 +388,14 @@ describe("ARM", function () {
         expect(output).toEqual("s31");
     });
 
+    it("can print the correct instruction", function () {
+        var cs = new capstone.Cs(capstone.ARCH_ARM, capstone.MODE_ARM);
+        var output = cs.insn_name(capstone.arm.INS_PUSH);
+        cs.close();
+        expect(output).toEqual("push");
+
+    });
+
     it("can be disassembled", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM, capstone.MODE_ARM);
         var output = cs.disasm(CODE_ARM, 0x1000);

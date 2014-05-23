@@ -201,6 +201,16 @@ describe("MIPS", function () {
         expect(output).toEqual("pc");
     });
 
+    it("can print the correct instruction", function () {
+        var cs = new capstone.Cs(
+            capstone.ARCH_MIPS,
+            capstone.MODE_32 | capstone.MODE_BIG_ENDIAN
+        );
+        var output = cs.insn_name(capstone.mips.INS_NEGU);
+        cs.close();
+        expect(output).toEqual("negu");
+    });
+
     it("can disassemble big endian", function () {
         var cs = new capstone.Cs(
             capstone.ARCH_MIPS,

@@ -311,6 +311,13 @@ describe("ARM64", function () {
         expect(output).toEqual("x30");
     });
 
+    it("can print the correct instruction", function () {
+        var cs = new capstone.Cs(capstone.ARCH_ARM64, capstone.MODE_ARM);
+        var output = cs.insn_name(capstone.arm64.INS_NGC);
+        cs.close();
+        expect(output).toEqual("ngc");
+    });
+
     it("can be disassembled", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM64, capstone.MODE_ARM);
         var output = cs.disasm(CODE_ARM64, 0x2c);

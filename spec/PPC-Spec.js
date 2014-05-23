@@ -338,6 +338,13 @@ describe("PPC", function () {
         expect(output).toEqual("cr1eq");
     });
 
+    it("can print the correct instruction", function () {
+        var cs = new capstone.Cs(capstone.ARCH_PPC, capstone.MODE_BIG_ENDIAN);
+        var output = cs.insn_name(capstone.ppc.INS_BCLRL);
+        cs.close();
+        expect(output).toEqual("bclrl");
+    });
+
     it("can be disassembled", function () {
         var cs = new capstone.Cs(capstone.ARCH_PPC, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm(CODE_PPC, 0x1000);
