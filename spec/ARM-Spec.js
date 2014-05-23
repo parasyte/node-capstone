@@ -104,9 +104,9 @@ describe("ARM", function () {
                     "writeback" : false,
                     "operands" : [
                         {
-                            "shift" : { "type" : 0, "value" : 0        },
+                            "shift" : { "type" : 0, "value" : 0 },
                             "type" : 4,
-                            "imm" : 4294967220
+                            "imm" : -76
                         }
                     ]
                 }
@@ -129,7 +129,7 @@ describe("ARM", function () {
                     "writeback" : true,
                     "operands" : [
                         {
-                            "shift" : { "type" : 0, "value" : 0    },
+                            "shift" : { "type" : 0, "value" : 0 },
                             "type" : 1,
                             "reg" : 10
                         },
