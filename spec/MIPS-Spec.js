@@ -273,7 +273,6 @@ describe("MIPS", function () {
         cs.skipdata = new capstone.CsSkipdata(".db");
         var output = cs.disasm_lite(CODE_MIPS_SKIPDATA, 0x1000);
         cs.close();
-        console.log(JSON.stringify(output));
         expect(output).toEqual(EXPECT_MIPS_SKIPDATA);
     });
 });
