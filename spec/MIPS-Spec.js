@@ -6,9 +6,6 @@ describe("MIPS", function () {
         0x24, 0x02, 0x00, 0x0c, 0x8f, 0xa2, 0x00, 0x00,
         0x34, 0x21, 0x34, 0x56
     ]);
-    var CODE_MIPS_LE = new Buffer([
-        0x56, 0x34, 0x21, 0x34, 0xc2, 0x17, 0x01, 0x00
-    ]);
 
     var EXPECT_MIPS = [
         {
@@ -157,6 +154,11 @@ describe("MIPS", function () {
         }
     ];
 
+
+    var CODE_MIPS_LE = new Buffer([
+        0x56, 0x34, 0x21, 0x34, 0xc2, 0x17, 0x01, 0x00
+    ]);
+
     var EXPECT_MIPS_LE = [
         {
             "arch" : 2,
@@ -175,6 +177,17 @@ describe("MIPS", function () {
             "op_str" : "$v0, $at, 0x1f"
         }
     ];
+
+
+    var CODE_MIPS_SKIPDATA = new Buffer([
+        0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF
+    ]);
+
+    var EXPECT_MIPS_SKIPDATA = [
+        [ 4096, 4, "nop", "" ],
+        [ 4100, 4, ".db", "0xff, 0xff, 0xff, 0xff" ]
+    ];
+
 
     it("can print the correct register", function () {
         var cs = new capstone.Cs(
@@ -250,5 +263,17 @@ describe("MIPS", function () {
         var output = cs.disasm(CODE_MIPS_LE, 0x1000);
         cs.close();
         expect(output).toEqual(EXPECT_MIPS_LE);
+    });
+
+    it("can disassemble with skipdata", function () {
+        var cs = new capstone.Cs(
+            capstone.ARCH_MIPS,
+            capstone.MODE_32 | capstone.MODE_BIG_ENDIAN
+        );
+        cs.skipdata = new capstone.CsSkipdata(".db");
+        var output = cs.disasm_lite(CODE_MIPS_SKIPDATA, 0x1000);
+        cs.close();
+        console.log(JSON.stringify(output));
+        expect(output).toEqual(EXPECT_MIPS_SKIPDATA);
     });
 });
