@@ -97,7 +97,12 @@ CommentContext.prototype.processTags = function () {
             break;
 
         case "memberOf":
-            this._doc.getClass(tag.parent).addChild(this);
+            try {
+                this._doc.getClass(tag.parent).addChild(this);
+            }
+            catch (e) {
+                console.error("memberOf:", e);
+            }
             break;
 
         case "kind":

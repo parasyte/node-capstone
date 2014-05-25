@@ -8,6 +8,8 @@ module.exports = function (grunt) {
         "lib/arm64.js",
         "lib/mips.js",
         "lib/ppc.js",
+        "lib/sparc.js",
+        "lib/systemz.js",
         "lib/x86.js",
     ];
     var specFiles = grunt.file.expand("spec/**/*.js");
