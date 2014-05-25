@@ -2,18 +2,21 @@
 module.exports = function (grunt) {
     "use strict";
 
-    var sourceFiles = [
-        "lib/capstone.js", // capstone.js must be listed first or docs fail
-        "lib/arm.js",
-        "lib/arm64.js",
-        "lib/mips.js",
-        "lib/ppc.js",
-        "lib/sparc.js",
-        "lib/systemz.js",
-        "lib/x86.js",
-    ];
+    var sourceFiles = grunt.file.expand("lib/**/*.js");
     var specFiles = grunt.file.expand("spec/**/*.js");
     var docsDir = "./docs"
+
+    // capstone.js must be listed first or docs fail
+    sourceFiles = sourceFiles.sort(function (a, b) {
+        return (
+            a === "lib/capstone.js" ? -1 :
+            b === "lib/capstone.js" ? 1 :
+            a < b ? -1 :
+            a > b ? 1 :
+            0
+        );
+    });
+    console.log("source files:", sourceFiles);
 
     // Project configuration.
     grunt.initConfig({
