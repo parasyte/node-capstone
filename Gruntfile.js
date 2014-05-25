@@ -7,7 +7,7 @@ module.exports = function (grunt) {
     var docsDir = "./docs"
 
     // capstone.js must be listed first or docs fail
-    sourceFiles = sourceFiles.sort(function (a, b) {
+    sourceFiles.sort(function (a, b) {
         return (
             a === "lib/capstone.js" ? -1 :
             b === "lib/capstone.js" ? 1 :
@@ -16,7 +16,6 @@ module.exports = function (grunt) {
             0
         );
     });
-    console.log("source files:", sourceFiles);
 
     // Project configuration.
     grunt.initConfig({
