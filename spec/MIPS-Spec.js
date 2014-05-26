@@ -277,6 +277,17 @@ describe("MIPS", function () {
             capstone.ARCH_MIPS,
             capstone.MODE_32 | capstone.MODE_BIG_ENDIAN
         );
+        cs.skipdata = new capstone.CsSkipdata(".db");
+        var output = cs.disasm_lite(CODE_MIPS_SKIPDATA, 0x1000);
+        cs.close();
+        expect(output).toEqual(EXPECT_MIPS_SKIPDATA);
+    });
+
+    it("can disassemble with skipdata callback", function () {
+        var cs = new capstone.Cs(
+            capstone.ARCH_MIPS,
+            capstone.MODE_32 | capstone.MODE_BIG_ENDIAN
+        );
 
         var cb_output = {};
         cs.skipdata = new capstone.CsSkipdata(
