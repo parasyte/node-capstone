@@ -188,6 +188,13 @@ describe("MIPS", function () {
         [ 4100, 4, ".db", "0xff, 0xff, 0xff, 0xff" ]
     ];
 
+    var EXPECT_MIPS_SKIPDATA_CB = {
+        "code" : [ 0xFF, 0xFF, 0xFF, 0xFF ],
+        "user" : {
+            "foo" : "bar"
+        }
+    };
+
 
     it("can print the correct register", function () {
         var cs = new capstone.Cs(
@@ -270,9 +277,21 @@ describe("MIPS", function () {
             capstone.ARCH_MIPS,
             capstone.MODE_32 | capstone.MODE_BIG_ENDIAN
         );
-        cs.skipdata = new capstone.CsSkipdata(".db");
+
+        var cb_output = {};
+        cs.skipdata = new capstone.CsSkipdata(
+            ".db",
+            function (code, offset, user) {
+                cb_output.code = code.reinterpret(4, 0).toJSON();
+                cb_output.user = user;
+                return 4;
+            },
+            { "foo" : "bar" }
+        );
+
         var output = cs.disasm_lite(CODE_MIPS_SKIPDATA, 0x1000);
         cs.close();
         expect(output).toEqual(EXPECT_MIPS_SKIPDATA);
+        expect(cb_output).toEqual(EXPECT_MIPS_SKIPDATA_CB);
     });
 });
