@@ -62,13 +62,13 @@
     "validthis"     : false,     // true: Tolerate using this in a non-constructor function
 
     // Environments
-    "browser"       : true,     // Web Browser (window, document, etc)
+    "browser"       : false,    // Web Browser (window, document, etc)
     "couch"         : false,    // CouchDB
-    "devel"         : true,     // Development/debugging (alert, confirm, etc)
+    "devel"         : false,    // Development/debugging (alert, confirm, etc)
     "dojo"          : false,    // Dojo Toolkit
     "jquery"        : false,    // jQuery
     "mootools"      : false,    // MooTools
-    "node"          : false,    // Node.js
+    "node"          : true,     // Node.js
     "nonstandard"   : false,    // Widely adopted globals (escape, unescape, etc)
     "prototypejs"   : false,    // Prototype and Scriptaculous
     "rhino"         : false,    // Rhino
@@ -84,16 +84,6 @@
 
     // Custom Globals
     "globals"       : {
-        // node.js
-        "global"        : false,
-        "process"       : false,
-        "require"       : false,
-        "module"        : false,
-        "exports"       : false,
-        "Buffer"        : false,
-        "__filename"    : false,
-        "__dirname"     : false,
-
         // Jasmine
         "jasmine"       : false,
         "describe"      : false,
