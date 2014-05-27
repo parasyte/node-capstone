@@ -1,10 +1,9 @@
-/*global module:false*/
 module.exports = function (grunt) {
     "use strict";
 
     var sourceFiles = grunt.file.expand("lib/**/*.js");
     var specFiles = grunt.file.expand("spec/**/*.js");
-    var docsDir = "./docs"
+    var docsDir = "./docs";
 
     // capstone.js must be listed first or docs fail
     sourceFiles.sort(function (a, b) {
@@ -27,7 +26,7 @@ module.exports = function (grunt) {
             },
 
             "files" : {
-                "src" : sourceFiles.concat(specFiles),
+                "src" : [ sourceFiles, specFiles, "Gruntfile.js" ],
             }
         },
 
