@@ -99,7 +99,7 @@ describe("ARM", function () {
                 "regs_write" : [ 10 ],
                 "groups" : [ 20 ],
                 "arm" : {
-                    "cc" : 0,
+                    "cc" : 15,
                     "update_flags" : false,
                     "writeback" : false,
                     "operands" : [
