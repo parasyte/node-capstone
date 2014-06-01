@@ -331,6 +331,7 @@ describe("PPC", function () {
         }
     ];
 
+
     it("can print the correct register", function () {
         var cs = new capstone.Cs(capstone.ARCH_PPC, capstone.MODE_BIG_ENDIAN);
         var output = cs.reg_name(capstone.ppc.REG_CR1EQ);

@@ -315,6 +315,7 @@ describe("SystemZ", function () {
         }
     ];
 
+
     it("can print the correct register", function () {
         var cs = new capstone.Cs(capstone.ARCH_SYSZ, capstone.MODE_BIG_ENDIAN);
         var output = cs.reg_name(capstone.sysz.REG_R0L);

@@ -201,21 +201,6 @@ describe("MIPS", function () {
             capstone.ARCH_MIPS,
             capstone.MODE_32 | capstone.MODE_BIG_ENDIAN
         );
-        var output = cs.reg_name(capstone.mips.REG_W31);
-        cs.close();
-        expect(output).toEqual("w31");
-    });
-
-    /**
-     * Disabled due to a bug in Capstone 2.1.2
-     * Fixed by: https://github.com/aquynh/capstone/pull/122
-     * @ignore
-     */
-    xit("can print the correct register", function () {
-        var cs = new capstone.Cs(
-            capstone.ARCH_MIPS,
-            capstone.MODE_32 | capstone.MODE_BIG_ENDIAN
-        );
         var output = cs.reg_name(capstone.mips.REG_PC);
         cs.close();
         expect(output).toEqual("pc");

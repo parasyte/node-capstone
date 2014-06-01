@@ -292,19 +292,8 @@ describe("ARM64", function () {
         }
     ];
 
-    it("can print the correct register", function () {
-        var cs = new capstone.Cs(capstone.ARCH_ARM64, capstone.MODE_ARM);
-        var output = cs.reg_name(capstone.arm64.REG_X28);
-        cs.close();
-        expect(output).toEqual("x28");
-    });
 
-    /**
-     * Disabled due to a bug in Capstone 2.1.2
-     * Fixed by: https://github.com/aquynh/capstone/commit/96934501f
-     * @ignore
-     */
-    xit("can print the correct register", function () {
+    it("can print the correct register", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM64, capstone.MODE_ARM);
         var output = cs.reg_name(capstone.arm64.REG_X30);
         cs.close();

@@ -175,7 +175,6 @@ describe("XCore", function () {
         var cs = new capstone.Cs(capstone.ARCH_XCORE, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm(CODE_XCORE, 0x1000);
         cs.close();
-        console.log(JSON.stringify(output));
         expect(output).toEqual(EXPECT_XCORE);
     });
 
@@ -183,7 +182,6 @@ describe("XCore", function () {
         var cs = new capstone.Cs(capstone.ARCH_XCORE, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm_lite(CODE_XCORE, 0x1000);
         cs.close();
-        console.log(JSON.stringify(output));
         expect(output).toEqual(EXPECT_XCORE_LITE);
     });
 
@@ -192,7 +190,6 @@ describe("XCore", function () {
         cs.detail = true;
         var output = cs.disasm(CODE_XCORE, 0x1000);
         cs.close();
-        console.log(JSON.stringify(output));
         expect(output).toEqual(EXPECT_XCORE_DETAIL);
     });
 });

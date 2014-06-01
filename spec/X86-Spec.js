@@ -122,6 +122,7 @@ describe("X86", function () {
         }
     ];
 
+
     it("can print the correct register", function () {
         var cs = new capstone.Cs(capstone.ARCH_X86, capstone.MODE_64);
         var output = cs.reg_name(capstone.x86.REG_R15W);
