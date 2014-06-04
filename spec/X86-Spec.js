@@ -39,7 +39,7 @@ describe("X86", function () {
             "address" : 4097,
             "bytes" : [ 72, 139, 5, 184, 19, 0, 0 ],
             "mnemonic" : "movq",
-            "op_str" : "qword ptr 0x13b8(%rip), %rax"
+            "op_str" : "0x13b8(%rip), %rax"
         }
     ];
 
