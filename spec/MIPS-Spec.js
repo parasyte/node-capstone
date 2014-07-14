@@ -277,8 +277,18 @@ describe("MIPS", function () {
         var cb_output = {};
         cs.skipdata = new capstone.CsSkipdata(
             ".db",
-            function (code, offset, user) {
-                cb_output.code = code.reinterpret(4, 0).toJSON();
+            function (code, code_size, offset, user) {
+                if (code_size - offset !== 4) {
+                    throw new Error("Unexpected code_size: " + code_size);
+                }
+                /*
+                 * FIXME: Use ref module for now because the shorthand method
+                 * does not pass the `offset` parameter
+                 * See: https://github.com/TooTallNate/ref/issues/17
+                 */
+                //cb_output.code = code.reinterpret(4, offset).toJSON();
+                var ref = require("ref");
+                cb_output.code = ref.reinterpret(code, 4, offset).toJSON();
                 cb_output.user = user;
                 return 4;
             },
