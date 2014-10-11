@@ -5,7 +5,9 @@ describe("ARM", function () {
         0xED, 0xFF, 0xFF, 0xEB, 0x04, 0xe0, 0x2d, 0xe5,
         0x00, 0x00, 0x00, 0x00, 0xe0, 0x83, 0x22, 0xe5,
         0xf1, 0x02, 0x03, 0x0e, 0x00, 0x00, 0xa0, 0xe3,
-        0x02, 0x30, 0xc1, 0xe7, 0x00, 0x00, 0x53, 0xe3
+        0x02, 0x30, 0xc1, 0xe7, 0x00, 0x00, 0x53, 0xe3,
+        0x00, 0x02, 0x01, 0xf1, 0x05, 0x40, 0xd0, 0xe8,
+        0xf4, 0x80, 0x00, 0x00
     ]);
 
     var EXPECT_ARM = [
@@ -72,7 +74,31 @@ describe("ARM", function () {
             "bytes" : [ 0, 0, 83, 227 ],
             "mnemonic" : "cmp",
             "op_str" : "r3, #0"
-        }
+        },
+        {
+            "arch" : 0,
+            "id" : 124,
+            "address" : 4128,
+            "bytes" : [ 0, 2, 1, 241 ],
+            "mnemonic" : "setend",
+            "op_str" : "be"
+        },
+        {
+            "arch" : 0,
+            "id" : 57,
+            "address" : 4132,
+            "bytes" : [ 5, 64, 208, 232 ],
+            "mnemonic" : "ldm",
+            "op_str" : "r0, {r0, r2, lr} ^"
+        },
+        {
+            "arch" : 0,
+            "id" : 204,
+            "address" : 4136,
+            "bytes" : [ 244, 128, 0, 0 ],
+            "mnemonic" : "strdeq",
+            "op_str" : "r8, sb, [r0], -r4"
+        },
     ];
 
     var EXPECT_ARM_LITE = [
@@ -83,7 +109,10 @@ describe("ARM", function () {
         [ 4112, 4, "mcreq", "p2, #0, r0, c3, c1, #7" ],
         [ 4116, 4, "mov", "r0, #0"],
         [ 4120, 4, "strb", "r3, [r1, r2]" ],
-        [ 4124, 4, "cmp", "r3, #0" ]
+        [ 4124, 4, "cmp", "r3, #0" ],
+        [ 4128, 4, "setend", "be" ],
+        [ 4132, 4, "ldm", "r0, {r0, r2, lr} ^" ],
+        [ 4136, 4, "strdeq", "r8, sb, [r0], -r4" ],
     ];
 
     var EXPECT_ARM_DETAIL = [
@@ -99,14 +128,21 @@ describe("ARM", function () {
                 "regs_write" : [ 10 ],
                 "groups" : [ 20 ],
                 "arm" : {
+                    "usermode" : false,
+                    "vector_size" : 0,
+                    "vector_data" : 0,
+                    "cps_mode" : 0,
+                    "cps_flag" : 0,
                     "cc" : 15,
                     "update_flags" : false,
                     "writeback" : false,
                     "operands" : [
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 4,
-                            "imm" : 4028
+                            "imm" : 4028,
+                            "subtracted" : false,
                         }
                     ]
                 }
@@ -124,16 +160,24 @@ describe("ARM", function () {
                 "regs_write" : [],
                 "groups" : [ 20 ],
                 "arm" : {
+                    "usermode" : false,
+                    "vector_size" : 0,
+                    "vector_data" : 0,
+                    "cps_mode" : 0,
+                    "cps_flag" : 0,
                     "cc" : 15,
                     "update_flags" : false,
                     "writeback" : true,
                     "operands" : [
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 1,
-                            "reg" : 10
+                            "reg" : 10,
+                            "subtracted" : false,
                         },
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 6,
                             "mem" : {
@@ -141,7 +185,8 @@ describe("ARM", function () {
                                 "index" : 0,
                                 "scale" : 1,
                                 "disp" : -4
-                            }
+                            },
+                            "subtracted" : false,
                         }
                     ]
                 }
@@ -159,24 +204,35 @@ describe("ARM", function () {
                 "regs_write" : [],
                 "groups" : [ 20 ],
                 "arm" : {
+                    "usermode" : false,
+                    "vector_size" : 0,
+                    "vector_data" : 0,
+                    "cps_mode" : 0,
+                    "cps_flag" : 0,
                     "cc" : 1,
                     "update_flags" : false,
                     "writeback" : false,
                     "operands" : [
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 1,
-                            "reg" : 66
+                            "reg" : 66,
+                            "subtracted" : false,
                         },
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 1,
-                            "reg" : 66
+                            "reg" : 66,
+                            "subtracted" : false,
                         },
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 1,
-                            "reg" : 66
+                            "reg" : 66,
+                            "subtracted" : false,
                         }
                     ]
                 }
@@ -194,16 +250,24 @@ describe("ARM", function () {
                 "regs_write" : [],
                 "groups" : [ 20 ],
                 "arm" : {
+                    "usermode" : false,
+                    "vector_size" : 0,
+                    "vector_data" : 0,
+                    "cps_mode" : 0,
+                    "cps_flag" : 0,
                     "cc" : 15,
                     "update_flags" : false,
                     "writeback" : true,
                     "operands" : [
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 1,
-                            "reg" : 74
+                            "reg" : 74,
+                            "subtracted" : false,
                         },
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 6,
                             "mem" : {
@@ -211,7 +275,8 @@ describe("ARM", function () {
                                 "index" : 0,
                                 "scale" : 1,
                                 "disp" : -992
-                            }
+                            },
+                            "subtracted" : false,
                         }
                     ]
                 }
@@ -229,39 +294,56 @@ describe("ARM", function () {
                 "regs_write" : [],
                 "groups" : [ 20 ],
                 "arm" : {
+                    "usermode" : false,
+                    "vector_size" : 0,
+                    "vector_data" : 0,
+                    "cps_mode" : 0,
+                    "cps_flag" : 0,
                     "cc" : 1,
                     "update_flags" : false,
                     "writeback" : false,
                     "operands" : [
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 3,
-                            "imm" : 2
+                            "imm" : 2,
+                            "subtracted" : false,
                         },
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 4,
-                            "imm" : 0
+                            "imm" : 0,
+                            "subtracted" : false,
                         },
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 1,
-                            "reg" : 66
+                            "reg" : 66,
+                            "subtracted" : false,
                         },
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 2,
-                            "imm" : 3
+                            "imm" : 3,
+                            "subtracted" : false,
                         },
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 2,
-                            "imm" : 1
+                            "imm" : 1,
+                            "subtracted" : false,
                         },
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 4,
-                            "imm" : 7
+                            "imm" : 7,
+                            "subtracted" : false,
                         }
                     ]
                 }
@@ -279,19 +361,28 @@ describe("ARM", function () {
                 "regs_write" : [],
                 "groups" : [ 20 ],
                 "arm" : {
+                    "usermode" : false,
+                    "vector_size" : 0,
+                    "vector_data" : 0,
+                    "cps_mode" : 0,
+                    "cps_flag" : 0,
                     "cc" : 15,
                     "update_flags" : false,
                     "writeback" : false,
                     "operands" : [
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 1,
-                            "reg" : 66
+                            "reg" : 66,
+                            "subtracted" : false,
                         },
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 4,
-                            "imm" : 0
+                            "imm" : 0,
+                            "subtracted" : false,
                         }
                     ]
                 }
@@ -309,16 +400,24 @@ describe("ARM", function () {
                 "regs_write" : [],
                 "groups" : [ 20 ],
                 "arm" : {
+                    "usermode" : false,
+                    "vector_size" : 0,
+                    "vector_data" : 0,
+                    "cps_mode" : 0,
+                    "cps_flag" : 0,
                     "cc" : 15,
                     "update_flags" : false,
                     "writeback" : false,
                     "operands" : [
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 1,
-                            "reg" : 69
+                            "reg" : 69,
+                            "subtracted" : false,
                         },
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 6,
                             "mem" : {
@@ -326,7 +425,8 @@ describe("ARM", function () {
                                 "index" : 68,
                                 "scale" : 1,
                                 "disp" : 0
-                            }
+                            },
+                            "subtracted" : false,
                         }
                     ]
                 }
@@ -344,19 +444,171 @@ describe("ARM", function () {
                 "regs_write" : [ 3 ],
                 "groups" : [ 20 ],
                 "arm" : {
+                    "usermode" : false,
+                    "vector_size" : 0,
+                    "vector_data" : 0,
+                    "cps_mode" : 0,
+                    "cps_flag" : 0,
                     "cc" : 15,
                     "update_flags" : true,
                     "writeback" : false,
                     "operands" : [
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 1,
-                            "reg" : 69
+                            "reg" : 69,
+                            "subtracted" : false,
                         },
                         {
+                            "vector_index" : -1,
                             "shift" : { "type" : 0, "value" : 0 },
                             "type" : 4,
-                            "imm" : 0
+                            "imm" : 0,
+                            "subtracted" : false,
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "arch" : 0,
+            "id" : 124,
+            "address" : 4128,
+            "bytes" : [ 0, 2, 1, 241 ],
+            "mnemonic" : "setend",
+            "op_str" : "be",
+            "detail" : {
+                "regs_read" : [],
+                "regs_write" : [],
+                "groups" : [ 20 ],
+                "arm" : {
+                    "usermode" : false,
+                    "vector_size" : 0,
+                    "vector_data" : 0,
+                    "cps_mode" : 0,
+                    "cps_flag" : 0,
+                    "cc" : 15,
+                    "update_flags" : false,
+                    "writeback" : false,
+                    "operands" : [
+                        {
+                            "vector_index" : -1,
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 7,
+                            "subtracted" : false,
+                            "setend" : 1
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "arch" : 0,
+            "id" : 57,
+            "address" : 4132,
+            "bytes" : [ 5, 64, 208, 232 ],
+            "mnemonic" : "ldm",
+            "op_str" : "r0, {r0, r2, lr} ^",
+            "detail" : {
+                "regs_read" : [],
+                "regs_write" : [],
+                "groups" : [ 20 ],
+                "arm" : {
+                    "usermode" : true,
+                    "vector_size" : 0,
+                    "vector_data" : 0,
+                    "cps_mode" : 0,
+                    "cps_flag" : 0,
+                    "cc" : 15,
+                    "update_flags" : false,
+                    "writeback" : false,
+                    "operands" : [
+                        {
+                            "vector_index" : -1,
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 1,
+                            "subtracted" : false,
+                            "reg" : 66
+                        },
+                        {
+                            "vector_index" : -1,
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 1,
+                            "subtracted" : false,
+                            "reg" : 66
+                        },
+                        {
+                            "vector_index" : -1,
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 1,
+                            "subtracted" : false,
+                            "reg" : 68
+                        },
+                        {
+                            "vector_index" : -1,
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 1,
+                            "subtracted" : false,
+                            "reg" : 10
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "arch" : 0,
+            "id" : 204,
+            "address" : 4136,
+            "bytes" : [ 244, 128, 0, 0 ],
+            "mnemonic" : "strdeq",
+            "op_str" : "r8, sb, [r0], -r4",
+            "detail" : {
+                "regs_read" : [],
+                "regs_write" : [],
+                "groups" : [ 20 ],
+                "arm" : {
+                    "usermode" : false,
+                    "vector_size" : 0,
+                    "vector_data" : 0,
+                    "cps_mode" : 0,
+                    "cps_flag" : 0,
+                    "cc" : 1,
+                    "update_flags" : false,
+                    "writeback" : false,
+                    "operands" : [
+                        {
+                            "vector_index" : -1,
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 1,
+                            "subtracted" : false,
+                            "reg" : 74
+                        },
+                        {
+                            "vector_index" : -1,
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 1,
+                            "subtracted" : false,
+                            "reg" : 75
+                        },
+                        {
+                            "vector_index" : -1,
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 6,
+                            "subtracted" : false,
+                            "mem" : {
+                                "base" : 66,
+                                "index" : 0,
+                                "scale" : 1,
+                                "disp" : 0
+                            }
+                        },
+                        {
+                            "vector_index" : -1,
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "type" : 1,
+                            "subtracted" : true,
+                            "reg" : 70
                         }
                     ]
                 }
@@ -390,9 +642,9 @@ describe("ARM", function () {
 
     it("can print the correct instruction", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM, capstone.MODE_ARM);
-        var output = cs.insn_name(capstone.arm.INS_PUSH);
+        var output = cs.insn_name(capstone.arm.INS_VPOP);
         cs.close();
-        expect(output).toEqual("push");
+        expect(output).toEqual("vpop");
 
     });
 
