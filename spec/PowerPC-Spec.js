@@ -12,7 +12,7 @@ describe("PPC", function () {
     var EXPECT_PPC = [
         {
             "arch" : 4,
-            "id" : 167,
+            "id" : 347,
             "address" : 4096,
             "bytes" : [ 128, 32, 0, 0 ],
             "mnemonic" : "lwz",
@@ -20,7 +20,7 @@ describe("PPC", function () {
         },
         {
             "arch" : 4,
-            "id" : 167,
+            "id" : 347,
             "address" : 4100,
             "bytes" : [ 128, 63, 0, 0 ],
             "mnemonic" : "lwz",
@@ -28,7 +28,7 @@ describe("PPC", function () {
         },
         {
             "arch" : 4,
-            "id" : 363,
+            "id" : 570,
             "address" : 4104,
             "bytes" : [ 16, 67, 35, 14 ],
             "mnemonic" : "vpkpx",
@@ -36,7 +36,7 @@ describe("PPC", function () {
         },
         {
             "arch" : 4,
-            "id" : 247,
+            "id" : 443,
             "address" : 4108,
             "bytes" : [ 208, 68, 0, 128 ],
             "mnemonic" : "stfs",
@@ -44,7 +44,7 @@ describe("PPC", function () {
         },
         {
             "arch" : 4,
-            "id" : 46,
+            "id" : 52,
             "address" : 4112,
             "bytes" : [ 76, 67, 34, 2 ],
             "mnemonic" : "crand",
@@ -52,7 +52,7 @@ describe("PPC", function () {
         },
         {
             "arch" : 4,
-            "id" : 41,
+            "id" : 47,
             "address" : 4116,
             "bytes" : [ 45, 3, 0, 128 ],
             "mnemonic" : "cmpwi",
@@ -68,7 +68,7 @@ describe("PPC", function () {
         },
         {
             "arch" : 4,
-            "id" : 193,
+            "id" : 384,
             "address" : 4124,
             "bytes" : [ 124, 67, 32, 147 ],
             "mnemonic" : "mulhd.",
@@ -76,7 +76,7 @@ describe("PPC", function () {
         },
         {
             "arch" : 4,
-            "id" : 23,
+            "id" : 28,
             "address" : 4128,
             "bytes" : [ 79, 32, 0, 33 ],
             "mnemonic" : "bdnzlrl+",
@@ -84,11 +84,11 @@ describe("PPC", function () {
         },
         {
             "arch" : 4,
-            "id" : 435,
+            "id" : 38,
             "address" : 4132,
             "bytes" : [ 76, 200, 0, 33 ],
-            "mnemonic" : "bclrl",
-            "op_str" : "6, 8, 0"
+            "mnemonic" : "bgelrl-",
+            "op_str" : "cr2"
         }
     ];
 
@@ -102,13 +102,13 @@ describe("PPC", function () {
         [ 4120, 4, "addc", "r2, r3, r4" ],
         [ 4124, 4, "mulhd.", "r2, r3, r4" ],
         [ 4128, 4, "bdnzlrl+", "" ],
-        [ 4132, 4, "bclrl", "6, 8, 0" ]
+        [ 4132, 4, "bgelrl-", "cr2" ]
     ];
 
     var EXPECT_PPC_DETAIL = [
         {
             "arch" : 4,
-            "id" : 167,
+            "id" : 347,
             "address" : 4096,
             "bytes" : [ 128, 32, 0, 0 ],
             "mnemonic" : "lwz",
@@ -122,15 +122,15 @@ describe("PPC", function () {
                     "bh" : 0,
                     "update_cr0" : false,
                     "operands" : [
-                        { "type" : 1, "reg" : 69 },
-                        { "type" : 3, "mem" : { "base" : 2, "disp" : 0 } }
+                        { "type" : 1, "reg" : 46 },
+                        { "type" : 3, "mem" : { "base" : 45, "disp" : 0 } }
                     ]
                 }
             }
         },
         {
             "arch" : 4,
-            "id" : 167,
+            "id" : 347,
             "address" : 4100,
             "bytes" : [ 128, 63, 0, 0 ],
             "mnemonic" : "lwz",
@@ -144,15 +144,15 @@ describe("PPC", function () {
                     "bh" : 0,
                     "update_cr0" : false,
                     "operands" : [
-                        { "type" : 1, "reg" : 69 },
-                        { "type" : 3, "mem" : { "base" : 99, "disp" : 0 } }
+                        { "type" : 1, "reg" : 46 },
+                        { "type" : 3, "mem" : { "base" : 76, "disp" : 0 } }
                     ]
                 }
             }
         },
         {
             "arch" : 4,
-            "id" : 363,
+            "id" : 570,
             "address" : 4104,
             "bytes" : [ 16, 67, 35, 14 ],
             "mnemonic" : "vpkpx",
@@ -166,16 +166,16 @@ describe("PPC", function () {
                     "bh" : 0,
                     "update_cr0" : false,
                     "operands" : [
-                        { "type" : 1, "reg" : 102 },
-                        { "type" : 1, "reg" : 103 },
-                        { "type" : 1, "reg" : 104 }
+                        { "type" : 1, "reg" : 79 },
+                        { "type" : 1, "reg" : 80 },
+                        { "type" : 1, "reg" : 81 }
                     ]
                 }
             }
         },
         {
             "arch" : 4,
-            "id" : 247,
+            "id" : 443,
             "address" : 4108,
             "bytes" : [ 208, 68, 0, 128 ],
             "mnemonic" : "stfs",
@@ -189,15 +189,15 @@ describe("PPC", function () {
                     "bh" : 0,
                     "update_cr0" : false,
                     "operands" : [
-                        { "type" : 1, "reg" : 37 },
-                        { "type" : 3, "mem" : { "base" : 72, "disp" : 128 } }
+                        { "type" : 1, "reg" : 14 },
+                        { "type" : 3, "mem" : { "base" : 49, "disp" : 128 } }
                     ]
                 }
             }
         },
         {
             "arch" : 4,
-            "id" : 46,
+            "id" : 52,
             "address" : 4112,
             "bytes" : [ 76, 67, 34, 2 ],
             "mnemonic" : "crand",
@@ -211,16 +211,16 @@ describe("PPC", function () {
                     "bh" : 0,
                     "update_cr0" : false,
                     "operands" : [
-                        { "type" : 1, "reg" : 4 },
-                        { "type" : 1, "reg" : 5 },
-                        { "type" : 1, "reg" : 6 }
+                        { "type" : 1, "reg" : 47 },
+                        { "type" : 1, "reg" : 48 },
+                        { "type" : 1, "reg" : 49 }
                     ]
                 }
             }
         },
         {
             "arch" : 4,
-            "id" : 41,
+            "id" : 47,
             "address" : 4116,
             "bytes" : [ 45, 3, 0, 128 ],
             "mnemonic" : "cmpwi",
@@ -234,8 +234,8 @@ describe("PPC", function () {
                     "bh" : 0,
                     "update_cr0" : false,
                     "operands" : [
-                        { "type" : 1, "reg" : 4 },
-                        { "type" : 1, "reg" : 71 },
+                        { "type" : 1, "reg" : 5 },
+                        { "type" : 1, "reg" : 48 },
                         { "type" : 2, "imm" : 128 }
                     ]
                 }
@@ -257,46 +257,46 @@ describe("PPC", function () {
                     "bh" : 0,
                     "update_cr0" : false,
                     "operands" : [
-                        { "type" : 1, "reg" : 70 },
-                        { "type" : 1, "reg" : 71 },
-                        { "type" : 1, "reg" : 72 }
+                        { "type" : 1, "reg" : 47 },
+                        { "type" : 1, "reg" : 48 },
+                        { "type" : 1, "reg" : 49 }
                     ]
                 }
             }
         },
         {
             "arch" : 4,
-            "id" : 193,
+            "id" : 384,
             "address" : 4124,
             "bytes" : [ 124, 67, 32, 147 ],
             "mnemonic" : "mulhd.",
             "op_str" : "r2, r3, r4",
             "detail" : {
                 "regs_read" : [],
-                "regs_write" : [ 2 ],
+                "regs_write" : [ 3 ],
                 "groups" : [],
                 "ppc" : {
                     "bc" : 0,
                     "bh" : 0,
                     "update_cr0" : true,
                     "operands" : [
-                        { "type" : 1, "reg" : 70 },
-                        { "type" : 1, "reg" : 71 },
-                        { "type" : 1, "reg" : 72 }
+                        { "type" : 1, "reg" : 47 },
+                        { "type" : 1, "reg" : 48 },
+                        { "type" : 1, "reg" : 49 }
                     ]
                 }
             }
         },
         {
             "arch" : 4,
-            "id" : 23,
+            "id" : 28,
             "address" : 4128,
             "bytes" : [ 79, 32, 0, 33 ],
             "mnemonic" : "bdnzlrl+",
             "op_str" : "",
             "detail" : {
-                "regs_read" : [ 34, 67, 133 ],
-                "regs_write" : [ 34 ],
+                "regs_read" : [ 11, 44, 174 ],
+                "regs_write" : [ 11 ],
                 "groups" : [],
                 "ppc" : {
                     "bc" : 0,
@@ -308,23 +308,21 @@ describe("PPC", function () {
         },
         {
             "arch" : 4,
-            "id" : 435,
+            "id" : 38,
             "address" : 4132,
             "bytes" : [ 76, 200, 0, 33 ],
-            "mnemonic" : "bclrl",
-            "op_str" : "6, 8, 0",
+            "mnemonic" : "bgelrl-",
+            "op_str" : "cr2",
             "detail" : {
-                "regs_read" : [ 34, 67, 133 ],
-                "regs_write" : [ 67, 34 ],
+                "regs_read" : [ 11, 44, 174 ],
+                "regs_write" : [ 44, 11 ],
                 "groups" : [],
                 "ppc" : {
-                    "bc" : 0,
-                    "bh" : 0,
+                    "bc" : 4,
+                    "bh" : 2,
                     "update_cr0" : false,
                     "operands" : [
-                        { "type" : 2, "imm" : 6 },
-                        { "type" : 1, "reg" : 10 },
-                        { "type" : 2, "imm" : 0 }
+                        { "type" : 1, "reg" : 5 }
                     ]
                 }
             }
@@ -341,9 +339,9 @@ describe("PPC", function () {
 
     it("can print the correct instruction", function () {
         var cs = new capstone.Cs(capstone.ARCH_PPC, capstone.MODE_BIG_ENDIAN);
-        var output = cs.insn_name(capstone.ppc.INS_BCLRL);
+        var output = cs.insn_name(capstone.ppc.INS_BDZFLRL);
         cs.close();
-        expect(output).toEqual("bclrl");
+        expect(output).toEqual("bdzflrl");
     });
 
     it("can be disassembled", function () {
