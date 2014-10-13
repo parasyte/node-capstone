@@ -15,7 +15,7 @@ describe("Sparc", function () {
     var EXPECT_SPARC = [
         {
             "arch" : 5,
-            "id" : 34,
+            "id" : 33,
             "address" : 4096,
             "bytes" : [ 128, 160, 64, 2 ],
             "mnemonic" : "cmp",
@@ -23,7 +23,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 195,
+            "id" : 194,
             "address" : 4100,
             "bytes" : [ 133, 194, 96, 8 ],
             "mnemonic" : "jmpl",
@@ -31,7 +31,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 227,
+            "id" : 226,
             "address" : 4104,
             "bytes" : [ 133, 232, 32, 1 ],
             "mnemonic" : "restore",
@@ -39,7 +39,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 227,
+            "id" : 226,
             "address" : 4108,
             "bytes" : [ 129, 232, 0, 0 ],
             "mnemonic" : "restore",
@@ -47,15 +47,15 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 222,
+            "id" : 207,
             "address" : 4112,
             "bytes" : [ 144, 16, 32, 1 ],
-            "mnemonic" : "or",
-            "op_str" : "%g0, 1, %o0"
+            "mnemonic" : "mov",
+            "op_str" : "1, %o0"
         },
         {
             "arch" : 5,
-            "id" : 29,
+            "id" : 28,
             "address" : 4116,
             "bytes" : [ 213, 246, 16, 22 ],
             "mnemonic" : "casx",
@@ -63,7 +63,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 233,
+            "id" : 232,
             "address" : 4120,
             "bytes" : [ 33, 0, 0, 10 ],
             "mnemonic" : "sethi",
@@ -79,7 +79,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 218,
+            "id" : 217,
             "address" : 4128,
             "bytes" : [ 1, 0, 0, 0 ],
             "mnemonic" : "nop",
@@ -87,7 +87,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 17,
+            "id" : 16,
             "address" : 4132,
             "bytes" : [ 18, 191, 255, 255 ],
             "mnemonic" : "bne",
@@ -111,7 +111,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 20,
+            "id" : 19,
             "address" : 4144,
             "bytes" : [ 13, 191, 255, 255 ],
             "mnemonic" : "fbg",
@@ -119,7 +119,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 247,
+            "id" : 246,
             "address" : 4148,
             "bytes" : [ 212, 32, 96, 0 ],
             "mnemonic" : "st",
@@ -127,7 +127,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 199,
+            "id" : 198,
             "address" : 4152,
             "bytes" : [ 212, 78, 0, 22 ],
             "mnemonic" : "ldsb",
@@ -135,7 +135,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 25,
+            "id" : 24,
             "address" : 4156,
             "bytes" : [ 42, 194, 128, 3 ],
             "mnemonic" : "brnz,a,pn",
@@ -148,7 +148,7 @@ describe("Sparc", function () {
         [ 4100, 4, "jmpl", "%o1+8, %g2" ],
         [ 4104, 4, "restore", "%g0, 1, %g2" ],
         [ 4108, 4, "restore", "" ],
-        [ 4112, 4, "or", "%g0, 1, %o0" ],
+        [ 4112, 4, "mov", "1, %o0" ],
         [ 4116, 4, "casx", "[%i0], %l6, %o2" ],
         [ 4120, 4, "sethi", "0xa, %l0" ],
         [ 4124, 4, "add", "%g1, %g2, %g3" ],
@@ -165,7 +165,7 @@ describe("Sparc", function () {
     var EXPECT_SPARC_DETAIL = [
         {
             "arch" : 5,
-            "id" : 34,
+            "id" : 33,
             "address" : 4096,
             "bytes" : [ 128, 160, 64, 2 ],
             "mnemonic" : "cmp",
@@ -186,7 +186,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 195,
+            "id" : 194,
             "address" : 4100,
             "bytes" : [ 133, 194, 96, 8 ],
             "mnemonic" : "jmpl",
@@ -210,7 +210,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 227,
+            "id" : 226,
             "address" : 4104,
             "bytes" : [ 133, 232, 32, 1 ],
             "mnemonic" : "restore",
@@ -232,7 +232,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 227,
+            "id" : 226,
             "address" : 4108,
             "bytes" : [ 129, 232, 0, 0 ],
             "mnemonic" : "restore",
@@ -250,11 +250,11 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 222,
+            "id" : 207,
             "address" : 4112,
             "bytes" : [ 144, 16, 32, 1 ],
-            "mnemonic" : "or",
-            "op_str" : "%g0, 1, %o0",
+            "mnemonic" : "mov",
+            "op_str" : "1, %o0",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
@@ -263,7 +263,6 @@ describe("Sparc", function () {
                     "cc" : 0,
                     "hint" : 0,
                     "operands" : [
-                        { "type" : 1, "reg" : 54 },
                         { "type" : 2, "imm" : 1 },
                         { "type" : 1, "reg" : 78 }
                     ]
@@ -272,7 +271,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 29,
+            "id" : 28,
             "address" : 4116,
             "bytes" : [ 213, 246, 16, 22 ],
             "mnemonic" : "casx",
@@ -297,7 +296,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 233,
+            "id" : 232,
             "address" : 4120,
             "bytes" : [ 33, 0, 0, 10 ],
             "mnemonic" : "sethi",
@@ -340,7 +339,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 218,
+            "id" : 217,
             "address" : 4128,
             "bytes" : [ 1, 0, 0, 0 ],
             "mnemonic" : "nop",
@@ -358,7 +357,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 17,
+            "id" : 16,
             "address" : 4132,
             "bytes" : [ 18, 191, 255, 255 ],
             "mnemonic" : "bne",
@@ -420,7 +419,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 20,
+            "id" : 19,
             "address" : 4144,
             "bytes" : [ 13, 191, 255, 255 ],
             "mnemonic" : "fbg",
@@ -440,7 +439,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 247,
+            "id" : 246,
             "address" : 4148,
             "bytes" : [ 212, 32, 96, 0 ],
             "mnemonic" : "st",
@@ -464,7 +463,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 199,
+            "id" : 198,
             "address" : 4152,
             "bytes" : [ 212, 78, 0, 22 ],
             "mnemonic" : "ldsb",
@@ -488,23 +487,15 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 25,
+            "id" : 24,
             "address" : 4156,
-            "bytes" : [
-                42,
-                194,
-                128,
-                3
-            ],
+            "bytes" : [ 42, 194, 128, 3 ],
             "mnemonic" : "brnz,a,pn",
             "op_str" : "%o2, 3",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
-                "groups" : [
-                    7,
-                    8
-                ],
+                "groups" : [ 7, 8 ],
                 "sparc" : {
                     "cc" : 0,
                     "hint" : 5,
@@ -525,15 +516,15 @@ describe("Sparc", function () {
     var EXPECT_SPARCV9 = [
         {
             "arch" : 5,
-            "id" : 71,
+            "id" : 70,
             "address" : 4096,
             "bytes" : [ 129, 168, 10, 36 ],
             "mnemonic" : "fcmps",
-            "op_str" : "%fcc0, %f0, %f4"
+            "op_str" : "%f0, %f4"
         },
         {
             "arch" : 5,
-            "id" : 182,
+            "id" : 181,
             "address" : 4100,
             "bytes" : [ 137, 160, 16, 32 ],
             "mnemonic" : "fstox",
@@ -541,7 +532,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 160,
+            "id" : 159,
             "address" : 4104,
             "bytes" : [ 137, 160, 26, 96 ],
             "mnemonic" : "fqtoi",
@@ -549,7 +540,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 128,
+            "id" : 127,
             "address" : 4108,
             "bytes" : [ 137, 160, 0, 224 ],
             "mnemonic" : "fnegq",
@@ -558,7 +549,7 @@ describe("Sparc", function () {
     ];
 
     var EXPECT_SPARCV9_LITE = [
-        [ 4096, 4, "fcmps", "%fcc0, %f0, %f4" ],
+        [ 4096, 4, "fcmps", "%f0, %f4" ],
         [ 4100, 4, "fstox", "%f0, %f4" ],
         [ 4104, 4, "fqtoi", "%f0, %f4" ],
         [ 4108, 4, "fnegq", "%f0, %f4" ]
@@ -567,11 +558,11 @@ describe("Sparc", function () {
     var EXPECT_SPARCV9_DETAIL = [
         {
             "arch" : 5,
-            "id" : 71,
+            "id" : 70,
             "address" : 4096,
             "bytes" : [ 129, 168, 10, 36 ],
             "mnemonic" : "fcmps",
-            "op_str" : "%fcc0, %f0, %f4",
+            "op_str" : "%f0, %f4",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
@@ -580,7 +571,6 @@ describe("Sparc", function () {
                     "cc" : 0,
                     "hint" : 0,
                     "operands" : [
-                        { "type" : 1, "reg" : 49 },
                         { "type" : 1, "reg" : 1 },
                         { "type" : 1, "reg" : 5 }
                     ]
@@ -589,7 +579,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 182,
+            "id" : 181,
             "address" : 4100,
             "bytes" : [ 137, 160, 16, 32 ],
             "mnemonic" : "fstox",
@@ -612,7 +602,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 160,
+            "id" : 159,
             "address" : 4104,
             "bytes" : [ 137, 160, 26, 96 ],
             "mnemonic" : "fqtoi",
@@ -633,7 +623,7 @@ describe("Sparc", function () {
         },
         {
             "arch" : 5,
-            "id" : 128,
+            "id" : 127,
             "address" : 4108,
             "bytes" : [ 137, 160, 0, 224 ],
             "mnemonic" : "fnegq",
@@ -657,16 +647,16 @@ describe("Sparc", function () {
 
     it("can print the correct register", function () {
         var cs = new capstone.Cs(capstone.ARCH_SPARC, capstone.MODE_BIG_ENDIAN);
-        var output = cs.reg_name(capstone.sparc.REG_Y);
+        var output = cs.reg_name(capstone.sparc.REG_XCC);
         cs.close();
-        expect(output).toEqual("y");
+        expect(output).toEqual("xcc");
     });
 
     it("can print the correct instruction", function () {
         var cs = new capstone.Cs(capstone.ARCH_SPARC, capstone.MODE_BIG_ENDIAN);
-        var output = cs.insn_name(capstone.sparc.INS_XOR);
+        var output = cs.insn_name(capstone.sparc.INS_RETL);
         cs.close();
-        expect(output).toEqual("xor");
+        expect(output).toEqual("retl");
     });
 
     it("can be disassembled", function () {
