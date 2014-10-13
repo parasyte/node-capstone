@@ -45,7 +45,7 @@ describe("SystemZ", function () {
         },
         {
             "arch": 6,
-            "id": 675,
+            "id": 678,
             "address": 4114,
             "bytes": [ 235, 42, 255, 255, 127, 87 ],
             "mnemonic": "xiy",
@@ -53,7 +53,7 @@ describe("SystemZ", function () {
         },
         {
             "arch": 6,
-            "id": 678,
+            "id": 681,
             "address": 4120,
             "bytes": [ 227, 1, 255, 255, 127, 87 ],
             "mnemonic": "xy",
@@ -61,7 +61,7 @@ describe("SystemZ", function () {
         },
         {
             "arch": 6,
-            "id": 654,
+            "id": 657,
             "address": 4126,
             "bytes": [ 235, 0, 240, 0, 0, 36 ],
             "mnemonic": "stmg",
@@ -187,16 +187,14 @@ describe("SystemZ", function () {
         },
         {
             "arch" : 6,
-            "id" : 675,
+            "id" : 678,
             "address" : 4114,
             "bytes" : [ 235, 42, 255, 255, 127, 87 ],
             "mnemonic" : "xiy",
             "op_str" : "0x7ffff(%r15), 0x2a",
             "detail" : {
                 "regs_read" : [],
-                "regs_write" : [
-                    17
-                ],
+                "regs_write" : [ 17 ],
                 "groups" : [],
                 "sysz" : {
                     "cc" : 0,
@@ -217,7 +215,7 @@ describe("SystemZ", function () {
         },
         {
             "arch" : 6,
-            "id" : 678,
+            "id" : 681,
             "address" : 4120,
             "bytes" : [ 227, 1, 255, 255, 127, 87 ],
             "mnemonic" : "xy",
@@ -245,7 +243,7 @@ describe("SystemZ", function () {
         },
         {
             "arch" : 6,
-            "id" : 654,
+            "id" : 657,
             "address" : 4126,
             "bytes" : [ 235, 0, 240, 0, 0, 36 ],
             "mnemonic" : "stmg",
