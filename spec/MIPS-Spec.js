@@ -10,7 +10,7 @@ describe("MIPS", function () {
     var EXPECT_MIPS = [
         {
             "arch" : 2,
-            "id" : 244,
+            "id" : 322,
             "address" : 4096,
             "bytes" : [ 12, 16, 0, 151 ],
             "mnemonic" : "jal",
@@ -18,7 +18,7 @@ describe("MIPS", function () {
         },
         {
             "arch" : 2,
-            "id" : 454,
+            "id" : 582,
             "address" : 4100,
             "bytes" : [ 0, 0, 0, 0 ],
             "mnemonic" : "nop",
@@ -26,7 +26,7 @@ describe("MIPS", function () {
         },
         {
             "arch" : 2,
-            "id" : 20,
+            "id" : 21,
             "address" : 4104,
             "bytes" : [ 36, 2, 0, 12 ],
             "mnemonic" : "addiu",
@@ -34,7 +34,7 @@ describe("MIPS", function () {
         },
         {
             "arch" : 2,
-            "id" : 267,
+            "id" : 353,
             "address" : 4108,
             "bytes" : [ 143, 162, 0, 0 ],
             "mnemonic" : "lw",
@@ -42,7 +42,7 @@ describe("MIPS", function () {
         },
         {
             "arch" : 2,
-            "id" : 339,
+            "id" : 445,
             "address" : 4112,
             "bytes" : [ 52, 33, 52, 86 ],
             "mnemonic" : "ori",
@@ -61,7 +61,7 @@ describe("MIPS", function () {
     var EXPECT_MIPS_DETAIL = [
         {
             "arch" : 2,
-            "id" : 244,
+            "id" : 322,
             "address" : 4096,
             "bytes" : [ 12, 16, 0, 151 ],
             "mnemonic" : "jal",
@@ -79,7 +79,7 @@ describe("MIPS", function () {
         },
         {
             "arch" : 2,
-            "id" : 454,
+            "id" : 582,
             "address" : 4100,
             "bytes" : [ 0, 0, 0, 0 ],
             "mnemonic" : "nop",
@@ -95,7 +95,7 @@ describe("MIPS", function () {
         },
         {
             "arch" : 2,
-            "id" : 20,
+            "id" : 21,
             "address" : 4104,
             "bytes" : [ 36, 2, 0, 12 ],
             "mnemonic" : "addiu",
@@ -115,7 +115,7 @@ describe("MIPS", function () {
         },
         {
             "arch" : 2,
-            "id" : 267,
+            "id" : 353,
             "address" : 4108,
             "bytes" : [ 143, 162, 0, 0 ],
             "mnemonic" : "lw",
@@ -134,7 +134,7 @@ describe("MIPS", function () {
         },
         {
             "arch" : 2,
-            "id" : 339,
+            "id" : 445,
             "address" : 4112,
             "bytes" : [ 52, 33, 52, 86 ],
             "mnemonic" : "ori",
@@ -162,7 +162,7 @@ describe("MIPS", function () {
     var EXPECT_MIPS_LE = [
         {
             "arch" : 2,
-            "id" : 339,
+            "id" : 445,
             "address" : 4096,
             "bytes" : [ 86, 52, 33, 52 ],
             "mnemonic" : "ori",
@@ -170,7 +170,7 @@ describe("MIPS", function () {
         },
         {
             "arch" : 2,
-            "id" : 406,
+            "id" : 525,
             "address" : 4100,
             "bytes" : [ 194, 23, 1, 0 ],
             "mnemonic" : "srl",
@@ -201,9 +201,9 @@ describe("MIPS", function () {
             capstone.ARCH_MIPS,
             capstone.MODE_32 | capstone.MODE_BIG_ENDIAN
         );
-        var output = cs.reg_name(capstone.mips.REG_PC);
+        var output = cs.reg_name(capstone.mips.REG_MPL2);
         cs.close();
-        expect(output).toEqual("pc");
+        expect(output).toEqual("mpl2");
     });
 
     it("can print the correct instruction", function () {
@@ -211,9 +211,9 @@ describe("MIPS", function () {
             capstone.ARCH_MIPS,
             capstone.MODE_32 | capstone.MODE_BIG_ENDIAN
         );
-        var output = cs.insn_name(capstone.mips.INS_NEGU);
+        var output = cs.insn_name(capstone.mips.INS_JR_HB);
         cs.close();
-        expect(output).toEqual("negu");
+        expect(output).toEqual("jr.hb");
     });
 
     it("can disassemble big endian", function () {
