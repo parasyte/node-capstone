@@ -10,7 +10,7 @@ describe("ARM64", function () {
     var EXPECT_ARM64 = [
         {
             "arch" : 1,
-            "id" : 212,
+            "id" : 195,
             "address" : 44,
             "bytes" : [ 33, 124, 2, 155 ],
             "mnemonic" : "mul",
@@ -18,7 +18,7 @@ describe("ARM64", function () {
         },
         {
             "arch" : 1,
-            "id" : 201,
+            "id" : 184,
             "address" : 48,
             "bytes" : [ 33, 124, 0, 83 ],
             "mnemonic" : "lsr",
@@ -26,7 +26,7 @@ describe("ARM64", function () {
         },
         {
             "arch" : 1,
-            "id" : 349,
+            "id" : 340,
             "address" : 52,
             "bytes" : [ 0, 64, 33, 75 ],
             "mnemonic" : "sub",
@@ -34,7 +34,7 @@ describe("ARM64", function () {
         },
         {
             "arch" : 1,
-            "id" : 170,
+            "id" : 162,
             "address" : 56,
             "bytes" : [ 225, 11, 64, 185 ],
             "mnemonic" : "ldr",
@@ -42,15 +42,15 @@ describe("ARM64", function () {
         },
         {
             "arch" : 1,
-            "id" : 58,
+            "id" : 440,
             "address" : 60,
             "bytes" : [ 32, 4, 129, 218 ],
-            "mnemonic" : "csneg",
-            "op_str" : "x0, x1, x1, eq"
+            "mnemonic" : "cneg",
+            "op_str" : "x0, x1, ne"
         },
         {
             "arch" : 1,
-            "id" : 7,
+            "id" : 6,
             "address" : 64,
             "bytes" : [ 32, 8, 2, 139 ],
             "mnemonic" : "add",
@@ -63,14 +63,14 @@ describe("ARM64", function () {
         [ 48, 4, "lsr", "w1, w1, #0" ],
         [ 52, 4, "sub", "w0, w0, w1, uxtw" ],
         [ 56, 4, "ldr", "w1, [sp, #8]" ],
-        [ 60, 4, "csneg", "x0, x1, x1, eq" ],
+        [ 60, 4, "cneg", "x0, x1, ne" ],
         [ 64, 4, "add", "x0, x1, x2, lsl #2" ]
     ];
 
     var EXPECT_ARM64_DETAIL = [
         {
             "arch" : 1,
-            "id" : 212,
+            "id" : 195,
             "address" : 44,
             "bytes" : [ 33, 124, 2, 155 ],
             "mnemonic" : "mul",
@@ -85,22 +85,31 @@ describe("ARM64", function () {
                     "writeback" : false,
                     "operands" : [
                         {
+                            "vector_index" : -1,
+                            "vas" : 0,
+                            "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
                             "type" : 1,
-                            "reg" : 198
+                            "reg" : 200
                         },
                         {
+                            "vector_index" : -1,
+                            "vas" : 0,
+                            "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
                             "type" : 1,
-                            "reg" : 198
+                            "reg" : 200
                         },
                         {
+                            "vector_index" : -1,
+                            "vas" : 0,
+                            "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
                             "type" : 1,
-                            "reg" : 199
+                            "reg" : 201
                         }
                     ]
                 }
@@ -108,7 +117,7 @@ describe("ARM64", function () {
         },
         {
             "arch" : 1,
-            "id" : 201,
+            "id" : 184,
             "address" : 48,
             "bytes" : [ 33, 124, 0, 83 ],
             "mnemonic" : "lsr",
@@ -123,18 +132,27 @@ describe("ARM64", function () {
                     "writeback" : false,
                     "operands" : [
                         {
+                            "vector_index" : -1,
+                            "vas" : 0,
+                            "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
                             "type" : 1,
-                            "reg" : 167
+                            "reg" : 169
                         },
                         {
+                            "vector_index" : -1,
+                            "vas" : 0,
+                            "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
                             "type" : 1,
-                            "reg" : 167
+                            "reg" : 169
                         },
                         {
+                            "vector_index" : -1,
+                            "vas" : 0,
+                            "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
                             "type" : 3,
@@ -146,7 +164,7 @@ describe("ARM64", function () {
         },
         {
             "arch" : 1,
-            "id" : 349,
+            "id" : 340,
             "address" : 52,
             "bytes" : [ 0, 64, 33, 75 ],
             "mnemonic" : "sub",
@@ -161,22 +179,31 @@ describe("ARM64", function () {
                     "writeback" : false,
                     "operands" : [
                         {
+                            "vector_index" : -1,
+                            "vas" : 0,
+                            "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
                             "type" : 1,
-                            "reg" : 166
+                            "reg" : 168
                         },
                         {
+                            "vector_index" : -1,
+                            "vas" : 0,
+                            "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
                             "type" : 1,
-                            "reg" : 166
+                            "reg" : 168
                         },
                         {
+                            "vector_index" : -1,
+                            "vas" : 0,
+                            "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 3,
                             "type" : 1,
-                            "reg" : 167
+                            "reg" : 169
                         }
                     ]
                 }
@@ -184,7 +211,7 @@ describe("ARM64", function () {
         },
         {
             "arch" : 1,
-            "id" : 170,
+            "id" : 162,
             "address" : 56,
             "bytes" : [ 225, 11, 64, 185 ],
             "mnemonic" : "ldr",
@@ -199,12 +226,18 @@ describe("ARM64", function () {
                     "writeback" : false,
                     "operands" : [
                         {
+                            "vector_index" : -1,
+                            "vas" : 0,
+                            "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
                             "type" : 1,
-                            "reg" : 167
+                            "reg" : 169
                         },
                         {
+                            "vector_index" : -1,
+                            "vas" : 0,
+                            "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
                             "type" : 5,
@@ -216,37 +249,37 @@ describe("ARM64", function () {
         },
         {
             "arch" : 1,
-            "id" : 58,
+            "id" : 440,
             "address" : 60,
             "bytes" : [ 32, 4, 129, 218 ],
-            "mnemonic" : "csneg",
-            "op_str" : "x0, x1, x1, eq",
+            "mnemonic" : "cneg",
+            "op_str" : "x0, x1, ne",
             "detail" : {
-                "regs_read" : [ 1 ],
+                "regs_read" : [ 3 ],
                 "regs_write" : [],
                 "groups" : [],
                 "arm64" : {
-                    "cc" : 1,
+                    "cc" : 2,
                     "update_flags" : false,
                     "writeback" : false,
                     "operands" : [
                         {
+                            "vector_index" : -1,
+                            "vas" : 0,
+                            "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
                             "type" : 1,
-                            "reg" : 197
+                            "reg" : 199
                         },
                         {
+                            "vector_index" : -1,
+                            "vas" : 0,
+                            "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
                             "type" : 1,
-                            "reg" : 198
-                        },
-                        {
-                            "shift" : { "type" : 0, "value" : 0 },
-                            "ext" : 0,
-                            "type" : 1,
-                            "reg" : 198
+                            "reg" : 200
                         }
                     ]
                 }
@@ -254,7 +287,7 @@ describe("ARM64", function () {
         },
         {
             "arch" : 1,
-            "id" : 7,
+            "id" : 6,
             "address" : 64,
             "bytes" : [ 32, 8, 2, 139 ],
             "mnemonic" : "add",
@@ -269,22 +302,31 @@ describe("ARM64", function () {
                     "writeback" : false,
                     "operands" : [
                         {
+                            "vector_index" : -1,
+                            "vas" : 0,
+                            "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
-                            "ext" : 0,
-                            "type" : 1,
-                            "reg" : 197
-                        },
-                        {
-                            "shift" : { "type" : 0, "value" : 0 },
-                            "ext" : 0,
-                            "type" : 1,
-                            "reg" : 198
-                        },
-                        {
-                            "shift" : { "type" : 1, "value" : 2 },
                             "ext" : 0,
                             "type" : 1,
                             "reg" : 199
+                        },
+                        {
+                            "vector_index" : -1,
+                            "vas" : 0,
+                            "vess" : 0,
+                            "shift" : { "type" : 0, "value" : 0 },
+                            "ext" : 0,
+                            "type" : 1,
+                            "reg" : 200
+                        },
+                        {
+                            "vector_index" : -1,
+                            "vas" : 0,
+                            "vess" : 0,
+                            "shift" : { "type" : 1, "value" : 2 },
+                            "ext" : 0,
+                            "type" : 1,
+                            "reg" : 201
                         }
                     ]
                 }
@@ -295,16 +337,16 @@ describe("ARM64", function () {
 
     it("can print the correct register", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM64, capstone.MODE_ARM);
-        var output = cs.reg_name(capstone.arm64.REG_X30);
+        var output = cs.reg_name(capstone.arm64.REG_V31);
         cs.close();
-        expect(output).toEqual("x30");
+        expect(output).toEqual("v31");
     });
 
     it("can print the correct instruction", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM64, capstone.MODE_ARM);
-        var output = cs.insn_name(capstone.arm64.INS_NGC);
+        var output = cs.insn_name(capstone.arm64.INS_TLBI);
         cs.close();
-        expect(output).toEqual("ngc");
+        expect(output).toEqual("tlbi");
     });
 
     it("can be disassembled", function () {
