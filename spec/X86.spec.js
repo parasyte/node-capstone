@@ -141,7 +141,7 @@ describe("X86", function () {
         var cs = new capstone.Cs(capstone.ARCH_X86, capstone.MODE_64);
         var output = cs.disasm(CODE_X86, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_X86);
+        expect(output).not.toBeDiff(EXPECT_X86);
     });
 
     it("can be disassembled with ATT syntax", function () {
@@ -149,14 +149,14 @@ describe("X86", function () {
         cs.syntax = capstone.SYNTAX_ATT;
         var output = cs.disasm(CODE_X86, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_X86_ATT);
+        expect(output).not.toBeDiff(EXPECT_X86_ATT);
     });
 
     it("can be disassembled quickly", function () {
         var cs = new capstone.Cs(capstone.ARCH_X86, capstone.MODE_64);
         var output = cs.disasm_lite(CODE_X86, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_X86_LITE);
+        expect(output).not.toBeDiff(EXPECT_X86_LITE);
     });
 
     it("can be disassembled with detail", function () {
@@ -164,6 +164,6 @@ describe("X86", function () {
         cs.detail = true;
         var output = cs.disasm(CODE_X86, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_X86_DETAIL);
+        expect(output).not.toBeDiff(EXPECT_X86_DETAIL);
     });
 });

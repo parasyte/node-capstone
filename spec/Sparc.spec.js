@@ -663,14 +663,14 @@ describe("Sparc", function () {
         var cs = new capstone.Cs(capstone.ARCH_SPARC, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm(CODE_SPARC, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_SPARC);
+        expect(output).not.toBeDiff(EXPECT_SPARC);
     });
 
     it("can be disassembled quickly", function () {
         var cs = new capstone.Cs(capstone.ARCH_SPARC, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm_lite(CODE_SPARC, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_SPARC_LITE);
+        expect(output).not.toBeDiff(EXPECT_SPARC_LITE);
     });
 
     it("can be disassembled with detail", function () {
@@ -678,7 +678,7 @@ describe("Sparc", function () {
         cs.detail = true;
         var output = cs.disasm(CODE_SPARC, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_SPARC_DETAIL);
+        expect(output).not.toBeDiff(EXPECT_SPARC_DETAIL);
     });
 
     it("V9 can be disassembled", function () {
@@ -688,7 +688,7 @@ describe("Sparc", function () {
         );
         var output = cs.disasm(CODE_SPARCV9, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_SPARCV9);
+        expect(output).not.toBeDiff(EXPECT_SPARCV9);
     });
 
     it("V9 can be disassembled quickly", function () {
@@ -698,7 +698,7 @@ describe("Sparc", function () {
         );
         var output = cs.disasm_lite(CODE_SPARCV9, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_SPARCV9_LITE);
+        expect(output).not.toBeDiff(EXPECT_SPARCV9_LITE);
     });
 
     it("V9 can be disassembled with detail", function () {
@@ -709,6 +709,6 @@ describe("Sparc", function () {
         cs.detail = true;
         var output = cs.disasm(CODE_SPARCV9, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_SPARCV9_DETAIL);
+        expect(output).not.toBeDiff(EXPECT_SPARCV9_DETAIL);
     });
 });

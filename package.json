@@ -1,49 +1,55 @@
 {
-    "name" : "capstone",
-    "version" : "3.0.0",
-    "description" : "Bindings for the capstone disassembler library",
-    "keywords" : [
-        "capstone",
-        "disassembler", "disassembly", "ASM",
-        "ARM", "ARM64",
-        "PowerPC", "PPC",
-        "x86", "x86_64", "i386",
-        "MIPS",
-        "Sparc",
-        "SystemZ"
-    ],
-    "license" : "MIT",
-    "author" : {
-        "name" : "Jay Oster",
-        "email" : "jay@kodewerx.org",
-        "url" : "http://www.kodewerx.org/"
-    },
-    "homepage" : "https://parasyte.github.io/node-capstone-docs",
-    "repository" : {
-        "type" : "git",
-        "url" : "https://github.com/parasyte/node-capstone.git"
-    },
-    "dependencies" : {
-        "ref" : "~0.3.2",
-        "ref-array" : "~0.0.4",
-        "ref-struct" : "~0.0.6",
-        "ref-union" : "~0.0.3",
-        "ffi" : "~1.2.7"
-    },
-    "devDependencies" : {
-        "dot" : "~1.0.2",
-        "marked" : "~0.3.2",
-        "dox" : "~0.4.6",
-        "grunt" : "~0.4.1",
-        "grunt-contrib-jshint" : "~0.10.0",
-        "grunt-contrib-clean" : "~0.5.0",
-        "grunt-jasmine-node" : "~0.2.1"
-    },
-    "scripts" : {
-        "test" : "grunt test"
-    },
-    "engines" : {
-        "node" : "0.10.x"
-    },
-    "main" : "./lib/capstone.js"
+  "name": "capstone",
+  "version": "3.0.0",
+  "description": "Bindings for the capstone disassembler library",
+  "keywords": [
+    "capstone",
+    "disassembler",
+    "disassembly",
+    "ASM",
+    "ARM",
+    "ARM64",
+    "PowerPC",
+    "PPC",
+    "x86",
+    "x86_64",
+    "i386",
+    "MIPS",
+    "Sparc",
+    "SystemZ"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Jay Oster",
+    "email": "jay@kodewerx.org",
+    "url": "http://www.kodewerx.org/"
+  },
+  "homepage": "https://parasyte.github.io/node-capstone-docs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/parasyte/node-capstone.git"
+  },
+  "dependencies": {
+    "ref": "~1.0.0",
+    "ref-array": "~1.1.0",
+    "ref-struct": "~1.0.0",
+    "ref-union": "~0.0.3"
+  },
+  "devDependencies": {
+    "difflib": "~0.2.4",
+    "dot": "~1.0.3",
+    "dox": "~0.6.1",
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-jshint": "~0.11.0",
+    "grunt-jasmine-nodejs": "~1.0.2",
+    "marked": "~0.3.3"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "engines": {
+    "node": "0.12.x"
+  },
+  "main": "./lib/capstone.js"
 }

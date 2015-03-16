@@ -51,14 +51,20 @@ module.exports = function (grunt) {
             "dest" : docsDir,
         },
 
-        "jasmine_node" : {
-            "all" : [ "spec/" ],
+        "jasmine_nodejs" : {
+            "all" : {
+                "options" : {
+                    "useHelpers" : true
+                },
+                "specs" : [ "spec/*.spec.js" ],
+                "helpers" : [ "spec/*.helper.js" ],
+            }
         },
     });
 
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-clean");
-    grunt.loadNpmTasks("grunt-jasmine-node");
+    grunt.loadNpmTasks("grunt-jasmine-nodejs");
 
     // Custom Tasks
     grunt.loadTasks("tasks");
@@ -66,7 +72,7 @@ module.exports = function (grunt) {
     // Default task.
     grunt.registerTask("default", [ "test" ]);
 
-    grunt.registerTask("test", [ "jshint", "jasmine_node" ]);
+    grunt.registerTask("test", [ "jshint", "jasmine_nodejs" ]);
     grunt.registerTask("lint", [ "jshint" ]);
     grunt.registerTask("docs", [ "jshint", "clean:docs", "doxdot" ]);
 };

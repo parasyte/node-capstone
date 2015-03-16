@@ -652,14 +652,14 @@ describe("ARM", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM, capstone.MODE_ARM);
         var output = cs.disasm(CODE_ARM, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_ARM);
+        expect(output).not.toBeDiff(EXPECT_ARM);
     });
 
     it("can be disassembled quickly", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM, capstone.MODE_ARM);
         var output = cs.disasm_lite(CODE_ARM, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_ARM_LITE);
+        expect(output).not.toBeDiff(EXPECT_ARM_LITE);
     });
 
     it("can be disassembled with detail", function () {
@@ -667,6 +667,6 @@ describe("ARM", function () {
         cs.detail = true;
         var output = cs.disasm(CODE_ARM, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_ARM_DETAIL);
+        expect(output).not.toBeDiff(EXPECT_ARM_DETAIL);
     });
 });

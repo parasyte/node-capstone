@@ -348,14 +348,14 @@ describe("PPC", function () {
         var cs = new capstone.Cs(capstone.ARCH_PPC, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm(CODE_PPC, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_PPC);
+        expect(output).not.toBeDiff(EXPECT_PPC);
     });
 
     it("can be disassembled quickly", function () {
         var cs = new capstone.Cs(capstone.ARCH_PPC, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm_lite(CODE_PPC, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_PPC_LITE);
+        expect(output).not.toBeDiff(EXPECT_PPC_LITE);
     });
 
     it("can be disassembled with detail", function () {
@@ -363,6 +363,6 @@ describe("PPC", function () {
         cs.detail = true;
         var output = cs.disasm(CODE_PPC, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_PPC_DETAIL);
+        expect(output).not.toBeDiff(EXPECT_PPC_DETAIL);
     });
 });

@@ -175,14 +175,14 @@ describe("XCore", function () {
         var cs = new capstone.Cs(capstone.ARCH_XCORE, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm(CODE_XCORE, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_XCORE);
+        expect(output).not.toBeDiff(EXPECT_XCORE);
     });
 
     it("can be disassembled quickly", function () {
         var cs = new capstone.Cs(capstone.ARCH_XCORE, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm_lite(CODE_XCORE, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_XCORE_LITE);
+        expect(output).not.toBeDiff(EXPECT_XCORE_LITE);
     });
 
     it("can be disassembled with detail", function () {
@@ -190,6 +190,6 @@ describe("XCore", function () {
         cs.detail = true;
         var output = cs.disasm(CODE_XCORE, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_XCORE_DETAIL);
+        expect(output).not.toBeDiff(EXPECT_XCORE_DETAIL);
     });
 });

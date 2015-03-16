@@ -332,14 +332,14 @@ describe("SystemZ", function () {
         var cs = new capstone.Cs(capstone.ARCH_SYSZ, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm(CODE_SYSZ, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_SYSZ);
+        expect(output).not.toBeDiff(EXPECT_SYSZ);
     });
 
     it("can be disassembled quickly", function () {
         var cs = new capstone.Cs(capstone.ARCH_SYSZ, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm_lite(CODE_SYSZ, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_SYSZ_LITE);
+        expect(output).not.toBeDiff(EXPECT_SYSZ_LITE);
     });
 
     it("can be disassembled with detail", function () {
@@ -347,6 +347,6 @@ describe("SystemZ", function () {
         cs.detail = true;
         var output = cs.disasm(CODE_SYSZ, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_SYSZ_DETAIL);
+        expect(output).not.toBeDiff(EXPECT_SYSZ_DETAIL);
     });
 });

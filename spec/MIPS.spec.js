@@ -223,7 +223,7 @@ describe("MIPS", function () {
         );
         var output = cs.disasm(CODE_MIPS, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_MIPS);
+        expect(output).not.toBeDiff(EXPECT_MIPS);
     });
 
     it("can disassemble big endian quickly", function () {
@@ -233,7 +233,7 @@ describe("MIPS", function () {
         );
         var output = cs.disasm_lite(CODE_MIPS, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_MIPS_LITE);
+        expect(output).not.toBeDiff(EXPECT_MIPS_LITE);
     });
 
     it("can disassemble big endian with detail", function () {
@@ -244,7 +244,7 @@ describe("MIPS", function () {
         cs.detail = true;
         var output = cs.disasm(CODE_MIPS, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_MIPS_DETAIL);
+        expect(output).not.toBeDiff(EXPECT_MIPS_DETAIL);
     });
 
     it("can disassemble little endian", function () {
@@ -254,7 +254,7 @@ describe("MIPS", function () {
         );
         var output = cs.disasm(CODE_MIPS_LE, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_MIPS_LE);
+        expect(output).not.toBeDiff(EXPECT_MIPS_LE);
     });
 
     it("can disassemble with skipdata", function () {
@@ -265,7 +265,7 @@ describe("MIPS", function () {
         cs.skipdata = new capstone.CsSkipdata(".db");
         var output = cs.disasm_lite(CODE_MIPS_SKIPDATA, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_MIPS_SKIPDATA);
+        expect(output).not.toBeDiff(EXPECT_MIPS_SKIPDATA);
     });
 
     it("can disassemble with skipdata callback", function () {
@@ -297,7 +297,7 @@ describe("MIPS", function () {
 
         var output = cs.disasm_lite(CODE_MIPS_SKIPDATA, 0x1000);
         cs.close();
-        expect(output).toEqual(EXPECT_MIPS_SKIPDATA);
-        expect(cb_output).toEqual(EXPECT_MIPS_SKIPDATA_CB);
+        expect(output).not.toBeDiff(EXPECT_MIPS_SKIPDATA);
+        expect(cb_output).not.toBeDiff(EXPECT_MIPS_SKIPDATA_CB);
     });
 });
