@@ -1,17 +1,20 @@
-/*global module:false*/
 module.exports = function (grunt) {
     "use strict";
 
-    var sourceFiles = [
-        "lib/capstone.js", // capstone.js must be listed first or docs fail
-        "lib/arm.js",
-        "lib/arm64.js",
-        "lib/mips.js",
-        "lib/ppc.js",
-        "lib/x86.js",
-    ];
+    var sourceFiles = grunt.file.expand("lib/**/*.js");
     var specFiles = grunt.file.expand("spec/**/*.js");
-    var docsDir = "./docs"
+    var docsDir = "./docs";
+
+    // capstone.js must be listed first or docs fail
+    sourceFiles.sort(function (a, b) {
+        return (
+            a === "lib/capstone.js" ? -1 :
+            b === "lib/capstone.js" ? 1 :
+            a < b ? -1 :
+            a > b ? 1 :
+            0
+        );
+    });
 
     // Project configuration.
     grunt.initConfig({
@@ -23,7 +26,7 @@ module.exports = function (grunt) {
             },
 
             "files" : {
-                "src" : sourceFiles.concat(specFiles),
+                "src" : [ sourceFiles, specFiles, "Gruntfile.js" ],
             }
         },
 
@@ -48,14 +51,20 @@ module.exports = function (grunt) {
             "dest" : docsDir,
         },
 
-        "jasmine_node" : {
-            "all" : [ "spec/" ],
+        "jasmine_nodejs" : {
+            "all" : {
+                "options" : {
+                    "useHelpers" : true
+                },
+                "specs" : [ "spec/*.spec.js" ],
+                "helpers" : [ "spec/*.helper.js" ],
+            }
         },
     });
 
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-clean");
-    grunt.loadNpmTasks("grunt-jasmine-node");
+    grunt.loadNpmTasks("grunt-jasmine-nodejs");
 
     // Custom Tasks
     grunt.loadTasks("tasks");
@@ -63,7 +72,7 @@ module.exports = function (grunt) {
     // Default task.
     grunt.registerTask("default", [ "test" ]);
 
-    grunt.registerTask("test", [ "jshint", "jasmine_node" ]);
+    grunt.registerTask("test", [ "jshint", "jasmine_nodejs" ]);
     grunt.registerTask("lint", [ "jshint" ]);
     grunt.registerTask("docs", [ "jshint", "clean:docs", "doxdot" ]);
 };
