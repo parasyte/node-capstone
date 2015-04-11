@@ -7,7 +7,7 @@ supported architectures.
 
 ### Dependencies
 
-* [node.js v0.10.x](https://nodejs.org/)
+* [node.js v0.12.x](https://nodejs.org/)
     * [npm](https://www.npmjs.org/)
 * [Capstone](http://www.capstone-engine.org/)
 
@@ -59,7 +59,7 @@ Full documentation is available at https://parasyte.github.io/node-capstone-docs
 The source code is hereby released under the MIT License. The full text of the
 license appears below.
 
-Copyright (c) 2014 Jay Oster
+Copyright (c) 2014-2015 Jay Oster
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
