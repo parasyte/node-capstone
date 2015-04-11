@@ -9,70 +9,70 @@ describe("ARM64", function () {
 
     var EXPECT_ARM64 = [
         {
-            "arch" : 1,
-            "id" : 195,
-            "address" : 44,
-            "bytes" : [ 33, 124, 2, 155 ],
+            "arch" : capstone.ARCH_ARM64,
+            "id" : capstone.arm64.INS_MUL,
+            "address" : 0x2c,
+            "bytes" : [ 0x21, 0x7c, 0x02, 0x9b ],
             "mnemonic" : "mul",
             "op_str" : "x1, x1, x2"
         },
         {
-            "arch" : 1,
-            "id" : 184,
-            "address" : 48,
-            "bytes" : [ 33, 124, 0, 83 ],
+            "arch" : capstone.ARCH_ARM64,
+            "id" : capstone.arm64.INS_LSR,
+            "address" : 0x30,
+            "bytes" : [ 0x21, 0x7c, 0x00, 0x53 ],
             "mnemonic" : "lsr",
             "op_str" : "w1, w1, #0"
         },
         {
-            "arch" : 1,
-            "id" : 340,
-            "address" : 52,
-            "bytes" : [ 0, 64, 33, 75 ],
+            "arch" : capstone.ARCH_ARM64,
+            "id" : capstone.arm64.INS_SUB,
+            "address" : 0x34,
+            "bytes" : [ 0x00, 0x40, 0x21, 0x4b ],
             "mnemonic" : "sub",
             "op_str" : "w0, w0, w1, uxtw"
         },
         {
-            "arch" : 1,
-            "id" : 162,
-            "address" : 56,
-            "bytes" : [ 225, 11, 64, 185 ],
+            "arch" : capstone.ARCH_ARM64,
+            "id" : capstone.arm64.INS_LDR,
+            "address" : 0x38,
+            "bytes" : [ 0xe1, 0x0b, 0x40, 0xb9 ],
             "mnemonic" : "ldr",
             "op_str" : "w1, [sp, #8]"
         },
         {
-            "arch" : 1,
-            "id" : 440,
-            "address" : 60,
-            "bytes" : [ 32, 4, 129, 218 ],
+            "arch" : capstone.ARCH_ARM64,
+            "id" : capstone.arm64.INS_CNEG,
+            "address" : 0x3c,
+            "bytes" : [ 0x20, 0x04, 0x81, 0xda ],
             "mnemonic" : "cneg",
             "op_str" : "x0, x1, ne"
         },
         {
-            "arch" : 1,
-            "id" : 6,
-            "address" : 64,
-            "bytes" : [ 32, 8, 2, 139 ],
+            "arch" : capstone.ARCH_ARM64,
+            "id" : capstone.arm64.INS_ADD,
+            "address" : 0x40,
+            "bytes" : [ 0x20, 0x08, 0x02, 0x8b ],
             "mnemonic" : "add",
             "op_str" : "x0, x1, x2, lsl #2"
         },
     ];
 
     var EXPECT_ARM64_LITE = [
-        [ 44, 4, "mul", "x1, x1, x2" ],
-        [ 48, 4, "lsr", "w1, w1, #0" ],
-        [ 52, 4, "sub", "w0, w0, w1, uxtw" ],
-        [ 56, 4, "ldr", "w1, [sp, #8]" ],
-        [ 60, 4, "cneg", "x0, x1, ne" ],
-        [ 64, 4, "add", "x0, x1, x2, lsl #2" ]
+        [ 0x2c, 4, "mul", "x1, x1, x2" ],
+        [ 0x30, 4, "lsr", "w1, w1, #0" ],
+        [ 0x34, 4, "sub", "w0, w0, w1, uxtw" ],
+        [ 0x38, 4, "ldr", "w1, [sp, #8]" ],
+        [ 0x3c, 4, "cneg", "x0, x1, ne" ],
+        [ 0x40, 4, "add", "x0, x1, x2, lsl #2" ]
     ];
 
     var EXPECT_ARM64_DETAIL = [
         {
-            "arch" : 1,
-            "id" : 195,
-            "address" : 44,
-            "bytes" : [ 33, 124, 2, 155 ],
+            "arch" : capstone.ARCH_ARM64,
+            "id" : capstone.arm64.INS_MUL,
+            "address" : 0x2c,
+            "bytes" : [ 0x21, 0x7c, 0x02, 0x9b ],
             "mnemonic" : "mul",
             "op_str" : "x1, x1, x2",
             "detail" : {
@@ -80,7 +80,7 @@ describe("ARM64", function () {
                 "regs_write" : [],
                 "groups" : [],
                 "arm64" : {
-                    "cc" : 0,
+                    "cc" : capstone.arm64.CC_INVALID,
                     "update_flags" : false,
                     "writeback" : false,
                     "operands" : [
@@ -90,8 +90,8 @@ describe("ARM64", function () {
                             "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
-                            "type" : 1,
-                            "reg" : 200
+                            "type" : capstone.arm64.OP_REG,
+                            "reg" : capstone.arm64.REG_X1,
                         },
                         {
                             "vector_index" : -1,
@@ -99,8 +99,8 @@ describe("ARM64", function () {
                             "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
-                            "type" : 1,
-                            "reg" : 200
+                            "type" : capstone.arm64.OP_REG,
+                            "reg" : capstone.arm64.REG_X1,
                         },
                         {
                             "vector_index" : -1,
@@ -108,18 +108,18 @@ describe("ARM64", function () {
                             "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
-                            "type" : 1,
-                            "reg" : 201
+                            "type" : capstone.arm64.OP_REG,
+                            "reg" : capstone.arm64.REG_X2,
                         }
                     ]
                 }
             }
         },
         {
-            "arch" : 1,
-            "id" : 184,
-            "address" : 48,
-            "bytes" : [ 33, 124, 0, 83 ],
+            "arch" : capstone.ARCH_ARM64,
+            "id" : capstone.arm64.INS_LSR,
+            "address" : 0x30,
+            "bytes" : [ 0x21, 0x7c, 0x00, 0x53 ],
             "mnemonic" : "lsr",
             "op_str" : "w1, w1, #0",
             "detail" : {
@@ -127,7 +127,7 @@ describe("ARM64", function () {
                 "regs_write" : [],
                 "groups" : [],
                 "arm64" : {
-                    "cc" : 0,
+                    "cc" : capstone.arm64.CC_INVALID,
                     "update_flags" : false,
                     "writeback" : false,
                     "operands" : [
@@ -137,8 +137,8 @@ describe("ARM64", function () {
                             "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
-                            "type" : 1,
-                            "reg" : 169
+                            "type" : capstone.arm64.OP_REG,
+                            "reg" : capstone.arm64.REG_W1,
                         },
                         {
                             "vector_index" : -1,
@@ -146,8 +146,8 @@ describe("ARM64", function () {
                             "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
-                            "type" : 1,
-                            "reg" : 169
+                            "type" : capstone.arm64.OP_REG,
+                            "reg" : capstone.arm64.REG_W1,
                         },
                         {
                             "vector_index" : -1,
@@ -155,7 +155,7 @@ describe("ARM64", function () {
                             "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
-                            "type" : 3,
+                            "type" : capstone.arm64.OP_IMM,
                             "imm" : 0
                         }
                     ]
@@ -163,10 +163,10 @@ describe("ARM64", function () {
             }
         },
         {
-            "arch" : 1,
-            "id" : 340,
-            "address" : 52,
-            "bytes" : [ 0, 64, 33, 75 ],
+            "arch" : capstone.ARCH_ARM64,
+            "id" : capstone.arm64.INS_SUB,
+            "address" : 0x34,
+            "bytes" : [ 0x00, 0x40, 0x21, 0x4b ],
             "mnemonic" : "sub",
             "op_str" : "w0, w0, w1, uxtw",
             "detail" : {
@@ -174,7 +174,7 @@ describe("ARM64", function () {
                 "regs_write" : [],
                 "groups" : [],
                 "arm64" : {
-                    "cc" : 0,
+                    "cc" : capstone.arm64.CC_INVALID,
                     "update_flags" : false,
                     "writeback" : false,
                     "operands" : [
@@ -184,7 +184,7 @@ describe("ARM64", function () {
                             "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
-                            "type" : 1,
+                            "type" : capstone.arm64.OP_REG,
                             "reg" : 168
                         },
                         {
@@ -193,7 +193,7 @@ describe("ARM64", function () {
                             "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
-                            "type" : 1,
+                            "type" : capstone.arm64.OP_REG,
                             "reg" : 168
                         },
                         {
@@ -202,18 +202,18 @@ describe("ARM64", function () {
                             "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 3,
-                            "type" : 1,
-                            "reg" : 169
+                            "type" : capstone.arm64.OP_REG,
+                            "reg" : capstone.arm64.REG_W1,
                         }
                     ]
                 }
             }
         },
         {
-            "arch" : 1,
-            "id" : 162,
-            "address" : 56,
-            "bytes" : [ 225, 11, 64, 185 ],
+            "arch" : capstone.ARCH_ARM64,
+            "id" : capstone.arm64.INS_LDR,
+            "address" : 0x38,
+            "bytes" : [ 0xe1, 0x0b, 0x40, 0xb9 ],
             "mnemonic" : "ldr",
             "op_str" : "w1, [sp, #8]",
             "detail" : {
@@ -221,7 +221,7 @@ describe("ARM64", function () {
                 "regs_write" : [],
                 "groups" : [],
                 "arm64" : {
-                    "cc" : 0,
+                    "cc" : capstone.arm64.CC_INVALID,
                     "update_flags" : false,
                     "writeback" : false,
                     "operands" : [
@@ -231,8 +231,8 @@ describe("ARM64", function () {
                             "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
-                            "type" : 1,
-                            "reg" : 169
+                            "type" : capstone.arm64.OP_REG,
+                            "reg" : capstone.arm64.REG_W1,
                         },
                         {
                             "vector_index" : -1,
@@ -240,7 +240,7 @@ describe("ARM64", function () {
                             "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
-                            "type" : 5,
+                            "type" : capstone.arm64.OP_MEM,
                             "mem" : { "base" : 4, "index" : 0, "disp" : 8 }
                         }
                     ]
@@ -248,10 +248,10 @@ describe("ARM64", function () {
             }
         },
         {
-            "arch" : 1,
-            "id" : 440,
-            "address" : 60,
-            "bytes" : [ 32, 4, 129, 218 ],
+            "arch" : capstone.ARCH_ARM64,
+            "id" : capstone.arm64.INS_CNEG,
+            "address" : 0x3c,
+            "bytes" : [ 0x20, 0x04, 0x81, 0xda ],
             "mnemonic" : "cneg",
             "op_str" : "x0, x1, ne",
             "detail" : {
@@ -269,8 +269,8 @@ describe("ARM64", function () {
                             "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
-                            "type" : 1,
-                            "reg" : 199
+                            "type" : capstone.arm64.OP_REG,
+                            "reg" : capstone.arm64.REG_X0,
                         },
                         {
                             "vector_index" : -1,
@@ -278,18 +278,18 @@ describe("ARM64", function () {
                             "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
-                            "type" : 1,
-                            "reg" : 200
+                            "type" : capstone.arm64.OP_REG,
+                            "reg" : capstone.arm64.REG_X1,
                         }
                     ]
                 }
             }
         },
         {
-            "arch" : 1,
-            "id" : 6,
-            "address" : 64,
-            "bytes" : [ 32, 8, 2, 139 ],
+            "arch" : capstone.ARCH_ARM64,
+            "id" : capstone.arm64.INS_ADD,
+            "address" : 0x40,
+            "bytes" : [ 0x20, 0x08, 0x02, 0x8b ],
             "mnemonic" : "add",
             "op_str" : "x0, x1, x2, lsl #2",
             "detail" : {
@@ -297,7 +297,7 @@ describe("ARM64", function () {
                 "regs_write" : [],
                 "groups" : [],
                 "arm64" : {
-                    "cc" : 0,
+                    "cc" : capstone.arm64.CC_INVALID,
                     "update_flags" : false,
                     "writeback" : false,
                     "operands" : [
@@ -307,8 +307,8 @@ describe("ARM64", function () {
                             "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
-                            "type" : 1,
-                            "reg" : 199
+                            "type" : capstone.arm64.OP_REG,
+                            "reg" : capstone.arm64.REG_X0,
                         },
                         {
                             "vector_index" : -1,
@@ -316,17 +316,17 @@ describe("ARM64", function () {
                             "vess" : 0,
                             "shift" : { "type" : 0, "value" : 0 },
                             "ext" : 0,
-                            "type" : 1,
-                            "reg" : 200
+                            "type" : capstone.arm64.OP_REG,
+                            "reg" : capstone.arm64.REG_X1,
                         },
                         {
                             "vector_index" : -1,
                             "vas" : 0,
                             "vess" : 0,
-                            "shift" : { "type" : 1, "value" : 2 },
+                            "shift" : { "type" : capstone.arm64.OP_REG, "value" : 2 },
                             "ext" : 0,
-                            "type" : 1,
-                            "reg" : 201
+                            "type" : capstone.arm64.OP_REG,
+                            "reg" : capstone.arm64.REG_X2,
                         }
                     ]
                 }

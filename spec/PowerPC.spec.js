@@ -11,108 +11,108 @@ describe("PPC", function () {
 
     var EXPECT_PPC = [
         {
-            "arch" : 4,
-            "id" : 347,
-            "address" : 4096,
-            "bytes" : [ 128, 32, 0, 0 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_LWZ,
+            "address" : 0x1000,
+            "bytes" : [ 0x80, 0x20, 0x00, 0x00 ],
             "mnemonic" : "lwz",
             "op_str" : "r1, (0)"
         },
         {
-            "arch" : 4,
-            "id" : 347,
-            "address" : 4100,
-            "bytes" : [ 128, 63, 0, 0 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_LWZ,
+            "address" : 0x1004,
+            "bytes" : [ 0x80, 0x3f, 0x00, 0x00 ],
             "mnemonic" : "lwz",
             "op_str" : "r1, (r31)"
         },
         {
-            "arch" : 4,
-            "id" : 570,
-            "address" : 4104,
-            "bytes" : [ 16, 67, 35, 14 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_VPKPX,
+            "address" : 0x1008,
+            "bytes" : [ 0x10, 0x43, 0x23, 0x0e ],
             "mnemonic" : "vpkpx",
             "op_str" : "v2, v3, v4"
         },
         {
-            "arch" : 4,
-            "id" : 443,
-            "address" : 4108,
-            "bytes" : [ 208, 68, 0, 128 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_STFS,
+            "address" : 0x100c,
+            "bytes" : [ 0xd0, 0x44, 0x00, 0x80 ],
             "mnemonic" : "stfs",
             "op_str" : "f2, 0x80(r4)"
         },
         {
-            "arch" : 4,
-            "id" : 52,
-            "address" : 4112,
-            "bytes" : [ 76, 67, 34, 2 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_CRAND,
+            "address" : 0x1010,
+            "bytes" : [ 0x4c, 0x43, 0x22, 0x02 ],
             "mnemonic" : "crand",
             "op_str" : "2, 3, 4"
         },
         {
-            "arch" : 4,
-            "id" : 47,
-            "address" : 4116,
-            "bytes" : [ 45, 3, 0, 128 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_CMPWI,
+            "address" : 0x1014,
+            "bytes" : [ 0x2d, 0x03, 0x00, 0x80 ],
             "mnemonic" : "cmpwi",
             "op_str" : "cr2, r3, 0x80"
         },
         {
-            "arch" : 4,
-            "id" : 2,
-            "address" : 4120,
-            "bytes" : [ 124, 67, 32, 20 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_ADDC,
+            "address" : 0x1018,
+            "bytes" : [ 0x7c, 0x43, 0x20, 0x14 ],
             "mnemonic" : "addc",
             "op_str" : "r2, r3, r4"
         },
         {
-            "arch" : 4,
-            "id" : 384,
-            "address" : 4124,
-            "bytes" : [ 124, 67, 32, 147 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_MULHD,
+            "address" : 0x101c,
+            "bytes" : [ 0x7c, 0x43, 0x20, 0x93 ],
             "mnemonic" : "mulhd.",
             "op_str" : "r2, r3, r4"
         },
         {
-            "arch" : 4,
-            "id" : 28,
-            "address" : 4128,
-            "bytes" : [ 79, 32, 0, 33 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_BDNZLRL,
+            "address" : 0x1020,
+            "bytes" : [ 0x4f, 0x20, 0x00, 0x21 ],
             "mnemonic" : "bdnzlrl+",
             "op_str" : ""
         },
         {
-            "arch" : 4,
-            "id" : 38,
-            "address" : 4132,
-            "bytes" : [ 76, 200, 0, 33 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_BLRL,
+            "address" : 0x1024,
+            "bytes" : [ 0x4c, 0xc8, 0x00, 0x21 ],
             "mnemonic" : "bgelrl-",
             "op_str" : "cr2"
         }
     ];
 
     var EXPECT_PPC_LITE = [
-        [ 4096, 4, "lwz", "r1, (0)" ],
-        [ 4100, 4, "lwz", "r1, (r31)" ],
-        [ 4104, 4, "vpkpx", "v2, v3, v4" ],
-        [ 4108, 4, "stfs", "f2, 0x80(r4)" ],
-        [ 4112, 4, "crand", "2, 3, 4" ],
-        [ 4116, 4, "cmpwi", "cr2, r3, 0x80" ],
-        [ 4120, 4, "addc", "r2, r3, r4" ],
-        [ 4124, 4, "mulhd.", "r2, r3, r4" ],
-        [ 4128, 4, "bdnzlrl+", "" ],
-        [ 4132, 4, "bgelrl-", "cr2" ]
+        [ 0x1000, 4, "lwz", "r1, (0)" ],
+        [ 0x1004, 4, "lwz", "r1, (r31)" ],
+        [ 0x1008, 4, "vpkpx", "v2, v3, v4" ],
+        [ 0x100c, 4, "stfs", "f2, 0x80(r4)" ],
+        [ 0x1010, 4, "crand", "2, 3, 4" ],
+        [ 0x1014, 4, "cmpwi", "cr2, r3, 0x80" ],
+        [ 0x1018, 4, "addc", "r2, r3, r4" ],
+        [ 0x101c, 4, "mulhd.", "r2, r3, r4" ],
+        [ 0x1020, 4, "bdnzlrl+", "" ],
+        [ 0x1024, 4, "bgelrl-", "cr2" ]
     ];
 
     var EXPECT_PPC_DETAIL = [
         {
-            "arch" : 4,
-            "id" : 347,
-            "address" : 4096,
-            "bytes" : [ 128, 32, 0, 0 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_LWZ,
+            "address" : 0x1000,
+            "bytes" : [ 0x80, 0x20, 0x00, 0x00 ],
             "mnemonic" : "lwz",
-            "op_str" : "r1, (0)",
+            "op_str" : "r1, (0)", // FIXME: registers should be prefixed with `r`
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
@@ -122,17 +122,26 @@ describe("PPC", function () {
                     "bh" : 0,
                     "update_cr0" : false,
                     "operands" : [
-                        { "type" : 1, "reg" : 46 },
-                        { "type" : 3, "mem" : { "base" : 45, "disp" : 0 } }
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_R1,
+                        },
+                        {
+                            "type" : capstone.ppc.OP_MEM,
+                            "mem" : {
+                                "base" : capstone.ppc.REG_R0,
+                                "disp" : 0,
+                            }
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 4,
-            "id" : 347,
-            "address" : 4100,
-            "bytes" : [ 128, 63, 0, 0 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_LWZ,
+            "address" : 0x1004,
+            "bytes" : [ 0x80, 0x3f, 0x00, 0x00 ],
             "mnemonic" : "lwz",
             "op_str" : "r1, (r31)",
             "detail" : {
@@ -144,40 +153,58 @@ describe("PPC", function () {
                     "bh" : 0,
                     "update_cr0" : false,
                     "operands" : [
-                        { "type" : 1, "reg" : 46 },
-                        { "type" : 3, "mem" : { "base" : 76, "disp" : 0 } }
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_R1,
+                        },
+                        {
+                            "type" : capstone.ppc.OP_MEM,
+                            "mem" : {
+                                "base" : capstone.ppc.REG_R31,
+                                "disp" : 0,
+                            }
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 4,
-            "id" : 570,
-            "address" : 4104,
-            "bytes" : [ 16, 67, 35, 14 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_VPKPX,
+            "address" : 0x1008,
+            "bytes" : [ 0x10, 0x43, 0x23, 0x0e ],
             "mnemonic" : "vpkpx",
             "op_str" : "v2, v3, v4",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
-                "groups" : [ 1 ],
+                "groups" : [ capstone.ppc.GRP_ALTIVEC ],
                 "ppc" : {
                     "bc" : 0,
                     "bh" : 0,
                     "update_cr0" : false,
                     "operands" : [
-                        { "type" : 1, "reg" : 79 },
-                        { "type" : 1, "reg" : 80 },
-                        { "type" : 1, "reg" : 81 }
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_V2,
+                        },
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_V3,
+                        },
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_V4,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 4,
-            "id" : 443,
-            "address" : 4108,
-            "bytes" : [ 208, 68, 0, 128 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_STFS,
+            "address" : 0x100c,
+            "bytes" : [ 0xd0, 0x44, 0x00, 0x80 ],
             "mnemonic" : "stfs",
             "op_str" : "f2, 0x80(r4)",
             "detail" : {
@@ -189,19 +216,28 @@ describe("PPC", function () {
                     "bh" : 0,
                     "update_cr0" : false,
                     "operands" : [
-                        { "type" : 1, "reg" : 14 },
-                        { "type" : 3, "mem" : { "base" : 49, "disp" : 128 } }
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_F2,
+                        },
+                        {
+                            "type" : capstone.ppc.OP_MEM,
+                            "mem" : {
+                                "base" : capstone.ppc.REG_R4,
+                                "disp" : 0x80,
+                            }
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 4,
-            "id" : 52,
-            "address" : 4112,
-            "bytes" : [ 76, 67, 34, 2 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_CRAND,
+            "address" : 0x1010,
+            "bytes" : [ 0x4c, 0x43, 0x22, 0x02 ],
             "mnemonic" : "crand",
-            "op_str" : "2, 3, 4",
+            "op_str" : "2, 3, 4", // FIXME: registers should be prefixed with `r`
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
@@ -211,18 +247,27 @@ describe("PPC", function () {
                     "bh" : 0,
                     "update_cr0" : false,
                     "operands" : [
-                        { "type" : 1, "reg" : 47 },
-                        { "type" : 1, "reg" : 48 },
-                        { "type" : 1, "reg" : 49 }
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_R2,
+                        },
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_R3,
+                        },
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_R4,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 4,
-            "id" : 47,
-            "address" : 4116,
-            "bytes" : [ 45, 3, 0, 128 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_CMPWI,
+            "address" : 0x1014,
+            "bytes" : [ 0x2d, 0x03, 0x00, 0x80 ],
             "mnemonic" : "cmpwi",
             "op_str" : "cr2, r3, 0x80",
             "detail" : {
@@ -234,69 +279,100 @@ describe("PPC", function () {
                     "bh" : 0,
                     "update_cr0" : false,
                     "operands" : [
-                        { "type" : 1, "reg" : 5 },
-                        { "type" : 1, "reg" : 48 },
-                        { "type" : 2, "imm" : 128 }
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_CR2,
+                        },
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_R3,
+                        },
+                        {
+                            "type" : capstone.ppc.OP_IMM,
+                            "imm" : 0x80
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 4,
-            "id" : 2,
-            "address" : 4120,
-            "bytes" : [ 124, 67, 32, 20 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_ADDC,
+            "address" : 0x1018,
+            "bytes" : [ 0x7c, 0x43, 0x20, 0x14 ],
             "mnemonic" : "addc",
             "op_str" : "r2, r3, r4",
             "detail" : {
                 "regs_read" : [],
-                "regs_write" : [ 1 ],
+                "regs_write" : [ capstone.ppc.REG_CARRY ],
                 "groups" : [],
                 "ppc" : {
                     "bc" : 0,
                     "bh" : 0,
                     "update_cr0" : false,
                     "operands" : [
-                        { "type" : 1, "reg" : 47 },
-                        { "type" : 1, "reg" : 48 },
-                        { "type" : 1, "reg" : 49 }
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_R2,
+                        },
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_R3,
+                        },
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_R4,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 4,
-            "id" : 384,
-            "address" : 4124,
-            "bytes" : [ 124, 67, 32, 147 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_MULHD,
+            "address" : 0x101c,
+            "bytes" : [ 0x7c, 0x43, 0x20, 0x93 ],
             "mnemonic" : "mulhd.",
             "op_str" : "r2, r3, r4",
             "detail" : {
                 "regs_read" : [],
-                "regs_write" : [ 3 ],
+                "regs_write" : [ capstone.ppc.REG_CR0 ],
                 "groups" : [],
                 "ppc" : {
                     "bc" : 0,
                     "bh" : 0,
                     "update_cr0" : true,
                     "operands" : [
-                        { "type" : 1, "reg" : 47 },
-                        { "type" : 1, "reg" : 48 },
-                        { "type" : 1, "reg" : 49 }
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_R2,
+                        },
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_R3,
+                        },
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_R4,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 4,
-            "id" : 28,
-            "address" : 4128,
-            "bytes" : [ 79, 32, 0, 33 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_BDNZLRL,
+            "address" : 0x1020,
+            "bytes" : [ 0x4f, 0x20, 0x00, 0x21 ],
             "mnemonic" : "bdnzlrl+",
             "op_str" : "",
             "detail" : {
-                "regs_read" : [ 11, 44, 174 ],
-                "regs_write" : [ 11 ],
+                "regs_read" : [
+                    capstone.ppc.REG_CTR,
+                    capstone.ppc.REG_LR,
+                    capstone.ppc.REG_RM,
+                ],
+                "regs_write" : [ capstone.ppc.REG_CTR ],
                 "groups" : [],
                 "ppc" : {
                     "bc" : 0,
@@ -307,22 +383,32 @@ describe("PPC", function () {
             }
         },
         {
-            "arch" : 4,
-            "id" : 38,
-            "address" : 4132,
-            "bytes" : [ 76, 200, 0, 33 ],
+            "arch" : capstone.ARCH_PPC,
+            "id" : capstone.ppc.INS_BLRL,
+            "address" : 0x1024,
+            "bytes" : [ 0x4c, 0xc8, 0x00, 0x21 ],
             "mnemonic" : "bgelrl-",
             "op_str" : "cr2",
             "detail" : {
-                "regs_read" : [ 11, 44, 174 ],
-                "regs_write" : [ 44, 11 ],
+                "regs_read" : [
+                    capstone.ppc.REG_CTR,
+                    capstone.ppc.REG_LR,
+                    capstone.ppc.REG_RM,
+                ],
+                "regs_write" : [
+                    capstone.ppc.REG_LR,
+                    capstone.ppc.REG_CTR,
+                ],
                 "groups" : [],
                 "ppc" : {
                     "bc" : 4,
                     "bh" : 2,
                     "update_cr0" : false,
                     "operands" : [
-                        { "type" : 1, "reg" : 5 }
+                        {
+                            "type" : capstone.ppc.OP_REG,
+                            "reg" : capstone.ppc.REG_CR2,
+                        }
                     ]
                 }
             }

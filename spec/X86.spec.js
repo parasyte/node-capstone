@@ -7,18 +7,18 @@ describe("X86", function () {
 
     var EXPECT_X86 = [
         {
-            "arch" : 3,
-            "id" : 562,
-            "address" : 4096,
-            "bytes" : [ 85 ],
+            "arch" : capstone.ARCH_X86,
+            "id" : capstone.x86.INS_PUSH,
+            "address" : 0x1000,
+            "bytes" : [ 0x55 ],
             "mnemonic" : "push",
             "op_str" : "rbp"
         },
         {
-            "arch" : 3,
-            "id" : 424,
-            "address" : 4097,
-            "bytes" : [ 72, 139, 5, 184, 19, 0, 0 ],
+            "arch" : capstone.ARCH_X86,
+            "id" : capstone.x86.INS_MOV,
+            "address" : 0x1001,
+            "bytes" : [ 0x48, 0x8b, 0x05, 0xb8, 0x13, 0x00, 0x00 ],
             "mnemonic" : "mov",
             "op_str" : "rax, qword ptr [rip + 0x13b8]"
         }
@@ -26,65 +26,72 @@ describe("X86", function () {
 
     var EXPECT_X86_ATT = [
         {
-            "arch" : 3,
-            "id" : 562,
-            "address" : 4096,
+            "arch" : capstone.ARCH_X86,
+            "id" : capstone.x86.INS_PUSH,
+            "address" : 0x1000,
             "bytes" : [ 85 ],
             "mnemonic" : "pushq",
             "op_str" : "%rbp"
         },
         {
-            "arch" : 3,
-            "id" : 424,
-            "address" : 4097,
-            "bytes" : [ 72, 139, 5, 184, 19, 0, 0 ],
+            "arch" : capstone.ARCH_X86,
+            "id" : capstone.x86.INS_MOV,
+            "address" : 0x1001,
+            "bytes" : [ 0x48, 0x8b, 0x05, 0xb8, 0x13, 0x00, 0x00 ],
             "mnemonic" : "movq",
             "op_str" : "0x13b8(%rip), %rax"
         }
     ];
 
     var EXPECT_X86_LITE = [
-        [ 4096, 1, "push", "rbp" ],
-        [ 4097, 7, "mov", "rax, qword ptr [rip + 0x13b8]" ]
+        [ 0x1000, 1, "push", "rbp" ],
+        [ 0x1001, 7, "mov", "rax, qword ptr [rip + 0x13b8]" ]
     ];
 
     var EXPECT_X86_DETAIL = [
         {
-            "arch" : 3,
-            "id" : 562,
-            "address" : 4096,
-            "bytes" : [ 85 ],
+            "arch" : capstone.ARCH_X86,
+            "id" : capstone.x86.INS_PUSH,
+            "address" : 0x1000,
+            "bytes" : [ 0x55 ],
             "mnemonic" : "push",
             "op_str" : "rbp",
             "detail" : {
-                "regs_read" : [ 44 ],
-                "regs_write" : [ 44 ],
-                "groups" : [ 17 ],
+                "regs_read" : [ capstone.x86.REG_RSP ],
+                "regs_write" : [ capstone.x86.REG_RSP ],
+                "groups" : [ capstone.x86.GRP_MODE64 ],
                 "x86" : {
-                    "prefix" : [ 0, 0, 0, 0, 0 ],
-                    "segment" : 0,
-                    "opcode" : [ 85, 0, 0 ],
-                    "op_size" : 8,
+                    "prefix" : [ 0, 0, 0, 0 ],
+                    "opcode" : [ 0x55, 0x00, 0x00, 0x00 ],
                     "addr_size" : 8,
-                    "disp_size" : 4,
-                    "imm_size" : 4,
+                    "rex" : 0,
                     "modrm" : 0,
                     "sib" : 0,
                     "disp" : 0,
                     "sib_index" : 0,
                     "sib_scale" : 0,
                     "sib_base" : 0,
+                    "sse_cc" : 0,
+                    "avx_cc" : 0,
+                    "avx_sae" : false,
+                    "avx_rm" : 0,
                     "operands" : [
-                        { "type" : 1, "reg" : 36 }
+                        {
+                            "type" : capstone.x86.OP_REG,
+                            "size" : 8,
+                            "avx_bcast" : 0,
+                            "avx_zero_opmask" : false,
+                            "reg" : capstone.x86.REG_RBP,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 3,
-            "id" : 424,
-            "address" : 4097,
-            "bytes" : [ 72, 139, 5, 184, 19, 0, 0 ],
+            "arch" : capstone.ARCH_X86,
+            "id" : capstone.x86.INS_MOV,
+            "address" : 0x1001,
+            "bytes" : [ 0x48, 0x8b, 0x05, 0xb8, 0x13, 0x00, 0x00 ],
             "mnemonic" : "mov",
             "op_str" : "rax, qword ptr [rip + 0x13b8]",
             "detail" : {
@@ -92,28 +99,39 @@ describe("X86", function () {
                 "regs_write" : [],
                 "groups" : [],
                 "x86" : {
-                    "prefix" : [ 0, 0, 0, 0, 0 ],
-                    "segment" : 0,
-                    "opcode" : [ 139, 0, 0 ],
-                    "op_size" : 8,
+                    "prefix" : [ 0, 0, 0, 0 ],
+                    "opcode" : [ 0x8b, 0x00, 0x00, 0x00 ],
                     "addr_size" : 8,
-                    "disp_size" : 4,
-                    "imm_size" : 4,
+                    "rex" : 72,
                     "modrm" : 5,
                     "sib" : 0,
-                    "disp" : 5048,
+                    "disp" : 0x13b8,
                     "sib_index" : 0,
                     "sib_scale" : 0,
                     "sib_base" : 0,
+                    "sse_cc" : 0,
+                    "avx_cc" : 0,
+                    "avx_sae" : false,
+                    "avx_rm" : 0,
                     "operands" : [
-                        { "type" : 1, "reg" : 35 },
                         {
-                            "type" : 4,
+                            "type" : capstone.x86.OP_REG,
+                            "size" : 8,
+                            "avx_bcast" : 0,
+                            "avx_zero_opmask" : false,
+                            "reg" : capstone.x86.REG_RAX,
+                        },
+                        {
+                            "type" : capstone.x86.OP_MEM,
+                            "size" : 8,
+                            "avx_bcast" : 0,
+                            "avx_zero_opmask" : false,
                             "mem" : {
-                                "base" : 41,
+                                "segment" : 0,
+                                "base" : capstone.x86.REG_RIP,
                                 "index" : 0,
                                 "scale" : 1,
-                                "disp" : 5048
+                                "disp" : 0x13b8
                             }
                         }
                     ]

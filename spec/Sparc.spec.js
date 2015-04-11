@@ -14,181 +14,187 @@ describe("Sparc", function () {
 
     var EXPECT_SPARC = [
         {
-            "arch" : 5,
-            "id" : 33,
-            "address" : 4096,
-            "bytes" : [ 128, 160, 64, 2 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_CMP,
+            "address" : 0x1000,
+            "bytes" : [ 0x80, 0xa0, 0x40, 0x02 ],
             "mnemonic" : "cmp",
             "op_str" : "%g1, %g2"
         },
         {
-            "arch" : 5,
-            "id" : 194,
-            "address" : 4100,
-            "bytes" : [ 133, 194, 96, 8 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_JMPL,
+            "address" : 0x1004,
+            "bytes" : [ 0x85, 0xc2, 0x60, 0x08 ],
             "mnemonic" : "jmpl",
             "op_str" : "%o1+8, %g2"
         },
         {
-            "arch" : 5,
-            "id" : 226,
-            "address" : 4104,
-            "bytes" : [ 133, 232, 32, 1 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_RESTORE,
+            "address" : 0x1008,
+            "bytes" : [ 0x85, 0xe8, 0x20, 0x01 ],
             "mnemonic" : "restore",
             "op_str" : "%g0, 1, %g2"
         },
         {
-            "arch" : 5,
-            "id" : 226,
-            "address" : 4108,
-            "bytes" : [ 129, 232, 0, 0 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_RESTORE,
+            "address" : 0x100c,
+            "bytes" : [ 0x81, 0xe8, 0x00, 0x00 ],
             "mnemonic" : "restore",
             "op_str" : ""
         },
         {
-            "arch" : 5,
-            "id" : 207,
-            "address" : 4112,
-            "bytes" : [ 144, 16, 32, 1 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_MOV,
+            "address" : 0x1010,
+            "bytes" : [ 0x90, 0x10, 0x20, 0x01 ],
             "mnemonic" : "mov",
             "op_str" : "1, %o0"
         },
         {
-            "arch" : 5,
-            "id" : 28,
-            "address" : 4116,
-            "bytes" : [ 213, 246, 16, 22 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_CASX,
+            "address" : 0x1014,
+            "bytes" : [ 0xd5, 0xf6, 0x10, 0x16 ],
             "mnemonic" : "casx",
             "op_str" : "[%i0], %l6, %o2"
         },
         {
-            "arch" : 5,
-            "id" : 232,
-            "address" : 4120,
-            "bytes" : [ 33, 0, 0, 10 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_SETHI,
+            "address" : 0x1018,
+            "bytes" : [ 0x21, 0x00, 0x00, 0x0a ],
             "mnemonic" : "sethi",
             "op_str" : "0xa, %l0"
         },
         {
-            "arch" : 5,
-            "id" : 6,
-            "address" : 4124,
-            "bytes" : [ 134, 0, 64, 2 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_ADD,
+            "address" : 0x101c,
+            "bytes" : [ 0x86, 0x00, 0x40, 0x02 ],
             "mnemonic" : "add",
             "op_str" : "%g1, %g2, %g3"
         },
         {
-            "arch" : 5,
-            "id" : 217,
-            "address" : 4128,
-            "bytes" : [ 1, 0, 0, 0 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_NOP,
+            "address" : 0x1020,
+            "bytes" : [ 0x01, 0x00, 0x00, 0x00 ],
             "mnemonic" : "nop",
             "op_str" : ""
         },
         {
-            "arch" : 5,
-            "id" : 16,
-            "address" : 4132,
-            "bytes" : [ 18, 191, 255, 255 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_B,
+            "address" : 0x1024,
+            "bytes" : [ 0x12, 0xbf, 0xff, 0xff ],
             "mnemonic" : "bne",
-            "op_str" : "0x3fffff"
+            "op_str" : "0x1001020"
         },
         {
-            "arch" : 5,
-            "id" : 16,
-            "address" : 4136,
-            "bytes" : [ 16, 191, 255, 255 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_B,
+            "address" : 0x1028,
+            "bytes" : [ 0x10, 0xbf, 0xff, 0xff ],
             "mnemonic" : "ba",
-            "op_str" : "0x3fffff"
+            "op_str" : "0x1001024"
         },
         {
-            "arch" : 5,
-            "id" : 6,
-            "address" : 4140,
-            "bytes" : [ 160, 2, 0, 9 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_ADD,
+            "address" : 0x102c,
+            "bytes" : [ 0xa0, 0x02, 0x00, 0x09 ],
             "mnemonic" : "add",
             "op_str" : "%o0, %o1, %l0"
         },
         {
-            "arch" : 5,
-            "id" : 19,
-            "address" : 4144,
-            "bytes" : [ 13, 191, 255, 255 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_FB,
+            "address" : 0x1030,
+            "bytes" : [ 0x0d, 0xbf, 0xff, 0xff ],
             "mnemonic" : "fbg",
             "op_str" : "0x3fffff"
         },
         {
-            "arch" : 5,
-            "id" : 246,
-            "address" : 4148,
-            "bytes" : [ 212, 32, 96, 0 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_ST,
+            "address" : 0x1034,
+            "bytes" : [ 0xd4, 0x20, 0x60, 0x00 ],
             "mnemonic" : "st",
             "op_str" : "%o2, [%g1]"
         },
         {
-            "arch" : 5,
-            "id" : 198,
-            "address" : 4152,
-            "bytes" : [ 212, 78, 0, 22 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_LDSB,
+            "address" : 0x1038,
+            "bytes" : [ 0xd4, 0x4e, 0x00, 0x16 ],
             "mnemonic" : "ldsb",
             "op_str" : "[%i0+%l6], %o2"
         },
         {
-            "arch" : 5,
-            "id" : 24,
-            "address" : 4156,
-            "bytes" : [ 42, 194, 128, 3 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_BRNZ,
+            "address" : 0x103c,
+            "bytes" : [ 0x2a, 0xc2, 0x80, 0x03 ],
             "mnemonic" : "brnz,a,pn",
             "op_str" : "%o2, 3"
         }
     ];
 
     var EXPECT_SPARC_LITE = [
-        [ 4096, 4, "cmp", "%g1, %g2" ],
-        [ 4100, 4, "jmpl", "%o1+8, %g2" ],
-        [ 4104, 4, "restore", "%g0, 1, %g2" ],
-        [ 4108, 4, "restore", "" ],
-        [ 4112, 4, "mov", "1, %o0" ],
-        [ 4116, 4, "casx", "[%i0], %l6, %o2" ],
-        [ 4120, 4, "sethi", "0xa, %l0" ],
-        [ 4124, 4, "add", "%g1, %g2, %g3" ],
-        [ 4128, 4, "nop", "" ],
-        [ 4132, 4, "bne", "0x3fffff" ],
-        [ 4136, 4, "ba", "0x3fffff" ],
-        [ 4140, 4, "add", "%o0, %o1, %l0" ],
-        [ 4144, 4, "fbg", "0x3fffff" ],
-        [ 4148, 4, "st", "%o2, [%g1]" ],
-        [ 4152, 4, "ldsb", "[%i0+%l6], %o2" ],
-        [ 4156, 4, "brnz,a,pn", "%o2, 3" ]
+        [ 0x1000, 4, "cmp", "%g1, %g2" ],
+        [ 0x1004, 4, "jmpl", "%o1+8, %g2" ],
+        [ 0x1008, 4, "restore", "%g0, 1, %g2" ],
+        [ 0x100c, 4, "restore", "" ],
+        [ 0x1010, 4, "mov", "1, %o0" ],
+        [ 0x1014, 4, "casx", "[%i0], %l6, %o2" ],
+        [ 0x1018, 4, "sethi", "0xa, %l0" ],
+        [ 0x101c, 4, "add", "%g1, %g2, %g3" ],
+        [ 0x1020, 4, "nop", "" ],
+        [ 0x1024, 4, "bne", "0x1001020" ],
+        [ 0x1028, 4, "ba", "0x1001024" ],
+        [ 0x102c, 4, "add", "%o0, %o1, %l0" ],
+        [ 0x1030, 4, "fbg", "0x3fffff" ],
+        [ 0x1034, 4, "st", "%o2, [%g1]" ],
+        [ 0x1038, 4, "ldsb", "[%i0+%l6], %o2" ],
+        [ 0x103c, 4, "brnz,a,pn", "%o2, 3" ]
     ];
 
     var EXPECT_SPARC_DETAIL = [
         {
-            "arch" : 5,
-            "id" : 33,
-            "address" : 4096,
-            "bytes" : [ 128, 160, 64, 2 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_CMP,
+            "address" : 0x1000,
+            "bytes" : [ 0x80, 0xa0, 0x40, 0x02 ],
             "mnemonic" : "cmp",
             "op_str" : "%g1, %g2",
             "detail" : {
                 "regs_read" : [],
-                "regs_write" : [ 69 ],
+                "regs_write" : [ capstone.sparc.REG_ICC ],
                 "groups" : [],
                 "sparc" : {
                     "cc" : 0,
                     "hint" : 0,
                     "operands" : [
-                        { "type" : 1, "reg" : 55 },
-                        { "type" : 1, "reg" : 56 }
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_G1,
+                        },
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_G2,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 5,
-            "id" : 194,
-            "address" : 4100,
-            "bytes" : [ 133, 194, 96, 8 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_JMPL,
+            "address" : 0x1004,
+            "bytes" : [ 0x85, 0xc2, 0x60, 0x08 ],
             "mnemonic" : "jmpl",
             "op_str" : "%o1+8, %g2",
             "detail" : {
@@ -200,19 +206,26 @@ describe("Sparc", function () {
                     "hint" : 0,
                     "operands" : [
                         {
-                            "type" : 3,
-                            "mem" : { "base" : 79, "index" : 0, "disp" : 8 }
+                            "type" : capstone.sparc.OP_MEM,
+                            "mem" : {
+                                "base" : capstone.sparc.REG_O1,
+                                "index" : 0,
+                                "disp" : 8
+                            }
                         },
-                        { "type" : 1, "reg" : 56 }
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_G2,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 5,
-            "id" : 226,
-            "address" : 4104,
-            "bytes" : [ 133, 232, 32, 1 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_RESTORE,
+            "address" : 0x1008,
+            "bytes" : [ 0x85, 0xe8, 0x20, 0x01 ],
             "mnemonic" : "restore",
             "op_str" : "%g0, 1, %g2",
             "detail" : {
@@ -223,18 +236,27 @@ describe("Sparc", function () {
                     "cc" : 0,
                     "hint" : 0,
                     "operands" : [
-                        { "type" : 1, "reg" : 54 },
-                        { "type" : 2, "imm" : 1 },
-                        { "type" : 1, "reg" : 56 }
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_G0,
+                        },
+                        {
+                            "type" : capstone.sparc.OP_IMM,
+                            "imm" : 1,
+                        },
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_G2,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 5,
-            "id" : 226,
-            "address" : 4108,
-            "bytes" : [ 129, 232, 0, 0 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_RESTORE,
+            "address" : 0x100c,
+            "bytes" : [ 0x81, 0xe8, 0x00, 0x00 ],
             "mnemonic" : "restore",
             "op_str" : "",
             "detail" : {
@@ -249,10 +271,10 @@ describe("Sparc", function () {
             }
         },
         {
-            "arch" : 5,
-            "id" : 207,
-            "address" : 4112,
-            "bytes" : [ 144, 16, 32, 1 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_MOV,
+            "address" : 0x1010,
+            "bytes" : [ 0x90, 0x10, 0x20, 0x01 ],
             "mnemonic" : "mov",
             "op_str" : "1, %o0",
             "detail" : {
@@ -263,42 +285,58 @@ describe("Sparc", function () {
                     "cc" : 0,
                     "hint" : 0,
                     "operands" : [
-                        { "type" : 2, "imm" : 1 },
-                        { "type" : 1, "reg" : 78 }
+                        {
+                            "type" : capstone.sparc.OP_IMM,
+                            "imm" : 1,
+                        },
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_O0,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 5,
-            "id" : 28,
-            "address" : 4116,
-            "bytes" : [ 213, 246, 16, 22 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_CASX,
+            "address" : 0x1014,
+            "bytes" : [ 0xd5, 0xf6, 0x10, 0x16 ],
             "mnemonic" : "casx",
             "op_str" : "[%i0], %l6, %o2",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
-                "groups" : [ 7 ],
+                "groups" : [ capstone.sparc.GRP_64BIT ],
                 "sparc" : {
                     "cc" : 0,
                     "hint" : 0,
                     "operands" : [
                         {
-                            "type" : 3,
-                            "mem" : { "base" : 62, "index" : 0, "disp" : 0 }
+                            "type" : capstone.sparc.OP_MEM,
+                            "mem" : {
+                                "base" : capstone.sparc.REG_I0,
+                                "index" : 0,
+                                "disp" : 0,
+                            }
                         },
-                        { "type" : 1, "reg" : 76 },
-                        { "type" : 1, "reg" : 80 }
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_L6,
+                        },
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_O2,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 5,
-            "id" : 232,
-            "address" : 4120,
-            "bytes" : [ 33, 0, 0, 10 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_SETHI,
+            "address" : 0x1018,
+            "bytes" : [ 0x21, 0x00, 0x00, 0x0a ],
             "mnemonic" : "sethi",
             "op_str" : "0xa, %l0",
             "detail" : {
@@ -309,17 +347,23 @@ describe("Sparc", function () {
                     "cc" : 0,
                     "hint" : 0,
                     "operands" : [
-                        { "type" : 2, "imm" : 10 },
-                        { "type" : 1, "reg" : 70 }
+                        {
+                            "type" : capstone.sparc.OP_IMM,
+                            "imm" : 10,
+                        },
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_L0,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 5,
-            "id" : 6,
-            "address" : 4124,
-            "bytes" : [ 134, 0, 64, 2 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_ADD,
+            "address" : 0x101c,
+            "bytes" : [ 0x86, 0x00, 0x40, 0x02 ],
             "mnemonic" : "add",
             "op_str" : "%g1, %g2, %g3",
             "detail" : {
@@ -330,18 +374,27 @@ describe("Sparc", function () {
                     "cc" : 0,
                     "hint" : 0,
                     "operands" : [
-                        { "type" : 1, "reg" : 55 },
-                        { "type" : 1, "reg" : 56 },
-                        { "type" : 1, "reg" : 57 }
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_G1,
+                        },
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_G2,
+                        },
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_G3,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 5,
-            "id" : 217,
-            "address" : 4128,
-            "bytes" : [ 1, 0, 0, 0 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_NOP,
+            "address" : 0x1020,
+            "bytes" : [ 0x01, 0x00, 0x00, 0x00 ],
             "mnemonic" : "nop",
             "op_str" : "",
             "detail" : {
@@ -356,50 +409,56 @@ describe("Sparc", function () {
             }
         },
         {
-            "arch" : 5,
-            "id" : 16,
-            "address" : 4132,
-            "bytes" : [ 18, 191, 255, 255 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_B,
+            "address" : 0x1024,
+            "bytes" : [ 0x12, 0xbf, 0xff, 0xff ],
             "mnemonic" : "bne",
-            "op_str" : "0x3fffff",
+            "op_str" : "0x1001020",
             "detail" : {
                 "regs_read" : [ 69 ],
                 "regs_write" : [],
-                "groups" : [ 8 ],
+                "groups" : [ capstone.sparc.GRP_JUMP ],
                 "sparc" : {
                     "cc" : 265,
                     "hint" : 0,
                     "operands" : [
-                        { "type" : 2, "imm" : 4194303 }
+                        {
+                            "type" : capstone.sparc.OP_IMM,
+                            "imm" : 0x1001020,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 5,
-            "id" : 16,
-            "address" : 4136,
-            "bytes" : [ 16, 191, 255, 255 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_B,
+            "address" : 0x1028,
+            "bytes" : [ 0x10, 0xbf, 0xff, 0xff ],
             "mnemonic" : "ba",
-            "op_str" : "0x3fffff",
+            "op_str" : "0x1001024",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
-                "groups" : [ 8 ],
+                "groups" : [ capstone.sparc.GRP_JUMP ],
                 "sparc" : {
                     "cc" : 0,
                     "hint" : 0,
                     "operands" : [
-                        { "type" : 2, "imm" : 4194303 }
+                        {
+                            "type" : capstone.sparc.OP_IMM,
+                            "imm" : 0x1001024,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 5,
-            "id" : 6,
-            "address" : 4140,
-            "bytes" : [ 160, 2, 0, 9 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_ADD,
+            "address" : 0x102c,
+            "bytes" : [ 0xa0, 0x02, 0x00, 0x09 ],
             "mnemonic" : "add",
             "op_str" : "%o0, %o1, %l0",
             "detail" : {
@@ -410,38 +469,50 @@ describe("Sparc", function () {
                     "cc" : 0,
                     "hint" : 0,
                     "operands" : [
-                        { "type" : 1, "reg" : 78 },
-                        { "type" : 1, "reg" : 79 },
-                        { "type" : 1, "reg" : 70 }
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_O0,
+                        },
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_O1,
+                        },
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_L0,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 5,
-            "id" : 19,
-            "address" : 4144,
-            "bytes" : [ 13, 191, 255, 255 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_FB,
+            "address" : 0x1030,
+            "bytes" : [ 0x0d, 0xbf, 0xff, 0xff ],
             "mnemonic" : "fbg",
             "op_str" : "0x3fffff",
             "detail" : {
-                "regs_read" : [ 49 ],
+                "regs_read" : [ capstone.sparc.REG_FCC0 ],
                 "regs_write" : [],
-                "groups" : [ 8 ],
+                "groups" : [ capstone.sparc.GRP_JUMP ],
                 "sparc" : {
                     "cc" : 278,
                     "hint" : 0,
                     "operands" : [
-                        { "type" : 2, "imm" : 4194303 }
+                        {
+                            "type" : capstone.sparc.OP_IMM,
+                            "imm" : 0x3fffff,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 5,
-            "id" : 246,
-            "address" : 4148,
-            "bytes" : [ 212, 32, 96, 0 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_ST,
+            "address" : 0x1034,
+            "bytes" : [ 0xd4, 0x20, 0x60, 0x00 ],
             "mnemonic" : "st",
             "op_str" : "%o2, [%g1]",
             "detail" : {
@@ -452,20 +523,27 @@ describe("Sparc", function () {
                     "cc" : 0,
                     "hint" : 0,
                     "operands" : [
-                        { "type" : 1, "reg" : 80 },
                         {
-                            "type" : 3,
-                            "mem" : { "base" : 55, "index" : 0, "disp" : 0 }
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_O2,
+                        },
+                        {
+                            "type" : capstone.sparc.OP_MEM,
+                            "mem" : {
+                                "base" : capstone.sparc.REG_G1,
+                                "index" : 0,
+                                "disp" : 0,
+                            }
                         }
                     ]
                 }
             }
         },
         {
-            "arch" : 5,
-            "id" : 198,
-            "address" : 4152,
-            "bytes" : [ 212, 78, 0, 22 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_LDSB,
+            "address" : 0x1038,
+            "bytes" : [ 0xd4, 0x4e, 0x00, 0x16 ],
             "mnemonic" : "ldsb",
             "op_str" : "[%i0+%l6], %o2",
             "detail" : {
@@ -477,31 +555,47 @@ describe("Sparc", function () {
                     "hint" : 0,
                     "operands" : [
                         {
-                            "type" : 3,
-                            "mem" : { "base" : 62, "index" : 76, "disp" : 0 }
+                            "type" : capstone.sparc.OP_MEM,
+                            "mem" : {
+                                "base" : capstone.sparc.REG_I0,
+                                "index" : capstone.sparc.REG_L6,
+                                "disp" : 0,
+                            }
                         },
-                        { "type" : 1, "reg" : 80 }
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_O2,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 5,
-            "id" : 24,
-            "address" : 4156,
-            "bytes" : [ 42, 194, 128, 3 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_BRNZ,
+            "address" : 0x103c,
+            "bytes" : [ 0x2a, 0xc2, 0x80, 0x03 ],
             "mnemonic" : "brnz,a,pn",
             "op_str" : "%o2, 3",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
-                "groups" : [ 7, 8 ],
+                "groups" : [
+                    capstone.sparc.GRP_64BIT,
+                    capstone.sparc.GRP_JUMP,
+                ],
                 "sparc" : {
                     "cc" : 0,
                     "hint" : 5,
                     "operands" : [
-                        { "type" : 1, "reg" : 80 },
-                        { "type" : 2, "imm" : 3 }
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_O2,
+                        },
+                        {
+                            "type" : capstone.sparc.OP_IMM,
+                            "imm" : 3,
+                        }
                     ]
                 }
             }
@@ -515,52 +609,52 @@ describe("Sparc", function () {
 
     var EXPECT_SPARCV9 = [
         {
-            "arch" : 5,
-            "id" : 70,
-            "address" : 4096,
-            "bytes" : [ 129, 168, 10, 36 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_FCMPS,
+            "address" : 0x1000,
+            "bytes" : [ 0x81, 0xa8, 0x0a, 0x24 ],
             "mnemonic" : "fcmps",
             "op_str" : "%f0, %f4"
         },
         {
-            "arch" : 5,
-            "id" : 181,
-            "address" : 4100,
-            "bytes" : [ 137, 160, 16, 32 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_FSTOX,
+            "address" : 0x1004,
+            "bytes" : [ 0x89, 0xa0, 0x10, 0x20 ],
             "mnemonic" : "fstox",
             "op_str" : "%f0, %f4"
         },
         {
-            "arch" : 5,
-            "id" : 159,
-            "address" : 4104,
-            "bytes" : [ 137, 160, 26, 96 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_FQTOI,
+            "address" : 0x1008,
+            "bytes" : [ 0x89, 0xa0, 0x1a, 0x60 ],
             "mnemonic" : "fqtoi",
             "op_str" : "%f0, %f4"
         },
         {
-            "arch" : 5,
-            "id" : 127,
-            "address" : 4108,
-            "bytes" : [ 137, 160, 0, 224 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_FNEGQ,
+            "address" : 0x100c,
+            "bytes" : [ 0x89, 0xa0, 0x00, 0xe0 ],
             "mnemonic" : "fnegq",
             "op_str" : "%f0, %f4"
         }
     ];
 
     var EXPECT_SPARCV9_LITE = [
-        [ 4096, 4, "fcmps", "%f0, %f4" ],
-        [ 4100, 4, "fstox", "%f0, %f4" ],
-        [ 4104, 4, "fqtoi", "%f0, %f4" ],
-        [ 4108, 4, "fnegq", "%f0, %f4" ]
+        [ 0x1000, 4, "fcmps", "%f0, %f4" ],
+        [ 0x1004, 4, "fstox", "%f0, %f4" ],
+        [ 0x1008, 4, "fqtoi", "%f0, %f4" ],
+        [ 0x100c, 4, "fnegq", "%f0, %f4" ]
     ];
 
     var EXPECT_SPARCV9_DETAIL = [
         {
-            "arch" : 5,
-            "id" : 70,
-            "address" : 4096,
-            "bytes" : [ 129, 168, 10, 36 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_FCMPS,
+            "address" : 0x1000,
+            "bytes" : [ 0x81, 0xa8, 0x0a, 0x24 ],
             "mnemonic" : "fcmps",
             "op_str" : "%f0, %f4",
             "detail" : {
@@ -571,73 +665,95 @@ describe("Sparc", function () {
                     "cc" : 0,
                     "hint" : 0,
                     "operands" : [
-                        { "type" : 1, "reg" : 1 },
-                        { "type" : 1, "reg" : 5 }
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_F0,
+                        },
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_F4,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 5,
-            "id" : 181,
-            "address" : 4100,
-            "bytes" : [ 137, 160, 16, 32 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_FSTOX,
+            "address" : 0x1004,
+            "bytes" : [ 0x89, 0xa0, 0x10, 0x20 ],
             "mnemonic" : "fstox",
             "op_str" : "%f0, %f4",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
-                "groups" : [
-                    7
-                ],
+                "groups" : [ capstone.sparc.GRP_64BIT ],
                 "sparc" : {
                     "cc" : 0,
                     "hint" : 0,
                     "operands" : [
-                        { "type" : 1, "reg" : 1 },
-                        { "type" : 1, "reg" : 5 }
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_F0,
+                        },
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_F4,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 5,
-            "id" : 159,
-            "address" : 4104,
-            "bytes" : [ 137, 160, 26, 96 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_FQTOI,
+            "address" : 0x1008,
+            "bytes" : [ 0x89, 0xa0, 0x1a, 0x60 ],
             "mnemonic" : "fqtoi",
             "op_str" : "%f0, %f4",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
-                "groups" : [ 1 ],
+                "groups" : [ capstone.sparc.GRP_HARDQUAD ],
                 "sparc" : {
                     "cc" : 0,
                     "hint" : 0,
                     "operands" : [
-                        { "type" : 1, "reg" : 1 },
-                        { "type" : 1, "reg" : 5 }
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_F0,
+                        },
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_F4,
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 5,
-            "id" : 127,
-            "address" : 4108,
-            "bytes" : [ 137, 160, 0, 224 ],
+            "arch" : capstone.ARCH_SPARC,
+            "id" : capstone.sparc.INS_FNEGQ,
+            "address" : 0x100c,
+            "bytes" : [ 0x89, 0xa0, 0x00, 0xe0 ],
             "mnemonic" : "fnegq",
             "op_str" : "%f0, %f4",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
-                "groups" : [ 2 ],
+                "groups" : [ capstone.sparc.GRP_V9 ],
                 "sparc" : {
                     "cc" : 0,
                     "hint" : 0,
                     "operands" : [
-                        { "type" : 1, "reg" : 1 },
-                        { "type" : 1, "reg" : 5 }
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_F0,
+                        },
+                        {
+                            "type" : capstone.sparc.OP_REG,
+                            "reg" : capstone.sparc.REG_F4,
+                        }
                     ]
                 }
             }

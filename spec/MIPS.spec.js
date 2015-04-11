@@ -2,152 +2,173 @@ describe("MIPS", function () {
     var capstone = require("..");
 
     var CODE_MIPS = new Buffer([
-        0x0C, 0x10, 0x00, 0x97, 0x00, 0x00, 0x00, 0x00,
+        0x0c, 0x10, 0x00, 0x97, 0x00, 0x00, 0x00, 0x00,
         0x24, 0x02, 0x00, 0x0c, 0x8f, 0xa2, 0x00, 0x00,
         0x34, 0x21, 0x34, 0x56
     ]);
 
     var EXPECT_MIPS = [
         {
-            "arch" : 2,
-            "id" : 322,
-            "address" : 4096,
-            "bytes" : [ 12, 16, 0, 151 ],
+            "arch" : capstone.ARCH_MIPS,
+            "id" : capstone.mips.INS_JAL,
+            "address" : 0x1000,
+            "bytes" : [ 0x0c, 0x10, 0x00, 0x97 ],
             "mnemonic" : "jal",
             "op_str" : "0x40025c"
         },
         {
-            "arch" : 2,
-            "id" : 582,
-            "address" : 4100,
-            "bytes" : [ 0, 0, 0, 0 ],
+            "arch" : capstone.ARCH_MIPS,
+            "id" : capstone.mips.INS_NOP,
+            "address" : 0x1004,
+            "bytes" : [ 0x00, 0x00, 0x00, 0x00 ],
             "mnemonic" : "nop",
             "op_str" : ""
         },
         {
-            "arch" : 2,
-            "id" : 21,
-            "address" : 4104,
-            "bytes" : [ 36, 2, 0, 12 ],
+            "arch" : capstone.ARCH_MIPS,
+            "id" : capstone.mips.INS_ADDIU,
+            "address" : 0x1008,
+            "bytes" : [ 0x24, 0x02, 0x00, 0x0c ],
             "mnemonic" : "addiu",
             "op_str" : "$v0, $zero, 0xc"
         },
         {
-            "arch" : 2,
-            "id" : 353,
-            "address" : 4108,
-            "bytes" : [ 143, 162, 0, 0 ],
+            "arch" : capstone.ARCH_MIPS,
+            "id" : capstone.mips.INS_LW,
+            "address" : 0x100c,
+            "bytes" : [ 0x8f, 0xa2, 0x00, 0x00 ],
             "mnemonic" : "lw",
             "op_str" : "$v0, ($sp)"
         },
         {
-            "arch" : 2,
-            "id" : 445,
-            "address" : 4112,
-            "bytes" : [ 52, 33, 52, 86 ],
+            "arch" : capstone.ARCH_MIPS,
+            "id" : capstone.mips.INS_ORI,
+            "address" : 0x1010,
+            "bytes" : [ 0x34, 0x21, 0x34, 0x56 ],
             "mnemonic" : "ori",
             "op_str" : "$at, $at, 0x3456"
         }
     ];
 
     var EXPECT_MIPS_LITE = [
-        [ 4096, 4, "jal", "0x40025c" ],
-        [ 4100, 4, "nop", "" ],
-        [ 4104, 4, "addiu", "$v0, $zero, 0xc" ],
-        [ 4108, 4, "lw", "$v0, ($sp)" ],
-        [ 4112, 4, "ori", "$at, $at, 0x3456" ]
+        [ 0x1000, 4, "jal", "0x40025c" ],
+        [ 0x1004, 4, "nop", "" ],
+        [ 0x1008, 4, "addiu", "$v0, $zero, 0xc" ],
+        [ 0x100c, 4, "lw", "$v0, ($sp)" ],
+        [ 0x1010, 4, "ori", "$at, $at, 0x3456" ]
     ];
 
     var EXPECT_MIPS_DETAIL = [
         {
-            "arch" : 2,
-            "id" : 322,
-            "address" : 4096,
-            "bytes" : [ 12, 16, 0, 151 ],
+            "arch" : capstone.ARCH_MIPS,
+            "id" : capstone.mips.INS_JAL,
+            "address" : 0x1000,
+            "bytes" : [ 0x0c, 0x10, 0x00, 0x97 ],
             "mnemonic" : "jal",
             "op_str" : "0x40025c",
             "detail" : {
                 "regs_read" : [],
-                "regs_write" : [ 32 ],
-                "groups" : [ 10 ],
+                "regs_write" : [ capstone.mips.REG_RA ],
+                "groups" : [ capstone.mips.GRP_STDENC ],
                 "mips" : {
                     "operands" : [
-                        { "type" : 2, "imm" : 4194908 }
+                        { "type" : capstone.mips.OP_IMM, "imm" : 0x40025c }
                     ]
                 }
             }
         },
         {
-            "arch" : 2,
-            "id" : 582,
-            "address" : 4100,
-            "bytes" : [ 0, 0, 0, 0 ],
+            "arch" : capstone.ARCH_MIPS,
+            "id" : capstone.mips.INS_NOP,
+            "address" : 0x1004,
+            "bytes" : [ 0x00, 0x00, 0x00, 0x00 ],
             "mnemonic" : "nop",
             "op_str" : "",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
-                "groups" : [ 10 ],
+                "groups" : [ capstone.mips.GRP_STDENC ],
                 "mips" : {
                     "operands" : []
                 }
             }
         },
         {
-            "arch" : 2,
-            "id" : 21,
-            "address" : 4104,
-            "bytes" : [ 36, 2, 0, 12 ],
+            "arch" : capstone.ARCH_MIPS,
+            "id" : capstone.mips.INS_ADDIU,
+            "address" : 0x1008,
+            "bytes" : [ 0x24, 0x02, 0x00, 0x0c ],
             "mnemonic" : "addiu",
             "op_str" : "$v0, $zero, 0xc",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
-                "groups" : [ 10 ],
+                "groups" : [ capstone.mips.GRP_STDENC ],
                 "mips" : {
                     "operands" : [
-                        { "type" : 1, "reg" : 3 },
-                        { "type" : 1, "reg" : 1 },
-                        { "type" : 2, "imm" : 12 }
+                        {
+                            "type" : capstone.mips.OP_REG,
+                            "reg" : capstone.mips.REG_V0,
+                        },
+                        {
+                            "type" : capstone.mips.OP_REG,
+                            "reg" : capstone.mips.REG_ZERO,
+                        },
+                        { "type" : capstone.mips.OP_IMM, "imm" : 12 }
                     ]
                 }
             }
         },
         {
-            "arch" : 2,
-            "id" : 353,
-            "address" : 4108,
-            "bytes" : [ 143, 162, 0, 0 ],
+            "arch" : capstone.ARCH_MIPS,
+            "id" : capstone.mips.INS_LW,
+            "address" : 0x100c,
+            "bytes" : [ 0x8f, 0xa2, 0x00, 0x00 ],
             "mnemonic" : "lw",
             "op_str" : "$v0, ($sp)",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
-                "groups" : [ 10 ],
+                "groups" : [ capstone.mips.GRP_STDENC ],
                 "mips" : {
                     "operands" : [
-                        { "type" : 1, "reg" : 3 },
-                        { "type" : 3, "mem" : { "base" : 30, "disp" : 0 } }
+                        {
+                            "type" : capstone.mips.OP_REG,
+                            "reg" : capstone.mips.REG_V0,
+                        },
+                        {
+                            "type" : capstone.mips.OP_MEM,
+                            "mem" : {
+                                "base" : capstone.mips.REG_SP,
+                                "disp" : 0,
+                            }
+                        }
                     ]
                 }
             }
         },
         {
-            "arch" : 2,
-            "id" : 445,
-            "address" : 4112,
-            "bytes" : [ 52, 33, 52, 86 ],
+            "arch" : capstone.ARCH_MIPS,
+            "id" : capstone.mips.INS_ORI,
+            "address" : 0x1010,
+            "bytes" : [ 0x34, 0x21, 0x34, 0x56 ],
             "mnemonic" : "ori",
             "op_str" : "$at, $at, 0x3456",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
-                "groups" : [ 10 ],
+                "groups" : [ capstone.mips.GRP_STDENC ],
                 "mips" : {
                     "operands" : [
-                        { "type" : 1, "reg" : 2 },
-                        { "type" : 1, "reg" : 2 },
-                        { "type" : 2, "imm" : 13398 }
+                        {
+                            "type" : capstone.mips.OP_REG,
+                            "reg" : capstone.mips.REG_AT,
+                        },
+                        {
+                            "type" : capstone.mips.OP_REG,
+                            "reg" : capstone.mips.REG_AT,
+                        },
+                        { "type" : capstone.mips.OP_IMM, "imm" : 0x3456 }
                     ]
                 }
             }
@@ -161,18 +182,18 @@ describe("MIPS", function () {
 
     var EXPECT_MIPS_LE = [
         {
-            "arch" : 2,
-            "id" : 445,
-            "address" : 4096,
-            "bytes" : [ 86, 52, 33, 52 ],
+            "arch" : capstone.ARCH_MIPS,
+            "id" : capstone.mips.INS_ORI,
+            "address" : 0x1000,
+            "bytes" : [ 0x56, 0x34, 0x21, 0x34 ],
             "mnemonic" : "ori",
             "op_str" : "$at, $at, 0x3456"
         },
         {
-            "arch" : 2,
-            "id" : 525,
-            "address" : 4100,
-            "bytes" : [ 194, 23, 1, 0 ],
+            "arch" : capstone.ARCH_MIPS,
+            "id" : capstone.mips.INS_SRL,
+            "address" : 0x1004,
+            "bytes" : [ 0xc2, 0x17, 0x01, 0x00 ],
             "mnemonic" : "srl",
             "op_str" : "$v0, $at, 0x1f"
         }
@@ -184,8 +205,8 @@ describe("MIPS", function () {
     ]);
 
     var EXPECT_MIPS_SKIPDATA = [
-        [ 4096, 4, "nop", "" ],
-        [ 4100, 4, ".db", "0xff, 0xff, 0xff, 0xff" ]
+        [ 0x1000, 4, "nop", "" ],
+        [ 0x1004, 4, ".db", "0xff, 0xff, 0xff, 0xff" ]
     ];
 
     var EXPECT_MIPS_SKIPDATA_CB = {
@@ -281,14 +302,7 @@ describe("MIPS", function () {
                 if (code_size - offset !== 4) {
                     throw new Error("Unexpected code_size: " + code_size);
                 }
-                /*
-                 * FIXME: Use ref module for now because the shorthand method
-                 * does not pass the `offset` parameter
-                 * See: https://github.com/TooTallNate/ref/issues/17
-                 */
-                //cb_output.code = code.reinterpret(4, offset).toJSON();
-                var ref = require("ref");
-                cb_output.code = ref.reinterpret(code, 4, offset).toJSON();
+                cb_output.code = code.reinterpret(4, offset).toJSON().data;
                 cb_output.user = user;
                 return 4;
             },
