@@ -241,6 +241,7 @@ DocContext.prototype.processSource = function () {
             }
         }
         else {
+            console.warn("Unrecognized comment kind:", JSON.stringify(ctx));
             this.misc.push(ctx);
         }
     }.bind(this));
