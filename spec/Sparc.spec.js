@@ -91,7 +91,7 @@ describe("Sparc", function () {
             "address" : 0x1024,
             "bytes" : [ 0x12, 0xbf, 0xff, 0xff ],
             "mnemonic" : "bne",
-            "op_str" : "0x1001020"
+            "op_str" : "0x1020"
         },
         {
             "arch" : capstone.ARCH_SPARC,
@@ -99,7 +99,7 @@ describe("Sparc", function () {
             "address" : 0x1028,
             "bytes" : [ 0x10, 0xbf, 0xff, 0xff ],
             "mnemonic" : "ba",
-            "op_str" : "0x1001024"
+            "op_str" : "0x1024"
         },
         {
             "arch" : capstone.ARCH_SPARC,
@@ -115,7 +115,7 @@ describe("Sparc", function () {
             "address" : 0x1030,
             "bytes" : [ 0x0d, 0xbf, 0xff, 0xff ],
             "mnemonic" : "fbg",
-            "op_str" : "0x3fffff"
+            "op_str" : "0x102c"
         },
         {
             "arch" : capstone.ARCH_SPARC,
@@ -139,7 +139,7 @@ describe("Sparc", function () {
             "address" : 0x103c,
             "bytes" : [ 0x2a, 0xc2, 0x80, 0x03 ],
             "mnemonic" : "brnz,a,pn",
-            "op_str" : "%o2, 3"
+            "op_str" : "%o2, 0x1048"
         }
     ];
 
@@ -153,13 +153,13 @@ describe("Sparc", function () {
         [ 0x1018, 4, "sethi", "0xa, %l0" ],
         [ 0x101c, 4, "add", "%g1, %g2, %g3" ],
         [ 0x1020, 4, "nop", "" ],
-        [ 0x1024, 4, "bne", "0x1001020" ],
-        [ 0x1028, 4, "ba", "0x1001024" ],
+        [ 0x1024, 4, "bne", "0x1020" ],
+        [ 0x1028, 4, "ba", "0x1024" ],
         [ 0x102c, 4, "add", "%o0, %o1, %l0" ],
-        [ 0x1030, 4, "fbg", "0x3fffff" ],
+        [ 0x1030, 4, "fbg", "0x102c" ],
         [ 0x1034, 4, "st", "%o2, [%g1]" ],
         [ 0x1038, 4, "ldsb", "[%i0+%l6], %o2" ],
-        [ 0x103c, 4, "brnz,a,pn", "%o2, 3" ]
+        [ 0x103c, 4, "brnz,a,pn", "%o2, 0x1048" ]
     ];
 
     var EXPECT_SPARC_DETAIL = [
@@ -414,7 +414,7 @@ describe("Sparc", function () {
             "address" : 0x1024,
             "bytes" : [ 0x12, 0xbf, 0xff, 0xff ],
             "mnemonic" : "bne",
-            "op_str" : "0x1001020",
+            "op_str" : "0x1020",
             "detail" : {
                 "regs_read" : [ 69 ],
                 "regs_write" : [],
@@ -425,7 +425,7 @@ describe("Sparc", function () {
                     "operands" : [
                         {
                             "type" : capstone.sparc.OP_IMM,
-                            "imm" : 0x1001020,
+                            "imm" : 0x1020,
                         }
                     ]
                 }
@@ -437,7 +437,7 @@ describe("Sparc", function () {
             "address" : 0x1028,
             "bytes" : [ 0x10, 0xbf, 0xff, 0xff ],
             "mnemonic" : "ba",
-            "op_str" : "0x1001024",
+            "op_str" : "0x1024",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
@@ -448,7 +448,7 @@ describe("Sparc", function () {
                     "operands" : [
                         {
                             "type" : capstone.sparc.OP_IMM,
-                            "imm" : 0x1001024,
+                            "imm" : 0x1024,
                         }
                     ]
                 }
@@ -491,7 +491,7 @@ describe("Sparc", function () {
             "address" : 0x1030,
             "bytes" : [ 0x0d, 0xbf, 0xff, 0xff ],
             "mnemonic" : "fbg",
-            "op_str" : "0x3fffff",
+            "op_str" : "0x102c",
             "detail" : {
                 "regs_read" : [ capstone.sparc.REG_FCC0 ],
                 "regs_write" : [],
@@ -502,7 +502,7 @@ describe("Sparc", function () {
                     "operands" : [
                         {
                             "type" : capstone.sparc.OP_IMM,
-                            "imm" : 0x3fffff,
+                            "imm" : 0x102c,
                         }
                     ]
                 }
@@ -576,7 +576,7 @@ describe("Sparc", function () {
             "address" : 0x103c,
             "bytes" : [ 0x2a, 0xc2, 0x80, 0x03 ],
             "mnemonic" : "brnz,a,pn",
-            "op_str" : "%o2, 3",
+            "op_str" : "%o2, 0x1048",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
@@ -594,7 +594,7 @@ describe("Sparc", function () {
                         },
                         {
                             "type" : capstone.sparc.OP_IMM,
-                            "imm" : 3,
+                            "imm" : 0x1048,
                         }
                     ]
                 }
