@@ -30,7 +30,7 @@
     "url": "https://github.com/parasyte/node-capstone.git"
   },
   "dependencies": {
-    "ref": "~1.0.1",
+    "ref": "~1.0.2",
     "ref-array": "~1.1.1",
     "ref-struct": "~1.0.1",
     "ref-union": "~0.0.3"
@@ -38,11 +38,11 @@
   "devDependencies": {
     "difflib": "~0.2.4",
     "dot": "~1.0.3",
-    "dox": "~0.7.1",
+    "dox": "~0.8.0",
     "grunt": "~0.4.5",
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-jshint": "~0.11.2",
-    "grunt-jasmine-nodejs": "~1.0.2",
+    "grunt-jasmine-nodejs": "~1.4.0",
     "marked": "~0.3.3"
   },
   "scripts": {
