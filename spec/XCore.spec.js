@@ -66,16 +66,7 @@ describe("XCore", function () {
                 "groups": [],
                 "xcore": {
                     "operands": [
-                        { "type": 1, "reg": 7 },
-                        {
-                            "type": 3,
-                            "mem": {
-                                "base": 12,
-                                "index": 0,
-                                "disp": 1,
-                                "direct": 1
-                            }
-                        }
+                        { "type": 1, "reg": 7 }
                     ]
                 }
             }
@@ -93,16 +84,7 @@ describe("XCore", function () {
                 "groups": [],
                 "xcore": {
                     "operands": [
-                        { "type": 1, "reg": 5 },
-                        {
-                            "type": 3,
-                            "mem": {
-                                "base": 5,
-                                "index": 0,
-                                "disp": 0,
-                                "direct": 1
-                            }
-                        }
+                        { "type": 1, "reg": 5 }
                     ]
                 }
             }
@@ -140,15 +122,6 @@ describe("XCore", function () {
                 "groups": [],
                 "xcore": {
                     "operands": [
-                        {
-                            "type": 3,
-                            "mem": {
-                                "base": 7,
-                                "index": 0,
-                                "disp": 0,
-                                "direct": 1
-                            }
-                        },
                         { "type": 1, "reg": 15 }
                     ]
                 }
