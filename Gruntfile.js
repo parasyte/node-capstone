@@ -5,17 +5,6 @@ module.exports = function (grunt) {
     var specFiles = grunt.file.expand("spec/**/*.js");
     var docsDir = "./docs";
 
-    // capstone.js must be listed first or docs fail
-    sourceFiles.sort(function (a, b) {
-        return (
-            a === "lib/capstone.js" ? -1 :
-            b === "lib/capstone.js" ? 1 :
-            a < b ? -1 :
-            a > b ? 1 :
-            0
-        );
-    });
-
     // Project configuration.
     grunt.initConfig({
         "pkg" : grunt.file.readJSON("package.json"),

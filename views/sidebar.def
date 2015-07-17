@@ -45,7 +45,7 @@
   <dd>
     <ul class="side-nav">
       {{~ ctx.misc :value }}
-      <li><a href="misc.html#{{= value }}">{{= value }}</a></li>
+      <li><a href="misc.html#{{= value.name }}">{{= value.name }}</a></li>
       {{~}}
     </ul>
   </dd>

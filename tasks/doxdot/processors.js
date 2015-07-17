@@ -1,3 +1,4 @@
+var pubsub = require("pubsub.js");
 
 function CommentContext(doc, comment) {
     comment = comment || {};
@@ -97,12 +98,10 @@ CommentContext.prototype.processTags = function () {
             break;
 
         case "memberOf":
-            try {
-                this._doc.getClass(tag.parent).addChild(this);
-            }
-            catch (e) {
-                console.error("memberOf:", e);
-            }
+            this.parentName = tag.parent;
+            this._doc.getClass(tag.parent).then(function (cls) {
+                cls.addChild(this);
+            }.bind(this));
             break;
 
         case "kind":
@@ -139,13 +138,6 @@ CommentContext.prototype.processTags = function () {
 CommentContext.prototype.addChild = function (child) {
     this._children.push(child);
     child._parent = this;
-    child.parentName = this.name;
-};
-
-CommentContext.prototype.setParent = function (parent) {
-    parent._children.push(this);
-    this._parent = parent;
-    this.parentName = parent.name;
 };
 
 CommentContext.prototype.getChildren = function (name) {
@@ -161,7 +153,7 @@ CommentContext.prototype.getFirstChild = function (name) {
             current && (current.name === name) ? current :
             undefined
         );
-    });
+    }, null);
 };
 
 CommentContext.prototype.getLastChild = function (name) {
@@ -171,11 +163,12 @@ CommentContext.prototype.getLastChild = function (name) {
             current && (current.name === name) ? current :
             undefined
         );
-    });
+    }, null);
 };
 
 
-function DocContext() {
+function DocContext(options) {
+    this.options    = options;
     this.readme     = "";
     this.comments   = [];
 
@@ -216,18 +209,22 @@ DocContext.prototype.processSource = function () {
     this.comments.forEach(function (comment) {
         var ctx = new CommentContext(this, comment);
 
-        if (ctx.isIgnored || ctx.parentName) {
+        if (ctx.isIgnored) {
             return;
         }
 
         if (ctx.isClass) {
             if (!(ctx.name in this.classes)) {
                 this.classes[ctx.name] = ctx;
+                var className = (ctx.parentName ? ctx.parentName + "." : "") + ctx.name;
+                pubsub.publish("resolve:" + className, [ ctx ]);
             }
         }
         else if (ctx.isModule) {
             if (!(ctx.name in this.modules)) {
                 this.modules[ctx.name] = ctx;
+                var className = (ctx.parentName ? ctx.parentName + "." : "") + ctx.name;
+                pubsub.publish("resolve:" + className, [ ctx ]);
             }
         }
         else if (ctx.isFunction) {
@@ -241,25 +238,52 @@ DocContext.prototype.processSource = function () {
             }
         }
         else {
-            console.warn("Unrecognized comment kind:", JSON.stringify(ctx));
+            if (this.options.verbose) {
+                console.warn(
+                    "Unrecognized comment kind:",
+                    JSON.stringify(ctx, null, 2)
+                );
+            }
             this.misc.push(ctx);
         }
     }.bind(this));
 };
 
 DocContext.prototype.getClass = function (className) {
+    var self = this;
     var parts = className.split(".");
     var name = parts.shift();
     var ctx = this.classes[name] || this.modules[name];
-    if (!ctx) {
-        throw "No class or module named `" + name + "`";
+
+    function walkParts(ctx, resolve) {
+        var tmp = [ name ];
+
+        if (parts.every(function (part) {
+            tmp.push(part);
+            ctx = ctx.getFirstChild(part);
+            if (!ctx) {
+                // XXX
+                console.log("* TODO: waiting for:", tmp.join("."));
+                //pubsub.subscribeOnce("resolve:" + tmp.join("."), function () {
+                    // ...
+                //});
+            }
+            return ctx;
+        })) {
+            resolve(ctx);
+        }
     }
 
-    parts.forEach(function (part) {
-        ctx = ctx.getFirstChild(part) || new CommentContext(this);
+    return new Promise(function (resolve, reject) {
+        if (ctx) {
+            walkParts(ctx, resolve);
+        }
+        else {
+            pubsub.subscribeOnce("resolve:" + className, function (ctx) {
+                walkParts(ctx, resolve);
+            });
+        }
     });
-
-    return ctx;
 };
 
 

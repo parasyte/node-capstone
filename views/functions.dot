@@ -10,11 +10,13 @@
     <a href="#{{= fn }}" title="Link here"><span class="fa fa-link"></span></a>
   </h3>
 
+  {{? ctx.functions[fn].returns.types }}
   <p>
     <span class="fa fa-reply fa-flip-vertical" title="Returns"></span>
     <kbd title="Types">{{= renderTypes(ctx.functions[fn].returns.types) }}</kbd>
     {{= ctx.functions[fn].returns.description }}
   </p>
+  {{?}}
 
   <hr>
 

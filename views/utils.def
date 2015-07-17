@@ -7,9 +7,12 @@
 function renderTypes(types) {
     var natives = [ "number", "string", "bool", "array", "object", "function" ];
     return types.map(function (value) {
-        var type = value.replace(/[\[\]]/g, "");
+        var matches = value.match(/^Array.<(.*)>$/);
+        var type = (matches && matches[1]) || value;
+        var annotatedType = type + (matches ? "[]" : "");
+
         if (natives.indexOf(type.toLowerCase()) >= 0) {
-            return value;
+            return annotatedType;
         }
 
         type = type.replace(".", ".html#");
@@ -22,7 +25,7 @@ function renderTypes(types) {
             }
         }
 
-        return "<a href=\"" + type + "\">" + value + "</a>"
+        return "<a href=\"" + type + "\">" + annotatedType + "</a>"
     }).join(", ");
 }
 }}

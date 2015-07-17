@@ -43,7 +43,8 @@
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-jshint": "~0.11.2",
     "grunt-jasmine-nodejs": "~1.4.0",
-    "marked": "~0.3.3"
+    "marked": "~0.3.3",
+    "pubsub.js": "~1.4.0"
   },
   "scripts": {
     "test": "grunt test"
