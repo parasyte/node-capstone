@@ -10,7 +10,7 @@ function task() {
     var dot     = require("dot");
     var proc    = require("./doxdot/processors")
 
-    var ctx     = new proc.DocContext(this.options);
+    var ctx     = new proc.DocContext(this.options());
 
     // Get package info
     ctx.pkg = grunt.config("pkg");
