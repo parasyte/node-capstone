@@ -2,7 +2,7 @@
       </section>
     </div>
     <section class="footer">
-      Copyright &copy; 2014
+      Copyright &copy; 2014-2015
       <a href="mailto:{{= ctx.pkg.author.email }}">
         {{= ctx.pkg.author.name }}
       </a>
