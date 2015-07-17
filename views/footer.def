@@ -7,20 +7,18 @@
         {{= ctx.pkg.author.name }}
       </a>
 
-      {{? ctx.options.links.twitter }}
+{{? ctx.options.links.twitter }}
       <a href="https://twitter.com/{{= ctx.options.links.twitter }}">
         <span class="round label fa fa-twitter">
           @{{= ctx.options.links.twitter }}
         </span>
       </a>
-      {{?}}
+{{?}}
 
       <br>
 
       <a href="{{= ctx.options.links.github || github }}">Github</a> |
-      {{? ctx.options.links.blog }}
-      <a href="{{= ctx.options.links.blog }}">Blog</a> |
-      {{?}}
+      {{? ctx.options.links.blog }}<a href="{{= ctx.options.links.blog }}">Blog</a> |{{?}}
       <a href="{{= ctx.pkg.author.url }}">Website</a>
     </section>
     <script src="js/vendor/jquery.js"></script>

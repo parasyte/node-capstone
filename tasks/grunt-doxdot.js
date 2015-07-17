@@ -43,6 +43,7 @@ function task() {
         "path"              : views,
         "destination"       : dest,
         "templateSettings"  : {
+            "strip"             : false,
             "varname"           : "ctx",
         },
     });
