@@ -25,7 +25,7 @@ module.exports = function (grunt) {
             }
         },
 
-        "doxdot" : {
+        "dotdox" : {
             "options" : {
                 "views" : "views",
                 "readme" : "README.md",
@@ -63,5 +63,5 @@ module.exports = function (grunt) {
 
     grunt.registerTask("test", [ "jshint", "jasmine_nodejs" ]);
     grunt.registerTask("lint", [ "jshint" ]);
-    grunt.registerTask("docs", [ "jshint", "clean:docs", "doxdot" ]);
+    grunt.registerTask("docs", [ "jshint", "clean:docs", "dotdox" ]);
 };

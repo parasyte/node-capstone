@@ -2,13 +2,13 @@ var grunt;
 
 module.exports = function (g) {
     grunt = g;
-    grunt.registerTask("doxdot", "Build docs using dox and doT", task);
+    grunt.registerTask("dotdox", "Build docs using dox and doT", task);
 };
 
 function task() {
     var path    = require("path");
     var dot     = require("dot");
-    var proc    = require("./doxdot/processors");
+    var proc    = require("./dotdox/processors");
 
     var ctx     = new proc.DocContext(this.options());
 
@@ -19,7 +19,7 @@ function task() {
     ctx.base = ".";
 
     // Get destination directory
-    var dest = grunt.config("doxdot.dest");
+    var dest = grunt.config("dotdox.dest");
     if (dest.slice(-1) !== path.sep) {
         dest += path.sep;
     }
@@ -36,7 +36,7 @@ function task() {
     }
 
     // Process all source files
-    grunt.config("doxdot.src").forEach(function (file) {
+    grunt.config("dotdox.src").forEach(function (file) {
         ctx.addSource(grunt.file.read(file));
     });
     ctx.processSource();
