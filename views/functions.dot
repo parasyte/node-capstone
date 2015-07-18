@@ -14,7 +14,7 @@
   <p>
     <span class="fa fa-reply fa-flip-vertical" title="Returns"></span>
     <kbd title="Types">{{= renderTypes(ctx.functions[fn].returns.types) }}</kbd>
-    {{= ctx.functions[fn].returns.description }}
+    {{= ctx.functions[fn].returns.description.replace(/<\/?p>/g, "") }}
   </p>
 {{?}}
 
