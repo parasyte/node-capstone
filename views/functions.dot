@@ -7,7 +7,7 @@
     {{= fn }}({{~ ctx.functions[fn].params :param:i }}{{= param.name }}{{?
       i < ctx.functions[fn].params.length - 1
     }}, {{?}}{{~}})
-    <a href="#{{= fn }}" title="Link here"><span class="fa fa-link"></span></a>
+    <a href="functions.html#{{= fn }}" title="Link here"><span class="fa fa-link"></span></a>
   </h3>
 
 {{? ctx.functions[fn].returns.types }}
@@ -44,7 +44,7 @@
   {{= ctx.functions[fn].description.full }}
 
   <div>
-    <a href="#" class="toggle-code right" title="Toggle the Source Code">
+    <a href="functions.html#" class="toggle-code right" title="Toggle the Source Code">
       Source
       <span class="fa fa-code"></span>
     </a>
