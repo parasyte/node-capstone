@@ -5,7 +5,7 @@
   <dd>
     <ul class="side-nav">
       {{~ Object.keys(ctx.modules) :value }}<li>
-        <a href="{{= value }}.html">{{= value }}</a>
+        <a href="modules/{{= value }}.html">{{= value }}</a>
       </li>{{~}}
     </ul>
   </dd>
@@ -15,7 +15,7 @@
   <dd>
     <ul class="side-nav">
       {{~ Object.keys(ctx.classes) :value }}<li>
-        <a href="{{= value }}.html">{{= value }}</a>
+        <a href="classes/{{= value }}.html">{{= value }}</a>
       </li>{{~}}
     </ul>
   </dd>

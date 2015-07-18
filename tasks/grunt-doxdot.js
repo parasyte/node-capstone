@@ -8,12 +8,15 @@ module.exports = function (g) {
 function task() {
     var path    = require("path");
     var dot     = require("dot");
-    var proc    = require("./doxdot/processors")
+    var proc    = require("./doxdot/processors");
 
     var ctx     = new proc.DocContext(this.options());
 
     // Get package info
     ctx.pkg = grunt.config("pkg");
+
+    // Set the HTML base path
+    ctx.base = ".";
 
     // Get destination directory
     var dest = grunt.config("doxdot.dest");
@@ -57,13 +60,19 @@ function task() {
         }
     });
 
-    var classNames = Object.keys(ctx.classes).concat(Object.keys(ctx.modules));
-    if (classNames.length) {
-        classNames.forEach(function (className) {
-            ctx.className = className;
-            grunt.file.write(dest + className + ".html", dots.classes(ctx));
-        });
-    }
+    ctx.base = "..";
+    [ "classes", "modules" ].forEach(function (template) {
+        var names = Object.keys(ctx[template]);
+        if (names.length) {
+            names.forEach(function (name) {
+                ctx.template = ctx[template][name];
+                grunt.file.write(
+                    dest + template + "/" + name + ".html",
+                    dots[template](ctx)
+                );
+            });
+        }
+    });
 
     // Copy any view subdirectories
     console.log("Copying additional view files...");

@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{= ctx.options.project || ctx.pkg.name }}</title>
+    <base href="{{= ctx.base }}" />
     <link href="css/normalize.css" rel="stylesheet" />
     <link href="css/foundation.min.css" rel="stylesheet" />
     <link href="css/prism.css" rel="stylesheet" />
