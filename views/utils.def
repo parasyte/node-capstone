@@ -5,7 +5,9 @@
  * @return {String} Rendered types
  */
 function renderTypes(types) {
-    var natives = [ "number", "string", "bool", "array", "object", "function" ];
+    var natives = [
+        "number", "string", "boolean", "array", "object", "function", "buffer",
+    ];
     return types.map(function (value) {
         var matches = value.match(/^Array.<(.*)>$/);
         var type = (matches && matches[1]) || value;
@@ -18,10 +20,25 @@ function renderTypes(types) {
         type = type.replace(".", ".html#");
         if (type.indexOf(".") < 0) {
             if (type in ctx.classes) {
-                type += ".html#" + type;
+                type = "classes/" + type + ".html#" + type;
+            }
+            else if (type in ctx.modules) {
+                type += "modules/" + type + ".html#" + type;
             }
             else {
                 type = "constants.html#" + type;
+            }
+        }
+        else {
+            var parts = type.split(".");
+            var root = parts.shift();
+            var target = parts.join(".");
+
+            if (root in ctx.classes) {
+                type = "classes/" + root + ".html#" + target;
+            }
+            else if (root in ctx.modules) {
+                type = "module/" + root + ".html#" + target;
             }
         }
 
