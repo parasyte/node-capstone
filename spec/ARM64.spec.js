@@ -338,28 +338,24 @@ describe("ARM64", function () {
     it("can print the correct register", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM64, capstone.MODE_ARM);
         var output = cs.reg_name(capstone.arm64.REG_V31);
-        cs.close();
         expect(output).toEqual("v31");
     });
 
     it("can print the correct instruction", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM64, capstone.MODE_ARM);
         var output = cs.insn_name(capstone.arm64.INS_TLBI);
-        cs.close();
         expect(output).toEqual("tlbi");
     });
 
     it("can be disassembled", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM64, capstone.MODE_ARM);
         var output = cs.disasm(CODE_ARM64, 0x2c);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_ARM64);
     });
 
     it("can be disassembled quickly", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM64, capstone.MODE_ARM);
         var output = cs.disasm_lite(CODE_ARM64, 0x2c);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_ARM64_LITE);
     });
 
@@ -367,7 +363,6 @@ describe("ARM64", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM64, capstone.MODE_ARM);
         cs.detail = true;
         var output = cs.disasm(CODE_ARM64, 0x2c);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_ARM64_DETAIL);
     });
 });

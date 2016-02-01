@@ -362,28 +362,24 @@ describe("SystemZ", function () {
     it("can print the correct register", function () {
         var cs = new capstone.Cs(capstone.ARCH_SYSZ, capstone.MODE_BIG_ENDIAN);
         var output = cs.reg_name(capstone.sysz.REG_R0L);
-        cs.close();
         expect(output).toEqual("r0l");
     });
 
     it("can print the correct instruction", function () {
         var cs = new capstone.Cs(capstone.ARCH_SYSZ, capstone.MODE_BIG_ENDIAN);
         var output = cs.insn_name(capstone.sysz.INS_XY);
-        cs.close();
         expect(output).toEqual("xy");
     });
 
     it("can be disassembled", function () {
         var cs = new capstone.Cs(capstone.ARCH_SYSZ, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm(CODE_SYSZ, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_SYSZ);
     });
 
     it("can be disassembled quickly", function () {
         var cs = new capstone.Cs(capstone.ARCH_SYSZ, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm_lite(CODE_SYSZ, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_SYSZ_LITE);
     });
 
@@ -391,7 +387,6 @@ describe("SystemZ", function () {
         var cs = new capstone.Cs(capstone.ARCH_SYSZ, capstone.MODE_BIG_ENDIAN);
         cs.detail = true;
         var output = cs.disasm(CODE_SYSZ, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_SYSZ_DETAIL);
     });
 });

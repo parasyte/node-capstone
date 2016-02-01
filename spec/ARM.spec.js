@@ -650,29 +650,24 @@ describe("ARM", function () {
     it("can print the correct register", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM, capstone.MODE_ARM);
         var output = cs.reg_name(capstone.arm.REG_S31);
-        cs.close();
         expect(output).toEqual("s31");
     });
 
     it("can print the correct instruction", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM, capstone.MODE_ARM);
         var output = cs.insn_name(capstone.arm.INS_VPOP);
-        cs.close();
         expect(output).toEqual("vpop");
-
     });
 
     it("can be disassembled", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM, capstone.MODE_ARM);
         var output = cs.disasm(CODE_ARM, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_ARM);
     });
 
     it("can be disassembled quickly", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM, capstone.MODE_ARM);
         var output = cs.disasm_lite(CODE_ARM, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_ARM_LITE);
     });
 
@@ -680,7 +675,6 @@ describe("ARM", function () {
         var cs = new capstone.Cs(capstone.ARCH_ARM, capstone.MODE_ARM);
         cs.detail = true;
         var output = cs.disasm(CODE_ARM, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_ARM_DETAIL);
     });
 });

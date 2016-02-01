@@ -764,28 +764,24 @@ describe("Sparc", function () {
     it("can print the correct register", function () {
         var cs = new capstone.Cs(capstone.ARCH_SPARC, capstone.MODE_BIG_ENDIAN);
         var output = cs.reg_name(capstone.sparc.REG_XCC);
-        cs.close();
         expect(output).toEqual("xcc");
     });
 
     it("can print the correct instruction", function () {
         var cs = new capstone.Cs(capstone.ARCH_SPARC, capstone.MODE_BIG_ENDIAN);
         var output = cs.insn_name(capstone.sparc.INS_RETL);
-        cs.close();
         expect(output).toEqual("retl");
     });
 
     it("can be disassembled", function () {
         var cs = new capstone.Cs(capstone.ARCH_SPARC, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm(CODE_SPARC, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_SPARC);
     });
 
     it("can be disassembled quickly", function () {
         var cs = new capstone.Cs(capstone.ARCH_SPARC, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm_lite(CODE_SPARC, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_SPARC_LITE);
     });
 
@@ -793,7 +789,6 @@ describe("Sparc", function () {
         var cs = new capstone.Cs(capstone.ARCH_SPARC, capstone.MODE_BIG_ENDIAN);
         cs.detail = true;
         var output = cs.disasm(CODE_SPARC, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_SPARC_DETAIL);
     });
 
@@ -803,7 +798,6 @@ describe("Sparc", function () {
             capstone.MODE_BIG_ENDIAN | capstone.MODE_V9
         );
         var output = cs.disasm(CODE_SPARCV9, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_SPARCV9);
     });
 
@@ -813,7 +807,6 @@ describe("Sparc", function () {
             capstone.MODE_BIG_ENDIAN | capstone.MODE_V9
         );
         var output = cs.disasm_lite(CODE_SPARCV9, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_SPARCV9_LITE);
     });
 
@@ -824,7 +817,6 @@ describe("Sparc", function () {
         );
         cs.detail = true;
         var output = cs.disasm(CODE_SPARCV9, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_SPARCV9_DETAIL);
     });
 });

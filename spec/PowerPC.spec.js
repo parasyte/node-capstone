@@ -419,28 +419,24 @@ describe("PPC", function () {
     it("can print the correct register", function () {
         var cs = new capstone.Cs(capstone.ARCH_PPC, capstone.MODE_BIG_ENDIAN);
         var output = cs.reg_name(capstone.ppc.REG_CR1EQ);
-        cs.close();
         expect(output).toEqual("cr1eq");
     });
 
     it("can print the correct instruction", function () {
         var cs = new capstone.Cs(capstone.ARCH_PPC, capstone.MODE_BIG_ENDIAN);
         var output = cs.insn_name(capstone.ppc.INS_BDZFLRL);
-        cs.close();
         expect(output).toEqual("bdzflrl");
     });
 
     it("can be disassembled", function () {
         var cs = new capstone.Cs(capstone.ARCH_PPC, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm(CODE_PPC, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_PPC);
     });
 
     it("can be disassembled quickly", function () {
         var cs = new capstone.Cs(capstone.ARCH_PPC, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm_lite(CODE_PPC, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_PPC_LITE);
     });
 
@@ -448,7 +444,6 @@ describe("PPC", function () {
         var cs = new capstone.Cs(capstone.ARCH_PPC, capstone.MODE_BIG_ENDIAN);
         cs.detail = true;
         var output = cs.disasm(CODE_PPC, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_PPC_DETAIL);
     });
 });

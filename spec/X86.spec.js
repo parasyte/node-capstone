@@ -144,21 +144,18 @@ describe("X86", function () {
     it("can print the correct register", function () {
         var cs = new capstone.Cs(capstone.ARCH_X86, capstone.MODE_64);
         var output = cs.reg_name(capstone.x86.REG_R15W);
-        cs.close();
         expect(output).toEqual("r15w");
     });
 
     it("can print the correct instruction", function () {
         var cs = new capstone.Cs(capstone.ARCH_X86, capstone.MODE_64);
         var output = cs.insn_name(capstone.x86.INS_XTEST);
-        cs.close();
         expect(output).toEqual("xtest");
     });
 
     it("can be disassembled", function () {
         var cs = new capstone.Cs(capstone.ARCH_X86, capstone.MODE_64);
         var output = cs.disasm(CODE_X86, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_X86);
     });
 
@@ -166,14 +163,12 @@ describe("X86", function () {
         var cs = new capstone.Cs(capstone.ARCH_X86, capstone.MODE_64);
         cs.syntax = capstone.SYNTAX_ATT;
         var output = cs.disasm(CODE_X86, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_X86_ATT);
     });
 
     it("can be disassembled quickly", function () {
         var cs = new capstone.Cs(capstone.ARCH_X86, capstone.MODE_64);
         var output = cs.disasm_lite(CODE_X86, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_X86_LITE);
     });
 
@@ -181,7 +176,6 @@ describe("X86", function () {
         var cs = new capstone.Cs(capstone.ARCH_X86, capstone.MODE_64);
         cs.detail = true;
         var output = cs.disasm(CODE_X86, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_X86_DETAIL);
     });
 });

@@ -223,7 +223,6 @@ describe("MIPS", function () {
             capstone.MODE_32 | capstone.MODE_BIG_ENDIAN
         );
         var output = cs.reg_name(capstone.mips.REG_MPL2);
-        cs.close();
         expect(output).toEqual("mpl2");
     });
 
@@ -233,7 +232,6 @@ describe("MIPS", function () {
             capstone.MODE_32 | capstone.MODE_BIG_ENDIAN
         );
         var output = cs.insn_name(capstone.mips.INS_JR_HB);
-        cs.close();
         expect(output).toEqual("jr.hb");
     });
 
@@ -243,7 +241,6 @@ describe("MIPS", function () {
             capstone.MODE_32 | capstone.MODE_BIG_ENDIAN
         );
         var output = cs.disasm(CODE_MIPS, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_MIPS);
     });
 
@@ -253,7 +250,6 @@ describe("MIPS", function () {
             capstone.MODE_32 | capstone.MODE_BIG_ENDIAN
         );
         var output = cs.disasm_lite(CODE_MIPS, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_MIPS_LITE);
     });
 
@@ -264,7 +260,6 @@ describe("MIPS", function () {
         );
         cs.detail = true;
         var output = cs.disasm(CODE_MIPS, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_MIPS_DETAIL);
     });
 
@@ -274,7 +269,6 @@ describe("MIPS", function () {
             capstone.MODE_64 | capstone.MODE_LITTLE_ENDIAN
         );
         var output = cs.disasm(CODE_MIPS_LE, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_MIPS_LE);
     });
 
@@ -285,7 +279,6 @@ describe("MIPS", function () {
         );
         cs.skipdata = new capstone.CsSkipdata(".db");
         var output = cs.disasm_lite(CODE_MIPS_SKIPDATA, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_MIPS_SKIPDATA);
     });
 
@@ -310,7 +303,6 @@ describe("MIPS", function () {
         );
 
         var output = cs.disasm_lite(CODE_MIPS_SKIPDATA, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_MIPS_SKIPDATA);
         expect(cb_output).not.toBeDiff(EXPECT_MIPS_SKIPDATA_CB);
     });

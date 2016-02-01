@@ -133,28 +133,24 @@ describe("XCore", function () {
     it("can print the correct register", function () {
         var cs = new capstone.Cs(capstone.ARCH_XCORE, capstone.MODE_BIG_ENDIAN);
         var output = cs.reg_name(capstone.xcore.REG_ID);
-        cs.close();
         expect(output).toEqual("id");
     });
 
     it("can print the correct instruction", function () {
         var cs = new capstone.Cs(capstone.ARCH_XCORE, capstone.MODE_BIG_ENDIAN);
         var output = cs.insn_name(capstone.xcore.INS_ZEXT);
-        cs.close();
         expect(output).toEqual("zext");
     });
 
     it("can be disassembled", function () {
         var cs = new capstone.Cs(capstone.ARCH_XCORE, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm(CODE_XCORE, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_XCORE);
     });
 
     it("can be disassembled quickly", function () {
         var cs = new capstone.Cs(capstone.ARCH_XCORE, capstone.MODE_BIG_ENDIAN);
         var output = cs.disasm_lite(CODE_XCORE, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_XCORE_LITE);
     });
 
@@ -162,7 +158,6 @@ describe("XCore", function () {
         var cs = new capstone.Cs(capstone.ARCH_XCORE, capstone.MODE_BIG_ENDIAN);
         cs.detail = true;
         var output = cs.disasm(CODE_XCORE, 0x1000);
-        cs.close();
         expect(output).not.toBeDiff(EXPECT_XCORE_DETAIL);
     });
 });
