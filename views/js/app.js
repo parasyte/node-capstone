@@ -10,7 +10,7 @@ function toggle($el) {
 
 
 // Smooth-scroll anchor links
-$("a[href*=#]:not([href=#])").click(function () {
+$('a[href*="#"]:not([href="#"])').click(function () {
     if (location.hostname === this.hostname &&
         location.pathname === this.pathname) {
         var $target = $(this.hash);

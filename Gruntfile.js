@@ -49,11 +49,20 @@ module.exports = function (grunt) {
                 "helpers" : [ "spec/*.helper.js" ],
             }
         },
+
+        "bower-install-simple" : {
+            "dist" : {
+                "options" : {
+                    "cwd" : "views"
+                }
+            },
+        },
     });
 
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-jasmine-nodejs");
+    grunt.loadNpmTasks("grunt-bower-install-simple");
 
     // Custom Tasks
     grunt.loadTasks("tasks");
@@ -63,5 +72,5 @@ module.exports = function (grunt) {
 
     grunt.registerTask("test", [ "jshint", "jasmine_nodejs" ]);
     grunt.registerTask("lint", [ "jshint" ]);
-    grunt.registerTask("docs", [ "jshint", "clean:docs", "dotdox" ]);
+    grunt.registerTask("docs", [ "jshint", "clean:docs", "bower-install-simple", "dotdox" ]);
 };

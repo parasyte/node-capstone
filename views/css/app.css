@@ -96,6 +96,10 @@ table.args td.name {
     padding: 0;
 }
 
+.side-nav li a:not(.button) {
+    padding: inherit;
+}
+
 .top-bar-section .fa {
     position: relative;
     top: 3px;
@@ -144,6 +148,9 @@ body {
 }
 
 code {
+    background-color: inherit;
+    border: none;
+    color: slateblue;
     font-weight: normal;
-    line-height: normal;
+    padding: 0;
 }

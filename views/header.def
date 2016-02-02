@@ -2,18 +2,16 @@
 <!doctype html>
 <html class="no-js" lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{= ctx.options.project || ctx.pkg.name }}</title>
-    <base href="{{= ctx.base }}" />
-    <link href="css/normalize.css" rel="stylesheet" />
-    <link href="css/foundation.min.css" rel="stylesheet" />
-    <link href="css/prism.css" rel="stylesheet" />
-    <link href="css/app.css" rel="stylesheet" />
-    <link
-      href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
-      rel="stylesheet">
-    <script src="js/vendor/modernizr.js"></script>
+    <base href="{{= ctx.base }}">
+    <link href="bower_components/foundation/css/normalize.min.css" rel="stylesheet">
+    <link href="bower_components/foundation/css/foundation.min.css" rel="stylesheet">
+    <link href="bower_components/prism/themes/prism.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="bower_components/modernizr/modernizr.js"></script>
   </head>
   <body>
 

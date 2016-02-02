@@ -7,6 +7,9 @@ docs/*
 node_modules/
 npm-debug.log
 
+## Bower junk
+bower_components/
+
 ## OSX junk
 .DS_Store
 .Trashes

@@ -21,11 +21,11 @@
       {{? ctx.options.links.blog }}<a href="{{= ctx.options.links.blog }}">Blog</a> |{{?}}
       <a href="{{= ctx.pkg.author.url }}">Website</a>
     </section>
-    <script src="js/vendor/jquery.js"></script>
-    <script src="js/foundation.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/foundation/js/foundation.min.js"></script>
     <script>$(document).foundation();</script>
-    <script src="js/prism.min.js"></script>
-    <script src="js/vendor/jquery.easing.js"></script>
+    <script src="bower_components/prism/prism.js"></script>
+    <script src="bower_components/jquery.easing/js/jquery.easing.min.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>
