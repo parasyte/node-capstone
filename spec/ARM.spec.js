@@ -127,8 +127,8 @@ describe("ARM", function () {
                 "regs_read" : [ capstone.arm.REG_PC ],
                 "regs_write" : [ capstone.arm.REG_LR ],
                 "groups" : [
-                    capstone.arm.GRP_JUMP,
                     capstone.arm.GRP_ARM,
+                    capstone.arm.GRP_JUMP,
                 ],
                 "arm" : {
                     "usermode" : false,

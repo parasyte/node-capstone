@@ -16,7 +16,7 @@ describe("PPC", function () {
             "address" : 0x1000,
             "bytes" : [ 0x80, 0x20, 0x00, 0x00 ],
             "mnemonic" : "lwz",
-            "op_str" : "r1, (0)"
+            "op_str" : "r1, 0(0)"
         },
         {
             "arch" : capstone.ARCH_PPC,
@@ -24,7 +24,7 @@ describe("PPC", function () {
             "address" : 0x1004,
             "bytes" : [ 0x80, 0x3f, 0x00, 0x00 ],
             "mnemonic" : "lwz",
-            "op_str" : "r1, (r31)"
+            "op_str" : "r1, 0(r31)"
         },
         {
             "arch" : capstone.ARCH_PPC,
@@ -93,8 +93,8 @@ describe("PPC", function () {
     ];
 
     var EXPECT_PPC_LITE = [
-        [ 0x1000, 4, "lwz", "r1, (0)" ],
-        [ 0x1004, 4, "lwz", "r1, (r31)" ],
+        [ 0x1000, 4, "lwz", "r1, 0(0)" ],
+        [ 0x1004, 4, "lwz", "r1, 0(r31)" ],
         [ 0x1008, 4, "vpkpx", "v2, v3, v4" ],
         [ 0x100c, 4, "stfs", "f2, 0x80(r4)" ],
         [ 0x1010, 4, "crand", "2, 3, 4" ],
@@ -112,7 +112,7 @@ describe("PPC", function () {
             "address" : 0x1000,
             "bytes" : [ 0x80, 0x20, 0x00, 0x00 ],
             "mnemonic" : "lwz",
-            "op_str" : "r1, (0)", // FIXME: registers should be prefixed with `r`
+            "op_str" : "r1, 0(0)", // FIXME: registers should be prefixed with `r`
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
@@ -143,7 +143,7 @@ describe("PPC", function () {
             "address" : 0x1004,
             "bytes" : [ 0x80, 0x3f, 0x00, 0x00 ],
             "mnemonic" : "lwz",
-            "op_str" : "r1, (r31)",
+            "op_str" : "r1, 0(r31)",
             "detail" : {
                 "regs_read" : [],
                 "regs_write" : [],
