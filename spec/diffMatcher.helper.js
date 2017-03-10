@@ -21,7 +21,7 @@ var diffMatcher = {
                     pass : check.slice(3).some(function (a) {
                         return a[0] !== " ";
                     }),
-                    message : check.join("\n"),
+                    message : "\n" + check.join("\n"),
                 };
             }
         };
