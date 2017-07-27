@@ -27,7 +27,7 @@ On Windows and Linux, install a pre-compiled binary from the
 [Capstone download](http://www.capstone-engine.org/download.html) page, or
 build from source.
 
-Ensure `libcapstone` is available in your PATH. Additionally, the `libcapstone`
+Ensure `libcapstone` or `capstone` is available in your PATH. Additionally, the `libcapstone` or `capstone`
 version needs to match the binding's version.
 
 ### Basic usage
